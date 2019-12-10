@@ -31,4 +31,5 @@ public class Disease {
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Contagion> contagion;
 }
+//
 
