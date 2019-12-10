@@ -14,7 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+//
 @Data
 @Entity
 @NoArgsConstructor
