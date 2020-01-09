@@ -1,0 +1,38 @@
+.bg {
+  background-image: url("https://www.plandscape.co.uk/graphics/gallery/cache/c_910_439_q78xag.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+} 
+/* #app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: rgb(0, 0, 0);
+}
+body, html {
+  height: 100%;
+}
+
+h1, h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 05px;
+}
+a {
+  color: #42b983;
+}
+p {
+  font-size: 1.06rem;
+  margin-top: 1rem !important;
+} */

@@ -1,0 +1,102 @@
+/*html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 15px Arial, sans-serif;
+    background: #CFCFCF;
+    color: #000000;
+}
+
+h1{
+    display: block;
+    -font-size: 2em;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.boxtitle{
+     box-shadow: 0 20px 8px 0 rgba(0,0,0,0.2);
+     transition: 0.3s;
+     font-size: 20px;
+     -font-weight: 200;
+     text-align: center;
+     color: rgba(207, 207, 207);
+     background: #404040;
+ }
+
+.menu{
+    margin-block-start: 3em;
+    width: 50%;
+    height: 720px;
+    background: #404040;
+    box-shadow: 0 0 10px #665;
+    margin : 0 auto;
+    margin: 0 auto;
+}
+h3{
+    margin-top: 3em;
+}
+label{
+    margin-left: 15%;
+    font-size: 30px;
+    color: #FFFFFF;
+    text-rendering: optimizeLegibility;
+}
+label.type{
+    margin-left: -10%;
+    font-size: 20px;
+    color: #FFFFFF;
+    text-rendering: optimizeLegibility;
+}
+
+input{
+    font-size: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px #665;
+}
+select{
+    font-size: 20px;
+    color: rgba(0,0,0);
+    box-shadow: 0 0 10px #665;
+}
+
+.typname{
+    text-align: center;
+}
+div {
+    padding: 10px;
+
+}
+
+button.bl{
+     margin-block-start: 15px;
+     background: #00ff14;
+     font-size: 40px;
+     font-weight: inherit;
+     color: #000000;
+     min-width: 80px;
+     max-width: 120px;
+ }
+.name{
+    width: 50%;
+}
+.email{
+    width: 50%;
+
+}
+.Phon{
+    width: 12%;
+
+}
+.phon{
+    width: 40%;
+}
+.password{
+    width: 50%;
+}*/
