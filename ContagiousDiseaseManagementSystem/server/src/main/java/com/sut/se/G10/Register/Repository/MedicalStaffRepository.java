@@ -18,7 +18,7 @@ public interface MedicalStaffRepository extends JpaRepository<MedicalStaff, Long
 	Optional<MedicalStaff> findByFullname(String fullname);
 
 
-
+	//
 	/*@Query(value = "SELECT * FROM MEDICALSTAFF AS m WHERE m.POSITION_ID = :id"
     ,
      nativeQuery = true)
