@@ -106,6 +106,14 @@
                               @click="newPatient" dark>บันทึกข้อมูล
                             </v-btn>
                         </v-col>
+                        <v-col>
+                          <v-btn 
+                            color="success" 
+                            height="40" 
+                            width="100"   
+                            to="/">กลับ
+                          </v-btn>
+                        </v-col>
                     </v-row>
                     </v-layout>
                 </v-form>

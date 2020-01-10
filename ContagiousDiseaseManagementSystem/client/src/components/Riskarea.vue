@@ -96,6 +96,14 @@
           <v-col cols="15">
             <v-btn color="success" height="50" width="100" @click="saveRiskarea" dark>บันทึก</v-btn>
           </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols=15>
+          <v-btn 
+            color="success" 
+            height="40" 
+            width="100"   
+            to="/">กลับ</v-btn>
+          </v-col>
         </v-row>
 
       </v-card>
