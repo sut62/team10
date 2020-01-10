@@ -1,23 +1,25 @@
 import Vue from 'vue'
-import router from 'vue-router'
-import Home from '../views/Home.vue'
+import VueRouter from 'vue-router'
+import Login from '../components/Login.vue'
+import Home from '../components/Home.vue'
 import Contagion from '../components/Contagion.vue'
 import Diagnose from '../components/Diagnose.vue'
 import Patient from '../components/Patient.vue'
 import Register from '../components/Register.vue'
 import Riskarea from '../components/Riskarea.vue'
 import vaccineinformation from '../components/vaccineinformation.vue'
-import viewvaccineinformation from '../views/viewvaccineinformation.vue'
+import viewvaccineinformation from '../components/viewvaccineinformation.vue'
 
-Vue.use(router);
+Vue.use(VueRouter)
 
-export default new router({
-    mode: 'history',
-    base: process.env.BASE_URL,
-    routes: [{
- 
+const routes = [
+  {
     path: '/home',
     component: Home
+  },
+  {
+    path: '/',
+    component: Login
   },
   {
     path: '/contagion',
@@ -48,7 +50,11 @@ export default new router({
     component: viewvaccineinformation
   }
 ]
+
+const router = new VueRouter({
+  mode: 'history',
+  base: process.env.BASE_URL,
+  routes
 })
 
-
-
+export default router
