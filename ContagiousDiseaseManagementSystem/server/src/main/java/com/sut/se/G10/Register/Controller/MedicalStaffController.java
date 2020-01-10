@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.sut.se.G10.Register.Entity.*;
 import com.sut.se.G10.Register.Repository.*;
@@ -63,6 +64,12 @@ public class MedicalStaffController {
         return medicalStaffRepository.findById(id);
     }
 
+    @GetMapping("/medicalStaffWherePositionIsDoctor")
+    public Collection<MedicalStaff> getMedicalStaffWherePositionisDoctors() {
+        long id;
+        id = positionRepository.findByPosition("Doctor").getId();
+        return medicalStaffRepository.findByMedicalStaffId(id);
+    }
 
     @PostMapping("/medicalstaff/{gender_id}/{position_id}/{province_id}/{address}/{fullname}/{email}/{phone}/{password}/{bdate}")
     public MedicalStaff newMedicalStaff(  MedicalStaff newMedicalStaff, 
