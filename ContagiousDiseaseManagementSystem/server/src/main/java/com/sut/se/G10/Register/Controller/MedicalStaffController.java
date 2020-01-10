@@ -53,6 +53,12 @@ public class MedicalStaffController {
         return medicalStaffRepository.findAll();
     }
 
+    @GetMapping("/medicalstaff/{email}")
+    public Optional<MedicalStaff> MedicalStaffss(@PathVariable String email) {
+        Optional<MedicalStaff> medicalstaffss = medicalStaffRepository.findByEmail(email);
+        return medicalstaffss ;
+    }
+
     @GetMapping("/medicallstaff/{fullname}")
     public Optional<MedicalStaff> MedicalStaffs(@PathVariable String fullname) {
         Optional<MedicalStaff> medicalstaff = medicalStaffRepository.findByFullname(fullname);
