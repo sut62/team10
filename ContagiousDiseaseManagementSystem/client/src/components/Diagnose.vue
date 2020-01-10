@@ -114,6 +114,11 @@
                 <v-col>
                   <v-btn @click="saveDiagnose" :class="{ red: !valid, green: valid }">บันทึกการวินิจฉัย</v-btn>
                   <v-btn style="margin-left: 30px;" @click="clear">เคลียร์</v-btn>
+                  <v-btn 
+                      color="success" 
+                      height="40" 
+                      width="100"   
+                      to="/">กลับ</v-btn>
                 </v-col>
               </v-row>
               <br />

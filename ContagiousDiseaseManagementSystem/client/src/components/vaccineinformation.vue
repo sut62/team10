@@ -4,19 +4,6 @@
       <v-toolbar-title class="headline text-uppercase">
         <span class="font-weight">ContagiousDiseaseManagementSystem</span>
       </v-toolbar-title>
-      <!-- <v-row justify="center" style="margin-right:190px">
-        <v-btn @click="pushregister" color="#00E676" style="color:#000000">HOME</v-btn>
-        <v-btn @click="pushregister" color="#00E676" style="color:#000000">สมัครสมาชิก</v-btn>
-        <v-btn @click="pushpatient" color="#76FF03" style="color:#000000">ข้อมูลผู้ปวย</v-btn>
-        <v-btn @click="pushdiagnose" color="#00E676" style="color:#000000">วินิจฉัย</v-btn>
-        <v-btn @click="pushcontagion" color="#76FF03" style="color:#000000">ชื่อโรคติดต่อ</v-btn>
-        <v-btn
-          @click="pushvaccineinformation"
-          color="#00E676"
-          style="color:#000000"
-        >ข้อมูลวัคซีนป้องกัน/ยา</v-btn>
-        <v-btn @click="pushriskarea" color="#76FF03" style="color:#000000">ข้อมูลพื้นที่เสี่ยง</v-btn>
-      </v-row> -->
     </v-app-bar>
 
     <v-card style="width:80%; margin:auto; background-color:#FFFFFF" >
@@ -145,6 +132,14 @@
                   >ดูบันทึก</v-btn>
                   <!-- </v-btn-toggle> -->
                 </v-col>
+                <v-spacer></v-spacer>
+                <v-col cols=15>
+                    <v-btn 
+                      color="success" 
+                      height="40" 
+                      width="100"   
+                      to="/">กลับ</v-btn>
+                    </v-col>
               </v-row>
               <br />
             </v-form>
