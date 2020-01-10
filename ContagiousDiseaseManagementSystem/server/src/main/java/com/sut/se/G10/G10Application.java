@@ -143,7 +143,7 @@ public class G10Application {
 			});
 
 			// VaccineInfomation Part
-			Stream.of("ampicillin", "dicloxacillin", "Tetracyclin","Doxycyclin","Erythromycin","Clarithromycin").forEach(name -> {
+			Stream.of("พร้อมใช้งาน", "กำลังใช้งาน", "ทั้งหมด..").forEach(name -> {
 				Vaccine vaccine = new Vaccine(); 
 				vaccine.setVaccinename(name); 
 				vaccineRepository.save(vaccine); 
