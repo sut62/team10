@@ -77,6 +77,9 @@
             height="40" 
             width="100"   
             to="/">กลับ</v-btn>
+      </v-col>
+    </v-form>
+  </v-card>
 </template>
 
 <script>
