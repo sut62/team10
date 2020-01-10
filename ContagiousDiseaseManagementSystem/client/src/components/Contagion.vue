@@ -69,15 +69,17 @@
           required
         ></v-select>
       </v-layout>
-      <v-btn @click="saveContagion" color="success">บันทึก</v-btn>
-    <v-spacer></v-spacer>
-      <v-col cols=15>
-          <v-btn 
-            color="success" 
-            height="40" 
-            width="100"   
-            to="/">กลับ</v-btn>
+    <v-row>
+      
+      <v-col>
+        <v-btn @click="saveContagion" color="success">บันทึก</v-btn>
       </v-col>
+      <v-spacer></v-spacer>
+      <v-col>
+        <v-btn color="success" height="40" width="100" to="/">กลับ</v-btn>
+      </v-col>
+
+    </v-row>
     </v-form>
   </v-card>
 </template>
