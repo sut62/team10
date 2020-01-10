@@ -42,7 +42,7 @@
                     label="MedicalStaff"
                     outlined
                     v-model="diagnose.medicalStaffId"
-                    :items="medicalStaffWherePositionIsDoctors"
+                    :items="medicalStaffs"
                     item-text="id"
                     item-value="id"
                     :rules="[(v) => !!v || 'Item is required']"
