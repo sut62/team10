@@ -7,6 +7,7 @@ import com.sut.se.G10.Register.Entity.MedicalStaff;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
@@ -16,5 +17,12 @@ public interface MedicalStaffRepository extends JpaRepository<MedicalStaff, Long
 	Optional<MedicalStaff> findByEmail(String email);
 	Optional<MedicalStaff> findByFullname(String fullname);
 
+
+
+	@Query(value = "SELECT * FROM MEDICALSTAFF AS m WHERE m.POSITION_ID = :id"
+    ,
+     nativeQuery = true)
+     Collection<MedicalStaff> findByMedicalStaffId(@Param("id") long id);
 	
+
 }
