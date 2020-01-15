@@ -41,7 +41,7 @@ public class Diagnose {
     @NotNull
     @Column(name ="DIAGNOSIS")
     @Size(min = 10)
-    @Pattern(regexp = "^[A-Za-z0-9_.]+$")
+    @Pattern(regexp = "^[A-Za-z0-9_.-\s]+$")
     private String diagnosis;
 
     @NotNull
