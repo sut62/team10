@@ -23,6 +23,8 @@ import com.sut.se.G10.Register.Entity.MedicalStaff;
 import lombok.*;
 
 @Entity
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 @Table(name="DIAGNOSE")
@@ -41,7 +43,7 @@ public class Diagnose {
     @NotNull
     @Column(name ="DIAGNOSIS")
     @Size(min = 10)
-    @Pattern(regexp = "[a-zA-B0-9._ \t]+")
+    @Pattern(regexp = "[a-zA-B0-9._- \t]+")
     private String diagnosis;
 
     @NotNull
