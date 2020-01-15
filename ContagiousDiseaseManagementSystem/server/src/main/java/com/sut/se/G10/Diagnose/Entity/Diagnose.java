@@ -11,7 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
+
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;     
 
 import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Patient.Entity.Patient;
@@ -37,6 +40,8 @@ public class Diagnose {
 
     @NotNull
     @Column(name ="DIAGNOSIS")
+    @Size(min = 10)
+    @Pattern(regexp = "^[A-Za-z0-9_.]+$")
     private String diagnosis;
 
     @NotNull
@@ -52,11 +57,11 @@ public class Diagnose {
     private MedicalStaff fullname;
 
     @ManyToOne
-    @JoinColumn(name = "DISEASE_NAME", insertable = true)
+    @JoinColumn(name = "DISEASE_ID", insertable = true)
     private Disease disease;
 
     @ManyToOne
-    @JoinColumn(name = "ADMISSION_ADMITTED", insertable = true)
+    @JoinColumn(name = "ADMISSION_ID", insertable = true)
     private Admission admission;
 
 }

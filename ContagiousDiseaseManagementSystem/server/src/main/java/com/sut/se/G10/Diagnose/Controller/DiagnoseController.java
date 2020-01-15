@@ -55,19 +55,19 @@ public class DiagnoseController {
         return diagnoseRepository.findById(id);
     }
 
-    @PostMapping("/diagnose/{patient_id}/{medicalStaff_id}/{disease_id}/{admissionAdmitted}/{diagnosis}/{stayAlertedTime}")
+    @PostMapping("/diagnose/{patient_id}/{medicalStaff_id}/{disease_id}/{admission_id}/{diagnosis}/{stayAlertedTime}")
     public Diagnose newDiagnose( Diagnose newDiagnose,
             @PathVariable long patient_id, 
             @PathVariable long medicalStaff_id,
             @PathVariable long disease_id, 
-            @PathVariable String admissionAdmitted, 
+            @PathVariable long admission_id, 
             @PathVariable String diagnosis,
             @PathVariable String stayAlertedTime) {
 
         Patient patientfullname = patientRepository.findById(patient_id);
         MedicalStaff fullname = medicalStaffRepository.findById(medicalStaff_id);
         Disease disease = diseaseRepository.findById(disease_id);
-        Admission admission = admissionRepository.findByAdmitted(admissionAdmitted);
+        Admission admission = admissionRepository.findById(admission_id);
 
         newDiagnose.setPatientfullname(patientfullname);
         newDiagnose.setFullname(fullname);

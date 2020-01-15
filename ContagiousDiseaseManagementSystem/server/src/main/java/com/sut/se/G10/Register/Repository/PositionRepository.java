@@ -9,5 +9,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface PositionRepository extends JpaRepository<Position, Long> {
     Position findById(long id);
 
-    /*Position findByPosition(String position);*/
+    Position findByPosition(String position);
 }
