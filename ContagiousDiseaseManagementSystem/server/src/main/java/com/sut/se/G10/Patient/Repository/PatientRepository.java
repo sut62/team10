@@ -9,4 +9,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public 
 interface PatientRepository extends JpaRepository<Patient, Long> {
     Patient findById(long id);
+
+    Patient findByPatientfullname (String patientfullname);
+
 }

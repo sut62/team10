@@ -70,12 +70,12 @@ public class MedicalStaffController {
         return medicalStaffRepository.findById(id);
     }
 
-    /*@GetMapping("/medicalStaffWherePositionIsDoctor")
-    public Collection<MedicalStaff> getMedicalStaffWherePositionisDoctors() {
+    @GetMapping("/medicalStaffWherePositionIsDoctor")
+    public Collection<MedicalStaff> getMedicalStaffWherePositionIsDoctors() {
         long id;
         id = positionRepository.findByPosition("Doctor").getId();
         return medicalStaffRepository.findByMedicalStaffId(id);
-    }*/
+    }
 
     @PostMapping("/medicalstaff/{gender_id}/{position_id}/{province_id}/{address}/{fullname}/{email}/{phone}/{password}/{bdate}")
     public MedicalStaff newMedicalStaff(  MedicalStaff newMedicalStaff, 

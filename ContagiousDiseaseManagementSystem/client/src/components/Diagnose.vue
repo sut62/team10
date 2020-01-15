@@ -18,12 +18,12 @@
                   max-width="550px"
                   min-width="550px"
                   outlined
-                  label="Patient ID"
-                  v-model="diagnose.patientId"
+                  label="Patient Fullname"
+                  v-model="patientFullname"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
-                <p v-if="patientCheck != ''">Patient Id : {{patientId}}</p>
+                <p v-if="patientCheck != ''">Patient Fullname : {{patientFullname}}</p>
               </v-col>
               <v-col>
                 <div class="my-2">
@@ -42,8 +42,8 @@
                     label="MedicalStaff"
                     outlined
                     v-model="diagnose.medicalStaffId"
-                    :items="medicalStaffs"
-                    item-text="id"
+                    :items="medicalStaffWherePositionIsDoctors"
+                    item-text="fullname"
                     item-value="id"
                     :rules="[(v) => !!v || 'Item is required']"
                     required
@@ -75,10 +75,10 @@
                     min-width="550px"
                     label="Admission"
                     outlined
-                    v-model="diagnose.admissionAdmitted"
+                    v-model="diagnose.admissionId"
                     :items="admissions"
                     item-text="admitted"
-                    item-value="admitted"
+                    item-value="id"
                     :rules="[(v) => !!v || 'Item is required']"
                     required
                   ></v-select>
@@ -118,7 +118,8 @@
                       color="success" 
                       height="40" 
                       width="100"   
-                      to="/">กลับ</v-btn>
+                      to="/">กลับ
+                  </v-btn>
                 </v-col>
               </v-row>
               <br />
@@ -142,13 +143,13 @@ export default {
         patientId: "",
         medicalStaffId: "",
         diseaseId: "",
-        admissionAdmitted: "",
+        admissionId: "",
         diagnosis: "",
         stayAlertedTime: ""
       },
       valid: false,
       patientCheck: false,
-      patientId: ""
+      patientFullname: ""
     };
   },
 
@@ -190,7 +191,7 @@ export default {
         });
     },
 
-    getMedicalStaffWherePositionisDoctors() {
+    getMedicalStaffWherePositionIsDoctors() {
       http
         .get("/medicalStaffWherePositionIsDoctor")
         .then(response => {
@@ -204,12 +205,15 @@ export default {
     
     findPatient() {
       http
-        .get("/patient/" + this.diagnose.patientId)
+        .get("/patientByPatientfullname/" + this.patientFullname)
         .then(response => {
           console.log(response);
           if (response.data != null) {
-            this.patientId = response.data.id;
-            this.patientCheck = response.status;
+            this.diagnose.patientId = response.data.id;
+            if(this.patientFullname == response.data.patientfullname){
+              this.patientCheck = true;
+            }
+            
           } else {
             this.clear()
           }          
@@ -230,7 +234,7 @@ export default {
             "/" +
             this.diagnose.diseaseId +
             "/" +
-            this.diagnose.admissionAdmitted +
+            this.diagnose.admissionId +
             "/" +
             this.diagnose.diagnosis +
             "/" +
@@ -256,7 +260,7 @@ export default {
       this.getMedicalStaffs();
       this.getDiseases();
       this.getAdmissions();
-      this.getMedicalStaffWherePositionisDoctors();
+      this.getMedicalStaffWherePositionIsDoctors();
     }
   },
 
@@ -265,7 +269,7 @@ export default {
     this.getMedicalStaffs();
     this.getDiseases();
     this.getAdmissions();
-    this.getMedicalStaffWherePositionisDoctors();
+    this.getMedicalStaffWherePositionIsDoctors();
   }
 };
 </script>
