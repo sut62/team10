@@ -20,6 +20,7 @@ jobs:
 
     - name: Run gradle test
       run: |
-        cd ContagiousDiseaseManagementSystem\server
+        cd ContagiousDiseaseManagementSystem
+        cd server
         chmod 755 ./gradlew
         ./gradlew test
