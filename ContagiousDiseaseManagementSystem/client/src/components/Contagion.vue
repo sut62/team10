@@ -67,7 +67,20 @@
           v-model="contagion.rate"
           :rules="[v => !!v || 'Item is required']"
           required
-        ></v-select>
+          ></v-select>
+
+          <v-select
+          label="การรักษา"
+          outlined
+          :items="heal"
+          item-text="heal"
+          item-value="id"
+          style="width: 450px"
+          color="teal"
+          v-model="contagion.heal"
+          :rules="[v => !!v || 'Item is required']"
+          required
+          ></v-select>
       </v-layout>
     <v-row>
       
@@ -94,14 +107,16 @@ export default {
         disease: "",
         type: "",
         symptom: "",
-        rate: ""
+        rate: "",
+        heal: ""
       },
 
       disease: [],
       type: [],
       carrier: "",
       symptom: [],
-      rate: []
+      rate: [],
+      heal:[]
     };
   },
   methods: {
@@ -158,6 +173,19 @@ export default {
         });
     },
 
+    getHeal() {
+      http
+        .get("/heal")
+        .then(response => {
+          this.$forceUpdate();
+          this.heal = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
     saveContagion() {
       http
         .post(
@@ -170,8 +198,10 @@ export default {
             "/" +
             this.contagion.symptom +
             "/" +
-            this.contagion.rate,
-          this.contagion
+            this.contagion.rate +
+            "/" +
+            this.contagion.heal,
+            this.contagion
         )
         .then(response => {
           console.log(response);
@@ -192,6 +222,7 @@ export default {
       this.getType();
       this.getSymptom();
       this.getRate();
+      this.getHeal();
     }
   },
   mounted() {
@@ -199,6 +230,7 @@ export default {
     this.getType();
     this.getSymptom();
     this.getRate();
+    this.getHeal();
   }
 };
 </script>
