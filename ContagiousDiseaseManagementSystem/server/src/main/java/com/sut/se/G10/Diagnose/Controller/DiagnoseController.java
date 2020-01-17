@@ -46,12 +46,12 @@ public class DiagnoseController {
     }
 
     @GetMapping("/diagnose")
-    public List<Diagnose> diagnoses() {
+    public List<Diagnose> getDiagnoses() {
         return diagnoseRepository.findAll();
     }
 
     @GetMapping("/diagnose/{id}")
-    public Optional<Diagnose> findDiagnose(@PathVariable Long id) {
+    public Optional<Diagnose> getDiagnose(@PathVariable Long id) {
         return diagnoseRepository.findById(id);
     }
 

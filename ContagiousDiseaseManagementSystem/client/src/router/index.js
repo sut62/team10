@@ -9,6 +9,7 @@ import Register from '../components/Register.vue'
 import Riskarea from '../components/Riskarea.vue'
 import vaccineinformation from '../components/vaccineinformation.vue'
 import viewvaccineinformation from '../components/viewvaccineinformation.vue'
+import DiagnoseView from '../components/DiagnoseView.vue'
 
 Vue.use(VueRouter)
 
@@ -48,6 +49,10 @@ const routes = [
   {
     path: '/viewvaccineinformation',
     component: viewvaccineinformation
+  },
+  {
+    path: '/diagnoseView',
+    component: DiagnoseView
   }
 ]
 
