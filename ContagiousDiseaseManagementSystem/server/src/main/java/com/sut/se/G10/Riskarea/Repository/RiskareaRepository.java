@@ -13,6 +13,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public 
 interface RiskareaRepository extends JpaRepository<Riskarea, Long> {
 
+    // ค้นหาจากชื่อโรค
     @Query(value = "SELECT * FROM RISKAREA AS m WHERE m.DISEASE_ID = :id",nativeQuery = true)
     Collection<Riskarea> findByDisease(@Param("id") long id);
 }
