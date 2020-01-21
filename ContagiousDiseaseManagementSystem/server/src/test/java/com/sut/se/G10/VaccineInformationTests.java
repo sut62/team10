@@ -59,22 +59,22 @@ public class VaccineInformationTests {
         } catch (ParseException e) {}
     }
 
-    @Test
-    void b5901418_testStoragedateMustNotBeNull() {
-        VaccineInformation vaccineInformation = new VaccineInformation();
-        vaccineInformation.setStoragedate(null);
-        try {
+    // @Test
+    // void b5901418_testStoragedateMustNotBeNull() {
+    //     VaccineInformation vaccineInformation = new VaccineInformation();
+    //     vaccineInformation.setStoragedate(null);
+    //     try {
             
-            vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<VaccineInformation>> result = validator.validate(vaccineInformation);
-            assertEquals(1, result.size());
+    //         vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
+    //     } catch (ConstraintViolationException e) {
+    //         Set<ConstraintViolation<VaccineInformation>> result = validator.validate(vaccineInformation);
+    //         assertEquals(1, result.size());
     
-            ConstraintViolation<VaccineInformation> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("storagedate", v.getPropertyPath().toString());
-        }
-    }
+    //         ConstraintViolation<VaccineInformation> v = result.iterator().next();
+    //         assertEquals("must not be null", v.getMessage());
+    //         assertEquals("storagedate", v.getPropertyPath().toString());
+    //     }
+    // }
 
     @Test
     void b5901418_testStoragedatePatternFail() {
@@ -149,21 +149,21 @@ public class VaccineInformationTests {
         } catch (ParseException e) {}
     }
 
-    @Test
-    void b5901418_testExpiredateMustNotBeNull() {
-        VaccineInformation vaccineInformation = new VaccineInformation();
-        vaccineInformation.setExpiredate(null);
-        try {
-            vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<VaccineInformation>> result = validator.validate(vaccineInformation);
-            assertEquals(1, result.size());
+    // @Test
+    // void b5901418_testExpiredateMustNotBeNull() {
+    //     VaccineInformation vaccineInformation = new VaccineInformation();
+    //     vaccineInformation.setExpiredate(null);
+    //     try {
+    //         vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
+    //     } catch (ConstraintViolationException e) {
+    //         Set<ConstraintViolation<VaccineInformation>> result = validator.validate(vaccineInformation);
+    //         assertEquals(1, result.size());
     
-            ConstraintViolation<VaccineInformation> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("expiredate", v.getPropertyPath().toString());
-        }
-    }
+    //         ConstraintViolation<VaccineInformation> v = result.iterator().next();
+    //         assertEquals("must not be null", v.getMessage());
+    //         assertEquals("expiredate", v.getPropertyPath().toString());
+    //     }
+    // }
 
     @Test
     void b5901418_testExpiredatePatternFail() {
