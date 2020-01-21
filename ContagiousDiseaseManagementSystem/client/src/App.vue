@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card class="mx-auto" style="max-width: 950px;">
+    <v-card>
       <div id="app">
         <!-- <div id="nav">
           <router-link to="/">Home</router-link> |
