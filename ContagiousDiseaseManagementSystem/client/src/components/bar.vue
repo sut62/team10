@@ -1,6 +1,5 @@
 <template>
   <v-toolbar>
-    <v-toolbar-title>ล็อกอิน</v-toolbar-title>
     <div id="bar" class="flex-grow-1">
       <v-toolbar-items>
         <v-tabs>
@@ -29,7 +28,7 @@ export default {
       alert("Logout !!!");
       this.authenticated = false;
       this.whilelogin = true;
-      this.email = "";
+      this.email = [];
       this.password = "";
       this.$router.push("/");
     },
