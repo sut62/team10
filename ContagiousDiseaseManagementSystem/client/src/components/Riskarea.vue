@@ -102,7 +102,7 @@
             color="success" 
             height="40" 
             width="100"   
-            to="/">กลับ</v-btn>
+            to="/home">กลับ</v-btn>
           </v-col>
         </v-row>
 
