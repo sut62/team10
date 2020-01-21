@@ -201,6 +201,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          alert("บันทึกข้อมูลไม่สำเร็จ");
         });
     },
 

@@ -23,7 +23,10 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+<<<<<<< HEAD:ContagiousDiseaseManagementSystem/server/src/test/java/com/sut/se/G10/RegisterTests.java
 
+=======
+>>>>>>> 6ae92cdcd55135d924011d56b63e95ea10bb407f:ContagiousDiseaseManagementSystem/server/src/test/java/com/sut/se/G10/RiskareaTests.java
 
 @DataJpaTest
 public class RegisterTests {
