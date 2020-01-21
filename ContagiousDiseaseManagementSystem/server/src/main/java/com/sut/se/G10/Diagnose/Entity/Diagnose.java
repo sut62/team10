@@ -42,12 +42,14 @@ public class Diagnose {
 
     @NotNull
     @Column(name ="DIAGNOSIS")
-    @Size(min = 10)
-    @Pattern(regexp = "[a-zA-Z0-9._, \t]+")
+    @Size(min=10, max=100)
+    @Pattern(regexp = "[a-zA-Z0-9._, \t]*")
     private String diagnosis;
 
     @NotNull
     @Column(name ="STAY_ALERTED_TIME")
+    @Size(min=5, max=20)
+    @Pattern(regexp = "[a-zA-Z0-9 \t]*")
     private String stayAlertedTime;
 
     @ManyToOne
@@ -66,4 +68,5 @@ public class Diagnose {
     @JoinColumn(name = "ADMISSION_ID", insertable = true)
     private Admission admission;
 
+    
 }

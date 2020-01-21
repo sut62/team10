@@ -7,7 +7,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 //import org.springframework.stereotype.Repository;
 
 @RepositoryRestResource
-public 
-interface DiagnoseRepository extends JpaRepository<Diagnose, Long> {
-
+@Repository
+public interface DiagnoseRepository extends JpaRepository<Diagnose, Long> {
 }

@@ -12,6 +12,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.persistence.FetchType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -34,6 +35,7 @@ public class Patient {
     @Column(name = "PATIENT_ID", unique = true, nullable = true)
     private @NotNull Long id;
 
+    @Size(min = 10, max = 50)
     private @NotNull String patientfullname;
 
     @Pattern(regexp = "\\d{10}")
@@ -58,4 +60,6 @@ public class Patient {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
     @JoinColumn(name = "CONTAGION_NAME_ID", insertable = true)
     private @NotNull Disease disease;
+
+
 }
