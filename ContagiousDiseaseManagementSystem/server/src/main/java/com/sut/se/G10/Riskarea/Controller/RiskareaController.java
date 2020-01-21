@@ -44,7 +44,6 @@ public class RiskareaController {
         return riskareaRepository.findAll().stream().collect(Collectors.toList()) ;
     }
     
-    // ค้นหาจากชื่อโรค
     @GetMapping("/riskarea/{disease}")
     public Collection<Riskarea> riskareas(@PathVariable long disease) {
         return riskareaRepository.findByDisease(disease);

@@ -25,7 +25,7 @@
             :rules="[v => !!v || 'Item is required']"
             required
           ></v-select>
-          <!-- search Button By Disease-->
+          <!-- search Button -->
           <v-btn color="success" height="40" width="100" @click="findbyDisease">ค้นหา</v-btn>
         </v-col>
       </v-row>

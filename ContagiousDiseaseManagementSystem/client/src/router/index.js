@@ -55,6 +55,7 @@ const routes = [
     path: '/diagnoseView',
     component: DiagnoseView
   },
+  // searchriskarea
   {
     path: '/searchriskarea',
     component: searchriskarea
