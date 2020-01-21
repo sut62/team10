@@ -33,7 +33,6 @@ public class Riskarea {
     @Column(name = "RISKAREA_ID", unique = true, nullable = true)
     private @NotNull Long id ;
     
-    @NotNull
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private @NotNull Date date ;
 
