@@ -98,6 +98,7 @@ public class G10Application {
 				heal.setHeal(newrate);
 				healRepository.save(heal);
 			});
+			//Statistics = Disease,Type,Province
 			
 			// Diagnose Part
 			Stream.of("Admitted", "Not admitted", "Uncertainly").forEach(admitted -> {
@@ -162,6 +163,7 @@ public class G10Application {
 				typevaccine.setTypevaccinelist(list);
 				typeVaccineRepository.save(typevaccine); 
 			});
+			
 
 			diseaseRepository.findAll().forEach(System.out::println);
 			typeRepository.findAll().forEach(System.out::println);

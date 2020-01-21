@@ -26,6 +26,9 @@ public class Province {
     @Column(name = "PROVINCE_ID", unique = true, nullable = true)
     private  Long id;
     private @NotNull String province;
+	public Province findById(long province_id) {
+		return null;
+	}
 
   
 }

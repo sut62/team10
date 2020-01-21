@@ -10,9 +10,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.persistence.FetchType;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.Pattern;;
-
 import javax.persistence.Column;
 import lombok.*;
 
@@ -28,7 +27,9 @@ public class Contagion {
     @Column(name = "CONTAGION_ID", unique = true, nullable = true)
     private @NotNull Long id;
 
-    @Pattern(regexp = "[a-zA-Z]{2,6}$")
+    // @Pattern(regexp = "[a-z]{3,10}$")
+    @Size(min=3, max=10)
+    @Pattern(regexp = "[a-z]*")
     private @NotNull String carrier;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
@@ -46,6 +47,12 @@ public class Contagion {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Rate.class)
     @JoinColumn(name = "RATE_ID", insertable = true)
     private @NotNull Rate rate;
+
+	public void setHeal(Heal heal) {
+	}
+
+	public void setContagion(String string) {
+	}
 
 }
 
