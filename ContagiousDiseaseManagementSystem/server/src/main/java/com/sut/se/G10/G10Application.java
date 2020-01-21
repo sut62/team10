@@ -151,7 +151,7 @@ public class G10Application {
 			});
 
 			// VaccineInfomation Part
-			Stream.of("พร้อมใช้งาน", "กำลังใช้งาน", "ทั้งหมด..").forEach(name -> {
+			Stream.of("วัคซีนวัณโรค", "วัคซีนตัอักเสบบี", "วัคซีนโปลิโอ", "วัคซีนคอตีบ", "วัคซีนสมองอักเสบเจอี", "วัคซีนบาดทะยัก").forEach(name -> {
 				Vaccine vaccine = new Vaccine(); 
 				vaccine.setVaccinename(name); 
 				vaccineRepository.save(vaccine); 
