@@ -43,6 +43,11 @@ public class RiskareaController {
     public Collection<Riskarea> riskareas() {
         return riskareaRepository.findAll().stream().collect(Collectors.toList()) ;
     }
+    
+    @GetMapping("/riskarea/{disease}")
+    public Collection<Riskarea> riskareas(@PathVariable long disease) {
+        return riskareaRepository.findByDisease(disease);
+    }
 
     @PostMapping("/riskarea/{province_id}/{disease_id}/{communicablelevel_id}/{savedate}")
     public Riskarea newRiskarea( Riskarea newRiskarea,

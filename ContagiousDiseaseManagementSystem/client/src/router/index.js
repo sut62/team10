@@ -10,6 +10,7 @@ import Riskarea from '../components/Riskarea.vue'
 import vaccineinformation from '../components/vaccineinformation.vue'
 import viewvaccineinformation from '../components/viewvaccineinformation.vue'
 import DiagnoseView from '../components/DiagnoseView.vue'
+import searchriskarea from '../components/sprint2/SearchRiskarea.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,10 @@ const routes = [
   {
     path: '/diagnoseView',
     component: DiagnoseView
+  },
+  {
+    path: '/searchriskarea',
+    component: searchriskarea
   }
 ]
 
