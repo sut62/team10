@@ -62,7 +62,7 @@ const routes = [
     path: '/searchriskarea',
     component: searchriskarea
   },
-  // Statistics sprint2
+  // Statistics 
   {
     path: '/statistics',
     component: Statistics
