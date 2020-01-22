@@ -38,6 +38,7 @@ public class RiskareaTests {
         validator = factory.getValidator();
     }
 
+    // ===================================== Start Test Date =====================================
     @Test
     void b6020712_testDateCorrect() {
         Riskarea riskarea = new Riskarea();
@@ -110,7 +111,7 @@ public class RiskareaTests {
     }
 
     @Test
-    void b6020712_testDateMustNotBe10Digits() {
+    void b6020712_testDateMustNotBe11Characters() {
         Riskarea riskarea = new Riskarea();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -120,10 +121,76 @@ public class RiskareaTests {
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
             assertEquals(1, result.size());
-
+    
             ConstraintViolation<Riskarea> v = result.iterator().next();
             assertEquals("must match \"\\d{10}\"", v.getMessage());
             assertEquals("date", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }
+
+    // ===================================== End Test Date =====================================
+
+    // ================================== Start Test Combobox ==================================
+
+    // ---------------- Province Combobox ----------------
+    @Test
+    void b6020712_testProvinceComboboxMustNotBeNull() {
+        Riskarea riskarea = new Riskarea();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            riskarea.setDate(date);
+            riskarea.setProvince(null);
+            riskarea = riskareaRepository.saveAndFlush(riskarea);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Riskarea> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("province", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+
+    // ---------------- Disease Combobox ----------------
+    @Test
+    void b6020712_testDiseaseComboboxMustNotBeNull() {
+        Riskarea riskarea = new Riskarea();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            riskarea.setDate(date);
+            riskarea.setDisease(null);
+            riskarea = riskareaRepository.saveAndFlush(riskarea);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Riskarea> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("disease", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+
+    
+    // ---------------- Communicablelevel Combobox ----------------
+    @Test
+    void b6020712_testCommunicablelevelComboboxMustNotBeNull() {
+        Riskarea riskarea = new Riskarea();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            riskarea.setDate(date);
+            riskarea.setCommunicablelevel(null);
+            riskarea = riskareaRepository.saveAndFlush(riskarea);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Riskarea> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("communicablelevel", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+    // ================================== End Test Combobox ==================================
 }
