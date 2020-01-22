@@ -2,6 +2,14 @@ package com.sut.se.G10;
 
 import com.sut.se.G10.Diagnose.Entity.Diagnose;
 import com.sut.se.G10.Diagnose.Repository.DiagnoseRepository;
+import com.sut.se.G10.Patient.Entity.Patient;
+import com.sut.se.G10.Patient.Repository.PatientRepository;
+import com.sut.se.G10.Register.Entity.MedicalStaff;
+import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
+import com.sut.se.G10.Diagnose.Entity.Diagnose;
+import com.sut.se.G10.Diagnose.Repository.DiagnoseRepository;
+import com.sut.se.G10.Diagnose.Entity.Diagnose;
+import com.sut.se.G10.Diagnose.Repository.DiagnoseRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,30 +46,17 @@ public class DiagnoseTests {
     }
 
     @Test
-    void b5911837_testDiagnosisCorrect() {
+    void b5911837_testDiagnoseAllCorrect() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("ABab12 _.,");
-        diagnose.setDiagnosisDate(new Date());
-        diagnose.setStayAlertedTime("3 month");
-
-        Diagnose diagnoseFound = new Diagnose();
-        diagnoseFound =  diagnoseRepository.save(diagnose);
-
-        Optional<Diagnose> found = diagnoseRepository.findById(diagnoseFound.getId());
-        assertEquals("ABab12 _.,", found.get().getDiagnosis());
-    }
-
-    @Test
-    void b5911837_testStayAlertedTimeCorrect() {
-        Diagnose diagnose = new  Diagnose();
+        diagnose.setDiagnosisDate(new Date(2020, 12, 25));
         diagnose.setStayAlertedTime("3 months");
-        diagnose.setDiagnosis("ABab12 _.,");
-        diagnose.setDiagnosisDate(new Date());
 
-        Diagnose diagnoseFound = new Diagnose();
-        diagnoseFound =  diagnoseRepository.save(diagnose);
+        diagnose =  diagnoseRepository.saveAndFlush(diagnose);
 
-        Optional<Diagnose> found = diagnoseRepository.findById(diagnoseFound.getId());
+        Optional<Diagnose> found = diagnoseRepository.findById(diagnose.getId());
+        assertEquals("ABab12 _.,", found.get().getDiagnosis());
+        assertEquals(new Date(2020, 12, 25), found.get().getDiagnosisDate());
         assertEquals("3 months", found.get().getStayAlertedTime());
     }
 
