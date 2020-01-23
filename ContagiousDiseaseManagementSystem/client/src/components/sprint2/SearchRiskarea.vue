@@ -26,27 +26,42 @@
             required
           ></v-select>
           <!-- search Button -->
-          <v-btn color="success" height="40" width="100" @click="findbyDisease">ค้นหา</v-btn>
+          <v-btn 
+            color="primary" 
+            height="50"
+            width="100" 
+            @click="findbyDisease" dark>ค้นหา
+            <v-icon dark right>mdi-magnify</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
 
       <!-- ตาราง -->
       <div v-if="diseasecheck">
-        <h1 class="display-2 font-weight-bold mb-3">Find Success</h1>
         <v-data-table
           :headers="headers"
           :items="riskareadata"
           :items-per-page="5"
-          class="elevation-1"
+          class="elevation-1 mx-auto text-center"
+          style="width: 850px;"
         ></v-data-table>
+
+        <!-- ปุ่มกลับ -->
+        <v-row>
+          <v-col>
+            <v-btn 
+              class="ma-5"
+              color="grey lighten-2" 
+              height="50" 
+              width="80"   
+              to="/home">
+              <v-icon dark left>mdi-arrow-left</v-icon>
+              กลับ
+            </v-btn>
+          </v-col>
+        </v-row>
       </div>
 
-      <!-- ปุ่มกลับ -->
-      <v-row>
-        <v-col>
-          <v-btn color="success" height="40" width="100" to="/home">กลับ</v-btn>
-        </v-col>
-      </v-row>
     </v-card>
   </v-container>
 </template>
