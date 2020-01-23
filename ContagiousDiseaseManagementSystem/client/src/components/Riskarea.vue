@@ -86,23 +86,31 @@
                 v-on="on"
               ></v-text-field>
             </template>
-                <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
+              <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
             </v-menu>
           </v-col>
         </v-row>
 
         <!-- ปุ่มบันทึก -->
         <v-row>
-          <v-col cols="15">
-            <v-btn color="success" height="50" width="100" @click="saveRiskarea" dark>บันทึก</v-btn>
-          </v-col>
-          <v-spacer></v-spacer>
-          <v-col cols=15>
-          <v-btn 
-            color="success" 
-            height="40" 
-            width="100"   
-            to="/home">กลับ</v-btn>
+          <v-col>
+            <v-btn 
+              class="ma-5"
+              color="success" 
+              height="50"
+              width="100" 
+              @click="saveRiskarea" dark>บันทึก
+              <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
+            </v-btn>
+            <v-btn 
+              class="ma-5"
+              color="grey lighten-2" 
+              height="50" 
+              width="80"   
+              to="/home">
+              <v-icon dark left>mdi-arrow-left</v-icon>
+              กลับ
+            </v-btn>
           </v-col>
         </v-row>
 
