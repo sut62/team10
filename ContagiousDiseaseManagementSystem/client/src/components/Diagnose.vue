@@ -1,6 +1,17 @@
 <template>
   <v-container>
     <v-card class="mx-auto" style="max-width: 950px;">
+      <div v-if="saveUnsuccessful">
+        <v-alert outlined dense text type="warning" prominent border="left">
+            <strong>บันทึกไม่สำเร็จ</strong>
+            กรุณากรอกข้อมูลให้ครบและถูกต้องก่อนบันทึกข้อมูล
+        </v-alert>
+      </div>
+
+      <div v-if="saveSuccessful">
+        <v-alert dense outlined text prominent type="success">บันทึกสำเร็จ</v-alert>
+      </div>
+
       <v-layout text-center wrap>
         <v-flex mb-4>
           <br />
@@ -121,6 +132,14 @@
                       to="/">กลับ
                   </v-btn>
                 </v-col>
+                <v-col>
+                  <v-btn 
+                      color="primary" 
+                      height="40" 
+                      width="200"   
+                      to="/diagnoseView"> ไปหน้าแสดงผลการวินิจฉัย
+                  </v-btn>
+                </v-col>
               </v-row>
               <br />
             </div>
@@ -149,7 +168,9 @@ export default {
       },
       valid: false,
       patientCheck: false,
-      patientFullname: ""
+      patientFullname: "",
+      saveUnsuccessful: false,
+      saveSuccessful: false
     };
   },
 
@@ -243,12 +264,13 @@ export default {
         )
         .then(response => {
           console.log(response);
-          this.$router.push("/diagnoseView");
-          alert("บันทึกสำเร็จ");
+          this.saveSuccessful = true;
+          this.saveUnsuccessful = false;
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกไม่สำเร็จ");
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
         });
       this.submitted = true;
     },
