@@ -5,6 +5,7 @@
         <v-flex mb-4>
           <br />
           <bar />
+          <br />
           <h1 class="display-2 font-weight-bold mb-3">ระบบจัดการโรคติดต่อ</h1>
         </v-flex>
       </v-layout>

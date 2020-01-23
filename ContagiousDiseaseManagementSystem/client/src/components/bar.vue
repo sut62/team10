@@ -10,11 +10,11 @@
           <v-tab @click="pushPatient">จัดเก็บข้อมูลผู้ป่วยโรคติดต่อ</v-tab>
           <v-tab @click="pushvaccineinformation">บันทึกข้อมูลวัคซีนป้องกัน/ยา</v-tab>
           <v-tab @click="pushRiskarea">จัดเก็บพื้นที่เสี่ยง</v-tab>
+          <v-tab @click="pushSearchriskarea">ค้นหาพื้นที่เสี่ยง</v-tab>
         </v-tabs>
       </v-toolbar-items>
     </div>
-    <v-toolbar-title v-if="authenticated != ''">
-      Email : {{ email }}
+    <v-toolbar-title>
       <v-tab @click="Logout">Logout</v-tab>
     </v-toolbar-title>
   </v-toolbar>
@@ -50,6 +50,9 @@ export default {
     },
     pushRiskarea() {
       this.$router.push("/riskarea");
+    },
+    pushSearchriskarea() {
+      this.$router.push("/searchriskarea");
     },
     pushvaccineinformation() {
       this.$router.push("/vaccineinformation");

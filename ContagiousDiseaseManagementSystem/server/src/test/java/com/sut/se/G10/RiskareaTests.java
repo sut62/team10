@@ -46,7 +46,7 @@ public class RiskareaTests {
             Date date = formatter.parse("1999-05-13");
             riskarea.setDate(date) ;
         } catch (ParseException e) {}
-
+        
         riskarea = riskareaRepository.saveAndFlush(riskarea);
 
         Optional<Riskarea> found = riskareaRepository.findById(riskarea.getId());
@@ -58,8 +58,8 @@ public class RiskareaTests {
     @Test
     void b6020712_testDateMustNotBeNull() {
         Riskarea riskarea = new Riskarea();
-        riskarea.setDate(null);
         try {
+            riskarea.setDate(null);
             riskarea = riskareaRepository.saveAndFlush(riskarea);
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
@@ -90,27 +90,7 @@ public class RiskareaTests {
     }
 
     @Test
-    void b6020712_testDateMustBeUnique() {
-        Riskarea riskarea1 = new Riskarea();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563/01/21");
-            riskarea1.setDate(date);
-            riskarea1 = riskareaRepository.saveAndFlush(riskarea1);
-        } catch (DataIntegrityViolationException e) {
-            assertThrows(DataIntegrityViolationException.class, () -> {
-                Riskarea riskarea2 = new Riskarea();
-                try {
-                    Date date = formatter.parse("2563/01/21");
-                    riskarea2.setDate(date);
-                    riskarea2 = riskareaRepository.saveAndFlush(riskarea2);
-                } catch (ParseException ex) {}
-            });
-        } catch (ParseException e) {} 
-    }
-
-    @Test
-    void b6020712_testDateMustNotBe10Digits() {
+    void b6020712_testDateMustNotBe11Characters() {
         Riskarea riskarea = new Riskarea();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -122,7 +102,7 @@ public class RiskareaTests {
             assertEquals(1, result.size());
 
             ConstraintViolation<Riskarea> v = result.iterator().next();
-            assertEquals("must match \"\\d{10}\"", v.getMessage());
+            assertEquals("must match be 10 characters", v.getMessage());
             assertEquals("date", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }
