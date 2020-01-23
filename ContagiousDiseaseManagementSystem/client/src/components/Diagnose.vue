@@ -210,9 +210,9 @@ export default {
           console.log(response);
           if (response.data != null) {
             this.diagnose.patientId = response.data.id;
-            // if(this.patientFullname == response.data.patientfullname){
+            if(this.patientFullname == response.data.patientfullname){
               this.patientCheck = true;
-            // }
+            }
             
           } else {
             this.clear()

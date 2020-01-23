@@ -61,11 +61,29 @@ public class DiagnoseTests {
     }
 
     @Test
+    void b5911837_testDiagnosisDateNotNull() {
+        Diagnose diagnose = new  Diagnose();
+        diagnose.setDiagnosis("1234567890");
+        diagnose.setDiagnosisDate(null);
+        diagnose.setStayAlertedTime("3 months");
+
+        Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Diagnose> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("diagnosisDate", v.getPropertyPath().toString());
+    }
+
+    @Test
     void b5911837_testDiagnosisNotAgianstPattern() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("123456789$");
         diagnose.setDiagnosisDate(new Date());
-        diagnose.setStayAlertedTime("3 month");
+        diagnose.setStayAlertedTime("3 months");
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -83,7 +101,7 @@ public class DiagnoseTests {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis(null);
         diagnose.setDiagnosisDate(new Date());
-        diagnose.setStayAlertedTime("3 month");
+        diagnose.setStayAlertedTime("3 months");
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -101,7 +119,7 @@ public class DiagnoseTests {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("123456789");
         diagnose.setDiagnosisDate(new Date());
-        diagnose.setStayAlertedTime("3 month");
+        diagnose.setStayAlertedTime("3 months");
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -120,7 +138,7 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("12345678901234567890123456789012345678901234567890"+
         "123456789012345678901234567890123456789012345678901");
         diagnose.setDiagnosisDate(new Date());
-        diagnose.setStayAlertedTime("3 month");
+        diagnose.setStayAlertedTime("3 months");
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
