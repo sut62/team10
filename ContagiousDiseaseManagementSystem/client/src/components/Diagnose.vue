@@ -2,7 +2,7 @@
   <v-container>
     <v-card class="mx-auto" style="max-width: 950px;">
       <div v-if="saveUnsuccessful">
-        <v-alert outlined dense text type="warning" prominent border="left">
+        <v-alert outlined dense text type="error" prominent border="left">
             <strong>บันทึกไม่สำเร็จ</strong>
             กรุณากรอกข้อมูลให้ครบและถูกต้องก่อนบันทึกข้อมูล
         </v-alert>
