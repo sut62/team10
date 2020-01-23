@@ -2,14 +2,6 @@ package com.sut.se.G10;
 
 import com.sut.se.G10.Diagnose.Entity.Diagnose;
 import com.sut.se.G10.Diagnose.Repository.DiagnoseRepository;
-import com.sut.se.G10.Patient.Entity.Patient;
-import com.sut.se.G10.Patient.Repository.PatientRepository;
-import com.sut.se.G10.Register.Entity.MedicalStaff;
-import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
-import com.sut.se.G10.Diagnose.Entity.Diagnose;
-import com.sut.se.G10.Diagnose.Repository.DiagnoseRepository;
-import com.sut.se.G10.Diagnose.Entity.Diagnose;
-import com.sut.se.G10.Diagnose.Repository.DiagnoseRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
