@@ -1,5 +1,4 @@
 package com.sut.se.G10;
-
 import com.sut.se.G10.VaccineInformation.Entity.*;
 import com.sut.se.G10.VaccineInformation.Repository.*;
 
@@ -41,7 +40,7 @@ public class VaccineInformationTests {
     }
 
     
-// ==============================StorageDate===========================  
+// ============================StorageDate===========================  
     @Test
     void b5901418_testStoragedateCorrect() {
         VaccineInformation vaccineInformation = new VaccineInformation();
