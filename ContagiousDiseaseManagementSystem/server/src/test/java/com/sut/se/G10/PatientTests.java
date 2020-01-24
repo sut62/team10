@@ -23,7 +23,6 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.fail;
 
 @DataJpaTest
 public class PatientTests {
@@ -244,8 +243,86 @@ public class PatientTests {
             assertEquals(1, result.size());// result ต้องมี error 1 ค่าเท่านั้น
     
             ConstraintViolation<Patient> v = result.iterator().next();
-            assertEquals("must match \"\\d{10}\"", v.getMessage());
-            assertEquals("phone", v.getPropertyPath().toString());
+            assertEquals("must be betweet 10 to 50", v.getMessage());
+            assertEquals("patientfullname", v.getPropertyPath().toString());
+        }
+    }
+
+    // ---------------- Gender Combobox ----------------
+    @Test
+    void B5910557_testGenserComboboxMustNotBeNull() {
+        Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            patient.setPatientbirthdate(date);
+            patient.setGender(null);
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("gender", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+
+    // ---------------- Disease Combobox ----------------
+    @Test
+    void B5910557_testDiseaseComboboxMustNotBeNull() {
+        Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            patient.setPatientbirthdate(date);
+            patient.setDisease(null);
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("disease", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+
+    
+    // ---------------- Bloodtype Combobox ----------------
+    @Test
+    void B5910557_testBloodtypeComboboxMustNotBeNull() {
+        Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            patient.setPatientbirthdate(date);
+            patient.setBloodtype(null);
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("bloodtype", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+
+    //PatientDate ต้องnot null
+    @Test
+    void B5910557_testPatientdateMustNotBeNull() {
+        Patient patient = new Patient();
+        patient.setPatientdate(null);
+        try {
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("patient date", v.getPropertyPath().toString());
         }
     }
 
