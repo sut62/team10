@@ -52,21 +52,24 @@ public class Diagnose {
     @Pattern(regexp = "[a-zA-Z0-9 \t]*")
     private String stayAlertedTime;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID", insertable = true)
     private Patient patientfullname;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "MEDICAL_STAFF_ID", insertable = true)
     private MedicalStaff fullname;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "DISEASE_ID", insertable = true)
     private Disease disease;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "ADMISSION_ID", insertable = true)
     private Admission admission;
 
-    
 }

@@ -1,6 +1,15 @@
 <template>
     <v-container>
         <v-card class="mx-auto" style="max-width: 600px">
+          <div v-if="saveUnsuccessful">
+            <v-alert outlined dense text type="error" prominent border="left">
+                ข้อมูลไม่ครบถ้วน
+            </v-alert>
+          </div>
+
+          <div v-if="saveSuccessful">
+            <v-alert dense outlined text prominent type="success">บันทึกสำเร็จ</v-alert>
+          </div>
 
             <v-layout  text-center wrap>
                 <v-flex mb-4>
@@ -115,7 +124,7 @@
                           color="success" 
                           height="40" 
                           width="100"   
-                          to="/">กลับ
+                          to="/home">กลับ
                         </v-btn>
                       </v-col>
                   </v-row>
@@ -145,7 +154,9 @@ export default {
       ],
       patientfullname: "",
       phone: "",
-      address: ""
+      address: "",
+      saveUnsuccessful: false,
+      saveSuccessful: false
     };
   },
 
@@ -230,12 +241,15 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ");
+          this.saveSuccessful = true;
+          this.saveUnsuccessful = false;
         })
         .catch(e => {
           console.log(e);
-          alert("ข้อมูลไม่ครบถ้วน");
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
         });
+      this.submitted = true;
     }
   },
   mounted() {
