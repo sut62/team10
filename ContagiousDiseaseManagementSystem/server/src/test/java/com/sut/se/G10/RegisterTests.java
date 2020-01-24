@@ -1,6 +1,10 @@
 package com.sut.se.G10;
 
+import com.sut.se.G10.Register.Entity.Gender;
 import com.sut.se.G10.Register.Entity.MedicalStaff;
+import com.sut.se.G10.Register.Entity.Province;
+import com.sut.se.G10.Register.Entity.Position;
+import com.sut.se.G10.Register.Repository.*;
 import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -32,6 +36,12 @@ public class RegisterTests {
 
     @Autowired
     private MedicalStaffRepository medicalStaffRepository;
+    @Autowired
+    private GenderRepository genderRepository;
+    @Autowired
+    private PositionRepository positionRepository;
+    @Autowired
+    private ProvinceRepository provinceRepository;
 
     @BeforeEach
     public void setup() {
@@ -130,4 +140,187 @@ public class RegisterTests {
         } catch (ParseException e) {}
     }
 //-------------------------------------------birthdate--------------------------------------------//
+@Test
+    void b5905492_testFullnameMustNotBeNull() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        medicalStaff.setFullname(null);
+        try {
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("fullname", v.getPropertyPath().toString());
+        }
+        }
+        //-------------------------------------------fullname notnull--------------------------------------------// 
+        @Test
+    void b5905492_testAddressMustNotBeNull() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        medicalStaff.setAddress(null);
+        try {
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("address", v.getPropertyPath().toString());
+        }
 }
+//-------------------------------------------address notnull--------------------------------------------//
+@Test
+void b5905492_testEmailMustNotBeNull() {
+    MedicalStaff medicalStaff1 = new MedicalStaff();
+
+    try {
+        medicalStaff1.setEmail(null);
+        medicalStaff1 = medicalStaffRepository.save(medicalStaff1);
+    } catch (ConstraintViolationException e) {
+        Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff1);
+        assertEquals(1, result.size());
+
+        ConstraintViolation<MedicalStaff> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("email", v.getPropertyPath().toString());
+        
+    }
+}
+//-------------------------------------------email notnull--------------------------------------------//
+
+    @Test
+    void b5905492_testEmailMustBeUnique() {
+        MedicalStaff medicalStaff1 = new MedicalStaff();
+
+        try {
+            medicalStaff1.setEmail("sasithon@gmail.com");
+            medicalStaff1 = medicalStaffRepository.save(medicalStaff1);
+        } catch (DataIntegrityViolationException e) {
+            assertThrows(DataIntegrityViolationException.class, () -> {
+                MedicalStaff medicalStaff2 = new MedicalStaff();
+                try {
+                    medicalStaff2.setEmail("sasithongmail.com");
+                    medicalStaff2 = medicalStaffRepository.saveAndFlush(medicalStaff2);
+                } catch (DataIntegrityViolationException ex) {}
+            });
+        }
+    }
+    //-------------------------------------------email unique--------------------------------------------//
+    @Test
+void b5905492_testPasswordMustNotBeNull() {
+    MedicalStaff medicalStaff1 = new MedicalStaff();
+
+    try {
+        medicalStaff1.setPassword(null);
+        medicalStaff1 = medicalStaffRepository.save(medicalStaff1);
+    } catch (ConstraintViolationException e) {
+        Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff1);
+        assertEquals(1, result.size());
+
+        ConstraintViolation<MedicalStaff> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("password", v.getPropertyPath().toString());
+        
+    }
+}
+//-------------------------------------------password notnull--------------------------------------------//
+@Test
+    void b5905492_testPasswordMustNotBe7Digits() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        try {
+            
+            medicalStaff.setPassword("1234567");
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must match \"\\min=8\"", v.getMessage());
+            assertEquals("password", v.getPropertyPath().toString());
+        }
+    }
+    //-------------------------------------------password size--------------------------------------------//
+@Test
+    void b5905492_testGenderMustNotBeNull() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        medicalStaff.setGender(null);
+        try {
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("gender", v.getPropertyPath().toString());
+        }
+}
+//-------------------------------------------gender notnull--------------------------------------------//
+@Test
+    void b5905492_testPositionMustNotBeNull() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        medicalStaff.setPosition(null);
+        try {
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("position", v.getPropertyPath().toString());
+        }
+}
+//-------------------------------------------position notnull--------------------------------------------//
+@Test
+    void b5905492_testProvinceMustNotBeNull() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        medicalStaff.setProvince(null);
+        try {
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("province", v.getPropertyPath().toString());
+        }
+}
+//-------------------------------------------province notnull--------------------------------------------//
+@Test
+void B5905492_testMedicalStaffDataCorrect() {
+    MedicalStaff medicalStaff = new MedicalStaff();
+    Position position = positionRepository.findById(1);
+    Gender gender = genderRepository.findById(1);
+    Province province = provinceRepository.findById(1);
+    
+    medicalStaff.setFullname("Sasithon Chairat");
+    medicalStaff.setGender(gender);
+    medicalStaff.setPosition(position);
+    medicalStaff.setPhone("0987458748");
+    medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
+    medicalStaff.setProvince(province);
+    medicalStaff.setEmail("sasithon@gmail.com");
+    medicalStaff.setPassword("12345678");
+    
+    MedicalStaff medicalStaffFound = new MedicalStaff();
+    medicalStaffFound = medicalStaffRepository.save(medicalStaff);
+    Optional<MedicalStaff> found = medicalStaffRepository.findById(medicalStaffFound.getId());
+
+    assertEquals("Sasithon Chairat", found.get().getFullname());
+    assertEquals(gender, found.get().getGender());
+    assertEquals(position, found.get().getPosition());
+    assertEquals("0987458748", found.get().getPhone());
+    assertEquals("97/3 หนองหาน อุดรธานี 41130", found.get().getAddress());
+    assertEquals(province, found.get().getProvince());
+    assertEquals("sasithon@gmail.com", found.get().getEmail());
+    assertEquals("12345678", found.get().getPassword());
+
+}
+    }
+//-------------------------------------------ข้อมูลถูกต้องปกติ--------------------------------------------//
