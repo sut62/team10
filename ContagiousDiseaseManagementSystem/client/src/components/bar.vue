@@ -8,6 +8,7 @@
           <v-tab @click="pushContagion">จัดเก็บข้อมูลโรคติดต่อ</v-tab>
           <v-tab @click="pushDiagnose">จัดเก็บการวินิจฉัยโรคติดต่อ</v-tab>
           <v-tab @click="pushPatient">จัดเก็บข้อมูลผู้ป่วยโรคติดต่อ</v-tab>
+          <v-tab @click="pushPatientshow">แสดงข้อมูลผู้ป่วยโรคติดต่อ</v-tab>
           <v-tab @click="pushvaccineinformation">บันทึกข้อมูลวัคซีนป้องกัน/ยา</v-tab>
           <v-tab @click="pushRiskarea">จัดเก็บพื้นที่เสี่ยง</v-tab>
           <v-tab @click="pushSearchriskarea">ค้นหาพื้นที่เสี่ยง</v-tab>
@@ -56,6 +57,9 @@ export default {
     },
     pushvaccineinformation() {
       this.$router.push("/vaccineinformation");
+    },
+    pushPatientshow() {
+      this.$router.push("/patientshow");
     }
   }
 }
