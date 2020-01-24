@@ -12,6 +12,7 @@
           <v-tab @click="pushvaccineinformation">บันทึกข้อมูลวัคซีนป้องกัน/ยา</v-tab>
           <v-tab @click="pushRiskarea">จัดเก็บพื้นที่เสี่ยง</v-tab>
           <v-tab @click="pushSearchriskarea">ค้นหาพื้นที่เสี่ยง</v-tab>
+          <v-tab @click="pushDiagnoseView">แสดงผลการวินิจฉัยโรคติดต่อ</v-tab>
         </v-tabs>
       </v-toolbar-items>
     </div>
@@ -60,7 +61,10 @@ export default {
     },
     pushPatientshow() {
       this.$router.push("/patientshow");
-    }
+    },
+    pushDiagnoseView() {
+      this.$router.push("/diagnoseView");
+    },
   }
 }
 </script>

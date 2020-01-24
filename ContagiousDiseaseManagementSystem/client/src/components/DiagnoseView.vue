@@ -14,6 +14,24 @@
             </v-data-table>
         </v-col>
         </v-row>
+        <v-row justify="left">
+          <v-col cols="4">
+            <v-btn 
+              color="primary" 
+              height="40" 
+              width="80"   
+              to="/home"> ไปหน้าหลัก
+            </v-btn>
+          </v-col>
+          <v-col cols="4">
+            <v-btn 
+              color="secondary" 
+              height="40" 
+              width="300"   
+              to="/diagnose"> ไปหน้าวินิจฉัยโรคติดต่อ
+            </v-btn>
+          </v-col>
+        </v-row>
     </v-card>
   </v-container>
 </template>
