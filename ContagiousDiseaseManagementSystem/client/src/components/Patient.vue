@@ -8,7 +8,7 @@
           </div>
 
           <div v-if="saveSuccessful">
-            <v-alert dense outlined text prominent type="success">บันทึกสำเร็จ</v-alert>
+            <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
           </div>
 
             <v-layout  text-center wrap>
