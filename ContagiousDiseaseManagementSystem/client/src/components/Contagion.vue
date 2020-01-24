@@ -1,100 +1,127 @@
 <template>
-  <v-card class="mx-auto" tile max-width="600">
-    <v-form>
-      <v-layout wrap column>
+  <v-container>
+    <v-card class="mx-auto" tile max-width="600">
+
+      <v-layout text-center wrap column>
         <v-toolbar-title class="headline text-uppercase">
           <br />
           <h2>ระบบเก็บข้อมูลโรคติดต่อ</h2>
           <br />
         </v-toolbar-title>
-
-        <v-select
-          label="ชื่อโรคติดต่อ"
-          outlined
-          :items="disease"
-          item-text="disease"
-          item-value="id"
-          style="width: 450px"
-          color="teal"
-          v-model="contagion.disease"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-select>
-
-        <v-select
-          label="ประเภทของโรคติดต่อ"
-          outlined
-          :items="type"
-          item-text="type"
-          item-value="id"
-          style="width: 450px"
-          color="teal"
-          v-model="contagion.type"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-select>
-
-        <v-text-field
-          label="พาหะ"
-          color="teal"
-          v-model="carrier"
-          style="width: 450px"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-text-field>
-
-        <v-select
-          label="อาการของโรคติดต่อ"
-          outlined
-          :items="symptom"
-          item-text="symptom"
-          item-value="id"
-          style="width: 450px"
-          color="teal"
-          v-model="contagion.symptom"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-select>
-
-        <v-select
-          label="อัตราการติดต่อของโรคติดต่อ"
-          outlined
-          :items="rate"
-          item-text="rate"
-          item-value="id"
-          style="width: 450px"
-          color="teal"
-          v-model="contagion.rate"
-          :rules="[v => !!v || 'Item is required']"
-          required
-          ></v-select>
-
-          <v-select
-          label="การรักษา"
-          outlined
-          :items="heal"
-          item-text="heal"
-          item-value="id"
-          style="width: 450px"
-          color="teal"
-          v-model="contagion.heal"
-          :rules="[v => !!v || 'Item is required']"
-          required
-          ></v-select>
       </v-layout>
-    <v-row>
-      
-      <v-col>
-        <v-btn @click="saveContagion" color="success">บันทึก</v-btn>
-      </v-col>
-      <v-spacer></v-spacer>
-      <v-col>
-        <v-btn color="success" height="40" width="100" to="/">กลับ</v-btn>
-      </v-col>
 
-    </v-row>
-    </v-form>
-  </v-card>
+      <v-card-text>
+        <v-row>
+          <v-select
+            label="ชื่อโรคติดต่อ"
+            outlined
+            :items="disease"
+            item-text="disease"
+            item-value="id"
+            style="width: 400px"
+            color="teal"
+            v-model="contagion.disease"
+            :rules="[v => !!v || 'Item is required']"
+            required>
+          </v-select>
+        </v-row>
+
+        <v-row>
+          <v-select
+            label="ประเภทของโรคติดต่อ"
+            outlined
+            :items="type"
+            item-text="type"
+            item-value="id"
+            style="width: 400px"
+            color="teal"
+            v-model="contagion.type"
+            :rules="[v => !!v || 'Item is required']"
+            required>
+          </v-select>
+        </v-row>
+
+        <v-row>
+          <v-text-field
+            label="พาหะ"
+            color="teal"
+            v-model="carrier"
+            style="width: 400px"
+            :rules="[v => !!v || 'Item is required']"
+            required>
+          </v-text-field>
+        </v-row>
+
+        <v-row>
+          <v-select
+            label="อาการของโรคติดต่อ"
+            outlined
+            :items="symptom"
+            item-text="symptom"
+            item-value="id"
+            style="width: 400px"
+            color="teal"
+            v-model="contagion.symptom"
+            :rules="[v => !!v || 'Item is required']"
+            required>
+          </v-select>
+        </v-row>
+
+        <v-row>
+          <v-select
+            label="อัตราการติดต่อของโรคติดต่อ"
+            outlined
+            :items="rate"
+            item-text="rate"
+            item-value="id"
+            style="width: 400px"
+            color="teal"
+            v-model="contagion.rate"
+            :rules="[v => !!v || 'Item is required']"
+            required>
+          </v-select>
+        </v-row>
+
+        <v-row>
+          <v-select
+            label="การรักษา"
+            outlined
+            :items="heal"
+            item-text="heal"
+            item-value="id"
+            style="width: 400px"
+            color="teal"
+            v-model="contagion.heal"
+            :rules="[v => !!v || 'Item is required']"
+            required>
+          </v-select>
+        </v-row>
+
+        <v-row>
+          <v-col>
+            <v-btn @click="saveContagion" height="40" color="success">บันทึก</v-btn>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-spacer></v-spacer>
+          <v-spacer></v-spacer>
+          <v-spacer></v-spacer>
+          <v-col>
+            <v-btn color="success" height="40" width="100" to="/home">กลับ</v-btn>
+          </v-col>
+        </v-row>
+
+        <div v-if="saveUnsuccessful">
+          <v-alert outlined dense text type="error" prominent border="left">
+            บันทึกข้อมูลไม่สำเร็จ
+          </v-alert>
+      </div>
+      <div v-if="saveSuccessful">
+        <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
+      </div>
+
+      </v-card-text>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -108,19 +135,25 @@ export default {
         type: "",
         symptom: "",
         rate: "",
-        heal: ""
+        heal: "", 
+  
       },
-
+      menu1: false,
       disease: [],
       type: [],
       carrier: "",
       symptom: [],
       rate: [],
-      heal:[]
+      heal:[],
+      saveUnsuccessful: false,
+      saveSuccessful: false
     };
   },
+
+  /* eslint-disable no-console */
+   /* eslint-disable */
   methods: {
-    /* eslint-disable no-console */
+    // ดึงข้อมูล combobox
     getDisease() {
       http
         .get("/disease")
@@ -134,6 +167,7 @@ export default {
         });
     },
 
+    // ดึงข้อมูล combobox
     getType() {
       http
         .get("/type")
@@ -147,6 +181,7 @@ export default {
         });
     },
 
+    // ดึงข้อมูล combobox
     getSymptom() {
       http
         .get("/symptom")
@@ -160,6 +195,7 @@ export default {
         });
     },
 
+    // ดึงข้อมูล combobox
     getRate() {
       http
         .get("/rate")
@@ -173,6 +209,7 @@ export default {
         });
     },
 
+    // ดึงข้อมูล combobox
     getHeal() {
       http
         .get("/heal")
@@ -186,6 +223,7 @@ export default {
         });
     },
 
+    // function เมื่อกดปุ่ม บันทึก
     saveContagion() {
       http
         .post(
@@ -205,17 +243,21 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ");
+          this.saveSuccessful = true;
+          this.saveUnsuccessful = false;
+        
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกข้อมูลไม่สำเร็จ");
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
         });
       this.submitted = true;
     },
+
     clear() {
       this.$refs.form.reset();
-      this.customerCheck = false;
+      this.contagionCheck = false;
     },
     refreshList() {
       this.getDisease();
@@ -223,7 +265,7 @@ export default {
       this.getSymptom();
       this.getRate();
       this.getHeal();
-    }
+    },
   },
   mounted() {
     this.getDisease();
