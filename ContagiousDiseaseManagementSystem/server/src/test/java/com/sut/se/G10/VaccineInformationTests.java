@@ -40,7 +40,7 @@ public class VaccineInformationTests {
     }
 
     
-// ==============================StorageDate===========================  
+// ============================== StorageDate ===========================  
     @Test
     void b5901418_testStoragedateCorrect() {
         VaccineInformation vaccineInformation = new VaccineInformation();
@@ -139,7 +139,7 @@ public class VaccineInformationTests {
             assertEquals("date", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }
-// ==============================ExpireDate===========================  
+// ============================== ExpireDate ===========================  
 @Test
     void b5901418_testExpiredateCorrect() {
         VaccineInformation vaccineInformation = new VaccineInformation();
