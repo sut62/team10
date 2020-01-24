@@ -1,3 +1,4 @@
+  
 package com.sut.se.G10.Register.Controller;
 
 import java.util.HashMap;
@@ -76,6 +77,11 @@ public class MedicalStaffController {
         id = positionRepository.findByPosition("Doctor").getId();
         return medicalStaffRepository.findByMedicalStaffId(id);
     }
+    
+    @GetMapping("/medicalStaffposition/{position}")
+    public Collection<MedicalStaff> medicalStaffs(@PathVariable long position) {
+        return medicalStaffRepository.findByPosition(position);
+    }
 
     @PostMapping("/medicalstaff/{gender_id}/{position_id}/{province_id}/{address}/{fullname}/{email}/{phone}/{password}/{bdate}")
     public MedicalStaff newMedicalStaff(  MedicalStaff newMedicalStaff, 
@@ -111,4 +117,3 @@ public class MedicalStaffController {
         return medicalStaffRepository.save(newMedicalStaff);
     }
 }
-
