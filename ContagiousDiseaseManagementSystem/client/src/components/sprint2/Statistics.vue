@@ -1,72 +1,90 @@
 <template>
-  <v-card class="mx-auto" tile max-width="500">
-    <v-form>
-      <v-layout wrap column>
-        <v-toolbar-title class="headline text-uppercase">
-          <br />
-          <h2>ระบบเก็บสถิติการเกิดโรคติดต่อ</h2>
-          <br />
-        </v-toolbar-title>
+  <div class="text-center">
+      <v-card class="mx-auto" style="max-width: 600px">
 
-        <v-select
-          label="ชื่อโรคติดต่อ"
-          outlined
-          :items="disease"
-          item-text="disease"
-          item-value="id"
-          style="width: 500px"
-          color="teal"
-          v-model="statistics.disease"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-select>
+        <v-layout text-center wrap column>
+          <v-toolbar-title class="headline text-uppercase">
+            <br />
+            <div class="success pa-8 white--text">ระบบเก็บสถิติการเกิดโรคติดต่อ</div>
+            <br />
+          </v-toolbar-title>
+        </v-layout>
 
-        <v-select
-          label="ประเภทของโรคติดต่อ"
-          outlined
-          :items="type"
-          item-text="type"
-          item-value="id"
-          style="width: 500px"
-          color="teal"
-          v-model="statistics.type"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-select>
+        <v-card-text>
+            <v-row justify="center">
+              <v-col cols="10"> 
+                <v-select
+                  label="ชื่อโรคติดต่อ"
+                  outlined
+                  :items="disease"
+                  item-text="disease"
+                  item-value="id"
+                  color="teal"
+                  v-model="statistics.disease"
+                  :rules="[v => !!v || 'Item is required']"
+                  required>
+                </v-select>
+              </v-col>
 
-        <v-select
-          label="จังหวัด"
-          outlined
-          :items="province"
-          item-text="province"
-          item-value="id"
-          style="width: 500px"
-          color="teal"
-          v-model="statistics.province"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-select>
+              <v-col cols="10">
+              <v-select
+                label="ประเภทของโรคติดต่อ"
+                outlined
+                :items="type"
+                item-text="type"
+                item-value="id"
+                color="teal"
+                v-model="statistics.type"
+                :rules="[v => !!v || 'Item is required']"
+                required>
+              </v-select>
+              </v-col>
 
-         <v-text-field
-          label="จำนวน"
-          color="teal"
-          v-model="rates"
-          style="width: 500px"
-          :rules="[v => !!v || 'Item is required']"
-          required
-        ></v-text-field>
-      </v-layout>
-    <v-row>     
-      <v-col>
-        <v-btn @click="saveStatistics" color="success">บันทึก</v-btn>
-      </v-col>
-      <v-spacer></v-spacer>
-      <v-col>
-        <v-btn color="success" height="40" width="100" to="/">กลับ</v-btn>
-      </v-col>
-    </v-row>
-    </v-form>
-  </v-card>
+              <v-col cols="10">
+              <v-select
+                label="จังหวัด"
+                outlined
+                :items="province"
+                item-text="province"
+                item-value="id"
+                color="teal"
+                v-model="statistics.province"
+                :rules="[v => !!v || 'Item is required']"
+                required>
+              </v-select>
+              </v-col>
+
+              <v-col cols="10">
+                <v-text-field
+                  label="จำนวนผู้ป่วยโรคติดต่อ"
+                  color="teal"
+                  v-model="rates"
+                  :rules="[v => !!v || 'Item is required']"
+                  required>
+                </v-text-field>
+              </v-col>
+
+              <v-col>
+                <v-btn @click="saveStatistics" height="40" width="100" color="success">บันทึก</v-btn>
+              </v-col>
+              <v-spacer></v-spacer>
+              <v-col >
+                <v-btn color="success" height="40" width="100" to="/home">กลับ</v-btn>
+              </v-col>
+            </v-row>
+            
+            <div v-if="saveUnsuccessful">
+              <v-alert outlined dense text type="error" prominent border="left">
+                บันทึกข้อมูลไม่สำเร็จ
+              </v-alert>
+            </div>
+            <div v-if="saveSuccessful">
+              <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
+            </div> 
+
+        </v-card-text>
+      </v-card>
+  </div>
 </template>
 
 <script>
@@ -78,17 +96,22 @@ export default {
       statistics: {
         disease: "",
         type: "",
-        province: ""
+        province: "",
       },
-
+      menu1: false,
       disease: [],
       type: [],
       province: [],
-      rates: ""
+      rates: "",
+      saveUnsuccessful: false,
+      saveSuccessful: false
     };
   },
+
+  /* eslint-disable no-console */
+    /* eslint-disable */
   methods: {
-    /* eslint-disable no-console */
+    // ดึงข้อมูล combobox
     getDisease() {
       http
         .get("/disease")
@@ -102,6 +125,7 @@ export default {
         });
     },
 
+    // ดึงข้อมูล combobox
     getType() {
       http
         .get("/type")
@@ -115,6 +139,7 @@ export default {
         });
     },
 
+    // ดึงข้อมูล combobox
     getProvince() {
       http
         .get("/province")
@@ -128,6 +153,7 @@ export default {
         });
     },
 
+    // function เมื่อกดปุ่ม บันทึก
     saveStatistics() {
       http
         .post(
@@ -143,17 +169,21 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ");
+          this.saveSuccessful = true;
+          this.saveUnsuccessful = false;
+        
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกข้อมูลไม่สำเร็จ");
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
         });
       this.submitted = true;
     },
+
     clear() {
       this.$refs.form.reset();
-      this.customerCheck = false;
+      this.statisticsCheck = false;
     },
     refreshList() {
       this.getDisease();
