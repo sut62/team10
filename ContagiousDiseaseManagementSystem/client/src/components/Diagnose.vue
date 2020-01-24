@@ -277,6 +277,8 @@ export default {
     clear() {
       this.$refs.form.reset();
       this.patientCheck = false;
+      this.saveSuccessful = false;
+      this.saveUnsuccessful = false;
     },
     refreshList() {
       this.getMedicalStaffs();
