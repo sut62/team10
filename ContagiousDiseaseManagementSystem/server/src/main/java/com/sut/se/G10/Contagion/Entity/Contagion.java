@@ -27,7 +27,6 @@ public class Contagion {
     @Column(name = "CONTAGION_ID", unique = true, nullable = true)
     private @NotNull Long id;
 
-    // @Pattern(regexp = "[a-z]{3,10}$")
     @Size(min=3, max=10)
     @Pattern(regexp = "[a-z]*")
     private @NotNull String carrier;
@@ -48,11 +47,9 @@ public class Contagion {
     @JoinColumn(name = "RATE_ID", insertable = true)
     private @NotNull Rate rate;
 
-	public void setHeal(Heal heal) {
-	}
-
-	public void setContagion(String string) {
-	}
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Heal.class)
+    @JoinColumn(name = "HEAL_ID", insertable = true)
+    private @NotNull Heal heal ;
 
 }
 
