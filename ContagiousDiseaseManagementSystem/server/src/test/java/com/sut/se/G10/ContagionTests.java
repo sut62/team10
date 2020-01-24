@@ -220,7 +220,7 @@ public class ContagionTests {
     }
 
     @Test
-    void b5913480_testCarrierMax103() {
+    void b5913480_testCarrierMax10() {
         Contagion contagion = new Contagion();
         try {
             contagion.setCarrier("abcdefghijk");
