@@ -1,7 +1,13 @@
 package com.sut.se.G10;
 
 import com.sut.se.G10.Patient.Entity.Patient;
+import com.sut.se.G10.Register.Entity.Gender;
+import com.sut.se.G10.Patient.Entity.Bloodtype;
+import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Patient.Repository.PatientRepository;
+import com.sut.se.G10.Register.Repository.GenderRepository;
+import com.sut.se.G10.Patient.Repository.BloodtypeRepository;
+import com.sut.se.G10.Contagion.Repository.DiseaseRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +37,12 @@ public class PatientTests {
 
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private DiseaseRepository diseaseRepository;
+    @Autowired
+    private GenderRepository genderRepository;
+    @Autowired
+    private BloodtypeRepository bloodtypeRepository;
 
     @BeforeEach
     public void setup() {
@@ -131,18 +143,27 @@ public class PatientTests {
     @Test
 	void B5910557_testPatientDataCorrect() {
         Patient patient = new Patient();
+        Disease disease = diseaseRepository.findById(1);
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
         
-		patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        patient.setDisease(disease);
         
         Patient patientFound = new Patient();
         patientFound = patientRepository.save(patient);
         Optional<Patient> found = patientRepository.findById(patientFound.getId());
 
         assertEquals("Wachiraya Chaiyasaj", found.get().getPatientfullname());
+        assertEquals(gender, found.get().getGender());
+        assertEquals(bloodtype, found.get().getBloodtype());
         assertEquals("0982208997", found.get().getPhone());
         assertEquals("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190", found.get().getAddress());
+        assertEquals(disease, found.get().getDisease());
     }
 
     //ใส่ข้อมูลไม่ถูกต้องมีค่าnull
