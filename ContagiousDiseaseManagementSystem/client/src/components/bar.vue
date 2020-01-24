@@ -13,6 +13,7 @@
           <v-tab @click="pushRiskarea">จัดเก็บพื้นที่เสี่ยง</v-tab>
           <v-tab @click="pushSearchriskarea">ค้นหาพื้นที่เสี่ยง</v-tab>
           <v-tab @click="pushDiagnoseView">แสดงผลการวินิจฉัยโรคติดต่อ</v-tab>
+          <v-tab @click="pushSearchRegister">ค้นหาข้อมูลของสมาชิก</v-tab>
         </v-tabs>
       </v-toolbar-items>
     </div>
@@ -64,6 +65,9 @@ export default {
     },
     pushDiagnoseView() {
       this.$router.push("/diagnoseView");
+    },
+    pushSearchRegister() {
+      this.$router.push("/searchregister");
     },
   }
 }
