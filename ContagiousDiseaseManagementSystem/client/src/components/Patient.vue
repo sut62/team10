@@ -19,116 +19,116 @@
             </v-layout>
 
             <v-card-text>
-                <v-form>
-                  <v-row>
-                      <v-col cols="15">
-                          <label class="headline">ชื่อ-สกุล</label>
-                          <v-text-field label="กรุณากรอกชื่อ-สกุล" v-model="patientfullname" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-text-field>
-                      </v-col>
-                  </v-row>
+              <v-form>
+                <v-row>
+                    <v-col cols="15">
+                        <label class="headline">ชื่อ-สกุล</label>
+                        <v-text-field label="กรุณากรอกชื่อ-สกุล" v-model="patientfullname" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-text-field>
+                    </v-col>
+                </v-row>
 
-                  <v-row>    
-                      <v-col cols="15">
-                        <label class="headline">เพศ</label>
-                        <v-select label="กรุณาเลือกเพศ"  v-model="patient.gender" :items="gender"
-                            class="mx-auto"
-                            style="width: 700px"
-                            outlined
-                            item-text="gender"
-                            item-value="id"
-                            :rules="[(v) => !!v || 'ยังไม่ได้เลือกข้อมูล']"
-                            required>></v-select> 
-                      </v-col>
-                    </v-row>
-
-                    <v-row>
-                      <v-col cols="15">
-                          <label class="headline">วัน/เดือน/ปีเกิด</label>
-                          <v-menu
-                              ref="menu1"
-                              v-model="menu1"
-                              :close-on-content-click="false"
-                              transition="scale-transition"
-                              offset-y
-                              max-width="290px"
-                              min-width="290px"
-                          >
-                          <template v-slot:activator="{ on }">
-                              <v-text-field v-model="dateFormatted" label="กรุณากรอกวันที่" @blur="birthdate = parseDate(dateFormatted)" v-on="on"></v-text-field>
-                          </template>
-                              <v-date-picker v-model="birthdate" no-title @input="menu1 = false"></v-date-picker>
-                          </v-menu>
-                      </v-col>
-                  </v-row>
-
-                  <v-row>
-                      <v-col cols="15">
-                        <label class="headline">หมู่เลือด</label>
-                        <v-select label="กรุณาเลือกหมู่เลือด" v-model="patient.bloodtype" :items="bloodtype"
-                            class="mx-auto"
-                            style="width: 700px"
-                            outlined
-                            item-text="bloodtype"
-                            item-value="id"
-                            :rules="[(v) => !!v || 'ยังไม่ได้เลือกข้อมูล']"
-                            required>
-                        </v-select>
-                      </v-col>
-                  </v-row>
-
-                  <v-row>
-                      <v-col cols="15">    
-                        <label class="headline">เบอร์โทรศัพท์</label>
-                        <v-text-field label="กรุณากรอกเบอร์โทรศัพท์" v-model="phone" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-text-field>
-                      </v-col>
-                  </v-row>
-
-                  <v-row>
-                      <v-col cols="15">
-                        <label class="headline">ที่อยู่</label>
-                        <v-textarea label="กรุณากรอกที่อยู่" v-model="address" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-textarea>  
+                <v-row>    
+                    <v-col cols="15">
+                      <label class="headline">เพศ</label>
+                      <v-select label="กรุณาเลือกเพศ"  v-model="patient.gender" :items="gender"
+                          class="mx-auto"
+                          style="width: 700px"
+                          outlined
+                          item-text="gender"
+                          item-value="id"
+                          :rules="[(v) => !!v || 'ยังไม่ได้เลือกข้อมูล']"
+                          required>></v-select> 
                     </v-col>
                   </v-row>
 
                   <v-row>
-                      <v-col cols="15">
-                        <label class="headline">โรคติดต่อที่พบ</label>
-                        <v-select label="กรุณาเลือกโรคติดต่อ" :items="disease" v-model="patient.disease"
-                            class="mx-auto"
-                            style="width: 700px"
-                            outlined
-                            item-text="disease"
-                            item-value="id"
-                            :rules="[(v) => !!v || 'ยังไม่ได้เลือกข้อมูล']"
-                            required>></v-select>
-                      </v-col>
-                  </v-row>
+                    <v-col cols="15">
+                        <label class="headline">วัน/เดือน/ปีเกิด</label>
+                        <v-menu
+                            ref="menu1"
+                            v-model="menu1"
+                            :close-on-content-click="false"
+                            transition="scale-transition"
+                            offset-y
+                            max-width="290px"
+                            min-width="290px"
+                        >
+                        <template v-slot:activator="{ on }">
+                            <v-text-field v-model="dateFormatted" label="กรุณากรอกวันที่" @blur="birthdate = parseDate(dateFormatted)" v-on="on"></v-text-field>
+                        </template>
+                            <v-date-picker v-model="birthdate" no-title @input="menu1 = false"></v-date-picker>
+                        </v-menu>
+                    </v-col>
+                </v-row>
 
-                  <v-row>
-                      <v-col cols="15">
-                          <v-btn  
-                            color="success" 
-                            height="40" 
-                            width="100" 
-                            @click="newPatient" dark>บันทึกข้อมูล
-                          </v-btn>
-                      </v-col>
+                <v-row>
+                    <v-col cols="15">
+                      <label class="headline">หมู่เลือด</label>
+                      <v-select label="กรุณาเลือกหมู่เลือด" v-model="patient.bloodtype" :items="bloodtype"
+                          class="mx-auto"
+                          style="width: 700px"
+                          outlined
+                          item-text="bloodtype"
+                          item-value="id"
+                          :rules="[(v) => !!v || 'ยังไม่ได้เลือกข้อมูล']"
+                          required>
+                      </v-select>
+                    </v-col>
+                </v-row>
 
-                      <v-spacer></v-spacer>
-                      <v-spacer></v-spacer>
-                      <v-spacer></v-spacer>
-                      <v-spacer></v-spacer>
+                <v-row>
+                    <v-col cols="15">    
+                      <label class="headline">เบอร์โทรศัพท์</label>
+                      <v-text-field label="กรุณากรอกเบอร์โทรศัพท์" v-model="phone" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-text-field>
+                    </v-col>
+                </v-row>
 
-                      <v-col cols="15">
-                        <v-btn 
+                <v-row>
+                    <v-col cols="15">
+                      <label class="headline">ที่อยู่</label>
+                      <v-textarea label="กรุณากรอกที่อยู่" v-model="address" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-textarea>  
+                  </v-col>
+                </v-row>
+
+                <v-row>
+                    <v-col cols="15">
+                      <label class="headline">โรคติดต่อที่พบ</label>
+                      <v-select label="กรุณาเลือกโรคติดต่อ" :items="disease" v-model="patient.disease"
+                          class="mx-auto"
+                          style="width: 700px"
+                          outlined
+                          item-text="disease"
+                          item-value="id"
+                          :rules="[(v) => !!v || 'ยังไม่ได้เลือกข้อมูล']"
+                          required>></v-select>
+                    </v-col>
+                </v-row>
+
+                <v-row>
+                    <v-col cols="15">
+                        <v-btn  
                           color="success" 
                           height="40" 
-                          width="100"   
-                          to="/home">กลับ
+                          width="100" 
+                          @click="newPatient" dark>บันทึกข้อมูล
                         </v-btn>
-                      </v-col>
-                  </v-row>
-                </v-form>
+                    </v-col>
+
+                    <v-spacer></v-spacer>
+                    <v-spacer></v-spacer>
+                    <v-spacer></v-spacer>
+                    <v-spacer></v-spacer>
+
+                    <v-col cols="15">
+                      <v-btn 
+                        color="success" 
+                        height="40" 
+                        width="100"   
+                        to="/home">กลับ
+                      </v-btn>
+                    </v-col>
+                </v-row>
+              </v-form>
             </v-card-text>
         </v-card>
     </v-container>
