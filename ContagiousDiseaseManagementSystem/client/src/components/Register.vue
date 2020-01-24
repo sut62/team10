@@ -1,6 +1,17 @@
 <template>
     <v-container>
-        <v-card class="mx-auto" style="max-width: 600px" >
+        <v-card class="mx-auto" style="max-width: 550px" >'
+          
+       <div v-if="saveUnsuccessful">
+        <v-alert outlined dense text type="error" prominent border="left">
+            <strong>บันทึกไม่สำเร็จ</strong>
+            กรุณากรอกข้อมูลให้ครบและถูกต้องก่อนบันทึกข้อมูล
+        </v-alert>
+      </div>
+
+      <div v-if="saveSuccessful">
+        <v-alert dense outlined text prominent type="success">บันทึกสำเร็จ</v-alert>
+      </div>
           
             <v-layout  text-center wrap>
                 <v-flex mb-4>
@@ -8,7 +19,7 @@
                     <h1 class="font-weight-black mb-3">สมัครสมาชิก</h1>
                 </v-flex>
             </v-layout>
-
+ 
             <v-row>
                 <v-col cols="15">
                     <v-text-field 
@@ -134,8 +145,7 @@
                     ></v-textarea>
                 </v-col>
             </v-row>
-         
-        
+     
             <v-row > 
               <v-col cols=15>
                     <v-btn 
@@ -146,7 +156,6 @@
                     </v-col>
                
                <v-spacer></v-spacer>
-
                 <v-col cols=15>
                     <v-btn 
                         color="success" 
@@ -173,6 +182,9 @@ export default {
         position: "",
         province: ""
       },
+      saveUnsuccessful: false,
+      saveSuccessful: false,
+        
       address: "",
       phone: "",
       fullname: "",
@@ -189,6 +201,7 @@ export default {
           position: ""
         }
       ]
+        
     };
   
   },
@@ -267,14 +280,17 @@ export default {
             this.date,
           this.medicalstaff
         )
-        .then(response => {
+     .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ");
+          this.saveSuccessful = true;
+          this.saveUnsuccessful = false;
         })
         .catch(e => {
           console.log(e);
-          alert("ไม่สามารถสมัครได้");
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
         });
+      this.submitted = true;
     },
     formatDate(date) {
       if (!date) return null;
