@@ -1,7 +1,10 @@
 package com.sut.se.G10;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.stream.Stream;
+import java.util.Date;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -39,6 +42,10 @@ import com.sut.se.G10.VaccineInformation.Entity.TypeVaccine;
 import com.sut.se.G10.VaccineInformation.Entity.Vaccine;
 import com.sut.se.G10.VaccineInformation.Repository.TypeVaccineRepository;
 import com.sut.se.G10.VaccineInformation.Repository.VaccineRepository;
+import com.sut.se.G10.Register.Entity.MedicalStaff;
+import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
+import com.sut.se.G10.Patient.Entity.Patient;
+import com.sut.se.G10.Patient.Repository.PatientRepository;
 
 @SpringBootApplication
 public class G10Application {
@@ -60,7 +67,9 @@ public class G10Application {
 							PositionRepository positionRepository,
 							CommunicablelevelRepository communicablelevelRepository,
 							TypeVaccineRepository typeVaccineRepository,
-							VaccineRepository vaccineRepository ) {
+							VaccineRepository vaccineRepository,
+							PatientRepository patientRepository,
+							MedicalStaffRepository medicalStaffRepository ) {
 
 		return args -> {
 			// Contagion Part
@@ -163,7 +172,57 @@ public class G10Application {
 				typevaccine.setTypevaccinelist(list);
 				typeVaccineRepository.save(typevaccine); 
 			});
-			
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+
+			MedicalStaff medicalStaff1 = new MedicalStaff();
+			medicalStaff1.setFullname("abced Doctor");
+			medicalStaff1.setAddress("1111111111111111111");
+			try {
+            	Date medicalstaffbirthdate1 = formatter.parse("1998-04-21");
+            	medicalStaff1.setBirthdate(medicalstaffbirthdate1);
+        	} catch (ParseException e) {
+			}
+			medicalStaff1.setEmail("a@gmail.com");
+			medicalStaff1.setPassword("12345678");
+			medicalStaff1.setPhone("1234567890");
+			medicalStaff1.setPosition(positionRepository.findByPosition("Doctor"));
+			medicalStaff1.setGender(genderRepository.findById(1));
+			medicalStaff1.setProvince(provinceRepository.findById(1));
+			medicalStaffRepository.save(medicalStaff1);
+
+			MedicalStaff medicalStaff2 = new MedicalStaff();
+			medicalStaff2.setFullname("abced Nurse");
+			medicalStaff2.setAddress("1111111111111111111");
+			try {
+            	Date medicalstaffbirthdate2 = formatter.parse("1998-05-21");
+            	medicalStaff2.setBirthdate(medicalstaffbirthdate2);
+        	} catch (ParseException e) {
+			}
+			medicalStaff2.setEmail("b@gmail.com");
+			medicalStaff2.setPassword("12345678");
+			medicalStaff2.setPhone("1234567890");
+			medicalStaff2.setPosition(positionRepository.findByPosition("Nurse"));
+			medicalStaff2.setGender(genderRepository.findById(1));
+			medicalStaff2.setProvince(provinceRepository.findById(1));
+			medicalStaffRepository.save(medicalStaff2);
+
+
+			Patient patient1 = new Patient();
+			patient1.setPatientfullname("Nawapat  Sue");
+			patient1.setPhone("1234567890");
+			patient1.setAddress("1111111111111111111");
+        	try {
+            	Date patientbirthdate1 = formatter.parse("1997-09-21");
+            	patient1.setPatientbirthdate(patientbirthdate1) ;
+        	} catch (ParseException e) {
+			}
+			patient1.setPatientdate(new Date());
+			patient1.setBloodtype(bloodtypeRepository.findById(1));
+			patient1.setGender(genderRepository.findById(1));
+			patient1.setDisease(diseaseRepository.findById(1));
+			patientRepository.save(patient1);
+
 
 			diseaseRepository.findAll().forEach(System.out::println);
 			typeRepository.findAll().forEach(System.out::println);
@@ -177,6 +236,8 @@ public class G10Application {
 			communicablelevelRepository.findAll().forEach(System.out::println);
 			vaccineRepository.findAll().forEach(System.out::println); 
 			typeVaccineRepository.findAll().forEach(System.out::println);
+			patientRepository.findAll().forEach(System.out::println); 
+			medicalStaffRepository.findAll().forEach(System.out::println);
 		};
 	}
 
