@@ -128,16 +128,27 @@
                   <v-btn 
                       color="success" 
                       height="40" 
-                      width="100"   
+                      width="50"   
                       to="/">กลับ
+                  </v-btn>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col cols="10">
+                  <v-btn
+                      style="margin-right : 100px"
+                      color="primary" 
+                      height="40" 
+                      width="200"   
+                      to="/diagnoseView"> ไปหน้าแสดงผลการวินิจฉัย
                   </v-btn>
                 </v-col>
                 <v-col>
                   <v-btn 
                       color="primary" 
                       height="40" 
-                      width="200"   
-                      to="/diagnoseView"> ไปหน้าแสดงผลการวินิจฉัย
+                      width="100"   
+                      to="/home"> ไปหน้าหลัก
                   </v-btn>
                 </v-col>
               </v-row>
