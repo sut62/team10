@@ -227,7 +227,7 @@ export default {
         )
         .then(response => {
           console.log(response);
-          this.getStatistics();
+          
           this.saveSuccessful = true;
           this.saveUnsuccessful = false;
         
