@@ -1,7 +1,10 @@
 package com.sut.se.G10;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.stream.Stream;
+import java.util.Date;
 
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -39,28 +42,34 @@ import com.sut.se.G10.VaccineInformation.Entity.TypeVaccine;
 import com.sut.se.G10.VaccineInformation.Entity.Vaccine;
 import com.sut.se.G10.VaccineInformation.Repository.TypeVaccineRepository;
 import com.sut.se.G10.VaccineInformation.Repository.VaccineRepository;
+import com.sut.se.G10.Register.Entity.MedicalStaff;
+import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
+import com.sut.se.G10.Patient.Entity.Patient;
+import com.sut.se.G10.Patient.Repository.PatientRepository;
 
 @SpringBootApplication
 public class G10Application {
 
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		SpringApplication.run(G10Application.class, args);
 	}
 
 	@Bean
-	ApplicationRunner init( final DiseaseRepository diseaseRepository,
-							final TypeRepository typeRepository,
-							final SymptomRepository symptomRepository,
-							final RateRepository rateRepository, 
-							final HealRepository healRepository,
-							final AdmissionRepository admissionRepository,
-							final BloodtypeRepository bloodtypeRepository,
-							final ProvinceRepository provinceRepository,
-							final GenderRepository genderRepository,
-							final PositionRepository positionRepository,
-							final CommunicablelevelRepository communicablelevelRepository,
-							final TypeVaccineRepository typeVaccineRepository,
-							final VaccineRepository vaccineRepository ) {
+	ApplicationRunner init( DiseaseRepository diseaseRepository,
+							TypeRepository typeRepository,
+							SymptomRepository symptomRepository,
+							RateRepository rateRepository, 
+							HealRepository healRepository,
+							AdmissionRepository admissionRepository,
+							BloodtypeRepository bloodtypeRepository,
+							ProvinceRepository provinceRepository,
+							GenderRepository genderRepository,
+							PositionRepository positionRepository,
+							CommunicablelevelRepository communicablelevelRepository,
+							TypeVaccineRepository typeVaccineRepository,
+							VaccineRepository vaccineRepository,
+							PatientRepository patientRepository,
+							MedicalStaffRepository medicalStaffRepository ) {
 
 		return args -> {
 			// Contagion Part
@@ -69,7 +78,7 @@ public class G10Application {
 					"หวัด","ไข้หวัดใหญ่","ปอดบวม",
 					"ไข้หวัดนก","ไข้เลือดออกไข้สมองอักเสบเจอี","ไข้มาลาเลีย",
 					"เยื่อบุตาอักเสบ","โรคธาลัสซีเมีย","โรคเอดส์").forEach(newdisease -> {
-				final Disease disease = new Disease();
+				Disease disease = new Disease();
 				disease.setDisease(newdisease);
 				diseaseRepository.save(disease);
 			});
@@ -79,36 +88,37 @@ public class G10Application {
 					"กลุ่มโรคที่มีพาหะ",
 					"โรคติดต่อทางพันธุกรรม",
 					"โรคติดต่อทางเพศสัมพันธ์").forEach(newtype -> {
-				final Type type = new Type(); 
+				Type type = new Type(); 
 				type.setType(newtype); 
 				typeRepository.save(type); 
 			});
 			Stream.of("รุนเเรง","ไม่รุนเเรง").forEach(newsymptom -> {
-				final Symptom symptom = new Symptom(); 
+				Symptom symptom = new Symptom(); 
 				symptom.setSymptom(newsymptom); 
 				symptomRepository.save(symptom); 
 			});			
 			Stream.of("ติดต่อได้ง่าย","ไม่ติดต่อ").forEach(newrate -> {
-				final Rate rate = new Rate();
+				Rate rate = new Rate();
 				rate.setRate(newrate);
 				rateRepository.save(rate);
 			});
 			Stream.of("ให้ยา","ให้วัคซีน","ไม่มี").forEach(newrate -> {
-				final Heal heal = new Heal();
+				Heal heal = new Heal();
 				heal.setHeal(newrate);
 				healRepository.save(heal);
 			});
+			//Statistics = Disease,Type,Province
 			
 			// Diagnose Part
 			Stream.of("Admitted", "Not admitted", "Uncertainly").forEach(admitted -> {
-				final Admission admission = new Admission();
+				Admission admission = new Admission();
 				admission.setAdmitted(admitted);
 				admissionRepository.save(admission);
 			});
 
 			// Patient Part
 			Stream.of(	"A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-").forEach(newbloodtype -> {
-				final Bloodtype bloodtype = new Bloodtype();
+				Bloodtype bloodtype = new Bloodtype();
 				bloodtype.setBloodtype(newbloodtype); 
 				bloodtypeRepository.save(bloodtype);
 			});
@@ -123,19 +133,19 @@ public class G10Application {
                 "ราชบุรี", "ลพบุรี", "ลำปาง", "ลำพูน", "เลย", "ศรีสะเกษ", "สกลนคร", "สงขลา", "สตูล", "สมุทรปราการ",
                 "สมุทรสงคราม", "สมุทรสาคร", "สระแก้ว", "สระบุรี", "สิงห์บุรี", "สุโขทัย", "สุพรรณบุรี", "สุราษฎร์ธานี",
                 "สุรินทร์", "อ่างทอง", "อุดรธานี", "อุทัยธานี", "อุตรดิตถ์", "อุบลราชธานี", "อำนาจเจริญ").forEach(place -> {
-                    final Province province = new Province();
+                    Province province = new Province();
                     province.setProvince(place);
                     provinceRepository.save(province);
 				});
 					
 			Stream.of("ชาย", "หญิง").forEach(sexual -> {
-					final Gender gender = new Gender();
+					Gender gender = new Gender();
 					gender.setGender(sexual);
 					genderRepository.save(gender);
 				});	
 
 			Stream.of("Doctor", "Nurse","Pharmacy").forEach(newPosition -> {
-					final Position position = new Position();
+					Position position = new Position();
 					position.setPosition(newPosition);
 					positionRepository.save(position);
 				});
@@ -145,14 +155,12 @@ public class G10Application {
 					  "ระบาดปานกลาง (ระหว่าง 10 - 30 คน)",
 					  "ระบาดระดับเฝ้าะวัง (ระหว่าง 30 - 50 คน)",
 					  "ระบาดรุนแรง (ตั้งแต่ 51 คนขึ้นไป)").forEach(newCommunicablelevel -> {
-				final Communicablelevel communicablelevel = new Communicablelevel() ;
+				Communicablelevel communicablelevel = new Communicablelevel() ;
 				communicablelevel.setCommunicablelevel(newCommunicablelevel) ;
 				communicablelevelRepository.save(communicablelevel) ;
 			});
 
 			// VaccineInfomation Part
-		
-			
 			Object[][] user = new Object[][] { 
 				{ "วัคซีนป้องกันไข้หวัดใหญ่","อาการบริเวณที่ฉีด เจ็บบริเวณที่ฉีดซึ่งไม่มาก และจะหายใน 2 วัน  อาการทั่วๆไปจะมีไข้ ปวดตามตัวหลังจากฉีด 6-12 ชั่วโมงและอยู่ได้นาน 1-2 วัน บางรายอาจจะมีผื่นลมพิษริมฝีปากบวม"},
 				{ "วัคซีนป้องกันไข้สุกใสไข้สุกใส", "โดยทั่วไปไม่ค่อยมีโรคแทรกซ้อนอาจจะมีปอดบวมหรือติดเชื้อที่ผิวหนัง ถ้าเชื้อนี้เกิดในผู้ใหญ่ผื่นจะเกิดมากและไข้จะอยู่นานและเกิดโรคแทรกซ้อนปอดบวมได้สูง หากติดเชื้อนี้ขณะตั้งครรภ์อาจทำให้เด็กเกิดมาพิการได้"},
@@ -171,13 +179,57 @@ public class G10Application {
 				typevaccine.setTypevaccinelist(list);
 				typeVaccineRepository.save(typevaccine); 
 			});
-			// Stream.of("ยาใช้ภายนอก", "ยาใช้ภายใน").forEach(data -> {
-			// 	Vaccine vaccinedata = new Vaccine(); 
-			// 	vaccinedata.setVaccinedata(data);
-			// 	vaccineRepository.save(vaccinedata); 
-			// });
-			
-	
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+
+			MedicalStaff medicalStaff1 = new MedicalStaff();
+			medicalStaff1.setFullname("abced Doctor");
+			medicalStaff1.setAddress("1111111111111111111");
+			try {
+            	Date medicalstaffbirthdate1 = formatter.parse("1998-04-21");
+            	medicalStaff1.setBirthdate(medicalstaffbirthdate1);
+        	} catch (ParseException e) {
+			}
+			medicalStaff1.setEmail("a@gmail.com");
+			medicalStaff1.setPassword("12345678");
+			medicalStaff1.setPhone("1234567890");
+			medicalStaff1.setPosition(positionRepository.findByPosition("Doctor"));
+			medicalStaff1.setGender(genderRepository.findById(1));
+			medicalStaff1.setProvince(provinceRepository.findById(1));
+			medicalStaffRepository.save(medicalStaff1);
+
+			MedicalStaff medicalStaff2 = new MedicalStaff();
+			medicalStaff2.setFullname("abced Nurse");
+			medicalStaff2.setAddress("1111111111111111111");
+			try {
+            	Date medicalstaffbirthdate2 = formatter.parse("1998-05-21");
+            	medicalStaff2.setBirthdate(medicalstaffbirthdate2);
+        	} catch (ParseException e) {
+			}
+			medicalStaff2.setEmail("b@gmail.com");
+			medicalStaff2.setPassword("12345678");
+			medicalStaff2.setPhone("1234567890");
+			medicalStaff2.setPosition(positionRepository.findByPosition("Nurse"));
+			medicalStaff2.setGender(genderRepository.findById(1));
+			medicalStaff2.setProvince(provinceRepository.findById(1));
+			medicalStaffRepository.save(medicalStaff2);
+
+
+			Patient patient1 = new Patient();
+			patient1.setPatientfullname("Nawapat  Sue");
+			patient1.setPhone("1234567890");
+			patient1.setAddress("1111111111111111111");
+        	try {
+            	Date patientbirthdate1 = formatter.parse("1997-09-21");
+            	patient1.setPatientbirthdate(patientbirthdate1) ;
+        	} catch (ParseException e) {
+			}
+			patient1.setPatientdate(new Date());
+			patient1.setBloodtype(bloodtypeRepository.findById(1));
+			patient1.setGender(genderRepository.findById(1));
+			patient1.setDisease(diseaseRepository.findById(1));
+			patientRepository.save(patient1);
+
 
 			diseaseRepository.findAll().forEach(System.out::println);
 			typeRepository.findAll().forEach(System.out::println);
@@ -191,20 +243,22 @@ public class G10Application {
 			communicablelevelRepository.findAll().forEach(System.out::println);
 			vaccineRepository.findAll().forEach(System.out::println); 
 			typeVaccineRepository.findAll().forEach(System.out::println);
-	};
-}
+			patientRepository.findAll().forEach(System.out::println); 
+			medicalStaffRepository.findAll().forEach(System.out::println);
+		};
+	}
 
 	@Bean
 	public FilterRegistrationBean simpleCorsFilter() {
-		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		final CorsConfiguration config = new CorsConfiguration();
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
 		// *** URL below needs to match the Vue client URL and port ***
 		config.setAllowedOrigins(Collections.singletonList("http://localhost:8080"));
 		config.setAllowedMethods(Collections.singletonList("*"));
 		config.setAllowedHeaders(Collections.singletonList("*"));
 		source.registerCorsConfiguration("/**", config);
-		final FilterRegistrationBean bean = new FilterRegistrationBean<>(new CorsFilter(source));
+		FilterRegistrationBean bean = new FilterRegistrationBean<>(new CorsFilter(source));
 		bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 		return bean;
 	}
