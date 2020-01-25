@@ -11,9 +11,8 @@ import vaccineinformation from '../components/vaccineinformation.vue'
 import viewvaccineinformation from '../components/viewvaccineinformation.vue'
 import DiagnoseView from '../components/DiagnoseView.vue'
 import searchriskarea from '../components/sprint2/SearchRiskarea.vue'
-import Statistics from '../components/sprint2/Statistics.vue'
-import Patientshow from '../components/sprint2/Patientshow.vue'
-import SearchRegister from '../components/sprint2/SearchRegister.vue'
+import viewDataVaccine from '../components/sprint2/viewDataVaccine.vue'
+// import Statistics from '../components/sprint2/statistics.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +29,10 @@ const routes = [
     path: '/contagion',
     component: Contagion
   },
+  // {
+  //   path: '/statistics',
+  //   component: Statistics
+  // },
   {
     path: '/diagnose',
     component: Diagnose
@@ -63,18 +66,9 @@ const routes = [
     path: '/searchriskarea',
     component: searchriskarea
   },
-  // Statistics 
   {
-    path: '/statistics',
-    component: Statistics
-  },
-  {
-    path: '/patientshow',
-    component: Patientshow
-  },
-  {
-    path: '/searchregister',
-    component: SearchRegister
+    path: '/viewDataVaccine',
+    component: viewDataVaccine
   }
 ]
 
