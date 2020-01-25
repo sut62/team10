@@ -40,7 +40,7 @@ public class VaccineInformationTests {
     }
 
     
-// ==========================StorageDate===========================  
+// ============================StorageDate===========================  
     @Test
     void b5901418_testStoragedateCorrect() {
         VaccineInformation vaccineInformation = new VaccineInformation();
@@ -307,25 +307,6 @@ public class VaccineInformationTests {
     }
 
 
-     @Test
-     void b5901418_testVaccineDataMustNotBeNull() {
-         VaccineInformation vaccineInformation = new VaccineInformation();
-         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-         try {
-             Date storagedate = formatter.parse("2563-01-21");
-             Date expiredate = formatter.parse("2565-05-30");
-             vaccineInformation.setStoragedate(storagedate);
-             vaccineInformation.setExpiredate(expiredate);
-             vaccineInformation.setVaccineid(null);
-             vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
-         } catch (ConstraintViolationException e) {
-             Set<ConstraintViolation<VaccineInformation>> result = validator.validate(vaccineInformation);
-             assertEquals(1, result.size());
-     
-             ConstraintViolation<VaccineInformation> v = result.iterator().next();
-             assertEquals("must not be null", v.getMessage());
-             assertEquals("VaccineData", v.getPropertyPath().toString());
-         } catch (ParseException e) {}
-     }
+
     // ================================== End Test Combobox ==================================
 }
