@@ -113,6 +113,9 @@
         <v-col>
           <v-btn @click="saveContagion" height="40" width="90" color="success">บันทึก</v-btn>
         </v-col>
+        <!-- <v-col>
+          <v-btn @click="clear" height="40" width="90" color="success">refish</v-btn>
+        </v-col> -->
         <v-spacer></v-spacer>
         <v-col>
           <v-btn color="success" height="40" width="100" to="/home">
