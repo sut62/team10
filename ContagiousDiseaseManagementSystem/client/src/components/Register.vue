@@ -147,6 +147,7 @@
             </v-row>
      
             <v-row > 
+               <v-spacer></v-spacer>
               <v-col cols=15>
                     <v-btn 
                       color="success" 
@@ -154,8 +155,10 @@
                       width="100"   
                       to="/">กลับ</v-btn>
                     </v-col>
-               
-               <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>           
+      
                 <v-col cols=15>
                     <v-btn 
                         color="success" 
@@ -164,6 +167,7 @@
                         @click="saveMedicalStaff" dark>บันทึก
                     </v-btn>
                 </v-col>
+                 <v-spacer></v-spacer>
             </v-row>
         </v-card>
     </v-container>
