@@ -13,7 +13,7 @@ import DiagnoseView from '../components/DiagnoseView.vue'
 import searchriskarea from '../components/sprint2/SearchRiskarea.vue'
 import viewDataVaccine from '../components/sprint2/viewDataVaccine.vue'
 import Statistics from '../components/sprint2/statistics.vue'
-
+//path
 Vue.use(VueRouter)
 
 const routes = [
