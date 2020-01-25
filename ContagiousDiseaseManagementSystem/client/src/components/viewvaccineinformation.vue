@@ -8,6 +8,7 @@
             <h1 class="display-1 font-weight-bold mb-3">ข้อมูลวัคซีนป้องกัน/ยา</h1>
           </v-flex>
         </v-layout>
+        
         <v-row justify="center">
           <v-col cols="5">
             <v-text-field
@@ -87,7 +88,7 @@ export default {
           value: "vaccineinformationid"
         },
 
-        { text: "ขื่อวัคซีนป้องกัน/ยา", value: "vaccineid.vaccinename" },
+        { text: "ชื่อวัคซีนป้องกัน/ยา", value: "vaccineid.vaccinename" },
         {
           text: "ประเภทวัคซีนป้องกัน/ยา",
           value: "typevaccineid.typevaccinelist"
@@ -145,7 +146,6 @@ export default {
         .then(response => {
           console.log(response.data);
           this.$emit("refreshData");
-          alert("ทำการลบรายการข้อมูลเรียบร้อย");
           location.reload();
         })
         .catch(e => {
