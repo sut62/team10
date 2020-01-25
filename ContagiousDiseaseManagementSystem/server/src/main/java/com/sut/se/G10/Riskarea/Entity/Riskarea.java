@@ -12,10 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Register.Entity.Province;
 
@@ -34,7 +34,7 @@ public class Riskarea {
     @Column(name = "RISKAREA_ID", unique = true, nullable = true)
     private @NotNull Long id ;
     
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private @NotNull Date date ;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
