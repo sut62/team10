@@ -7,8 +7,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
 
 import java.util.Date;
 
@@ -27,8 +29,8 @@ public class VaccineInformation {
     @SequenceGenerator(name="vaccineinformation_SEQ",sequenceName="vaccineinformation_SEQ")               
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="vaccineinformation_SEQ")  
     @Column(name="VACCINEINFORMATION_ID",unique = true, nullable = true)
-    private @NonNull Long vaccineinformationid;
-
+    private @NotNull Long vaccineinformationid;
+ 
     @ManyToOne
     @JoinColumn(name = "MEDICALSTAFF")
     private MedicalStaff fullname;
@@ -43,10 +45,10 @@ public class VaccineInformation {
 
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private @NonNull Date storagedate;
+    private @NotNull Date storagedate;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private @NonNull Date expiredate;
+    private @NotNull Date expiredate;
    
   
 }
