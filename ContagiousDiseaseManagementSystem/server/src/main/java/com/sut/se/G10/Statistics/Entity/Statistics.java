@@ -38,8 +38,8 @@ public class Statistics {
     @Column(name = "STATISTICS_ID", unique = true, nullable = true)
     private @NotNull Long id;
 
-    @Pattern(regexp = "[0-9]{1,}$")
-    @Size(min = 3)
+    @Pattern(regexp = "[0-9]*")
+    @Size(min = 2, max =10)
     private @NotNull String rates;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
