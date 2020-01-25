@@ -106,8 +106,9 @@ public class MedicalStaffController {
         newMedicalStaff.setFullname(fullname);
         newMedicalStaff.setEmail(email);
         newMedicalStaff.setPhone(phone);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+  
         try {
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date birthdate = formatter.parse(bdate);
             newMedicalStaff.setBirthdate(birthdate);
         } catch (ParseException e) {
