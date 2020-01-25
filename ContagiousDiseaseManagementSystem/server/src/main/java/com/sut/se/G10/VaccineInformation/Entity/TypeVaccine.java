@@ -9,8 +9,7 @@ import javax.persistence.GenerationType;
 
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -23,8 +22,8 @@ public class TypeVaccine {
     @SequenceGenerator(name="typevaccine_SEQ",sequenceName="typevaccine_SEQ")               
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="typevaccine_SEQ")  
     @Column(name="TYPEVACCINE_ID",unique = true, nullable = true)
-    private @NonNull Long typevaccineid;
-    private @NonNull String typevaccinelist;
+    private @NotNull Long typevaccineid;
+    private @NotNull String typevaccinelist;
    
   
 }
