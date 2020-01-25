@@ -62,7 +62,7 @@ public class RiskareaController {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
         try {
             Date date = formatter.parse(savedate);
-            newRiskarea.setDate(date) ;
+            newRiskarea.setDate(date);
         } catch (ParseException e) {
         }
 
