@@ -79,7 +79,7 @@ public class MedicalStaffController {
     }
     
     @GetMapping("/medicalStaffposition/{position}")
-    public Collection<MedicalStaff> medicalStaffs(@PathVariable long position) {
+    public Collection<MedicalStaff> findByPosition(@PathVariable long position) {
         return medicalStaffRepository.findByPosition(position);
     }
 

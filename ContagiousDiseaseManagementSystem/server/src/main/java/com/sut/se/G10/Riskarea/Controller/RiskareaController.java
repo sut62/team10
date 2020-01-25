@@ -45,7 +45,7 @@ public class RiskareaController {
     }
     
     @GetMapping("/riskarea/{disease}")
-    public Collection<Riskarea> riskareas(@PathVariable long disease) {
+    public Collection<Riskarea> findByDisease(@PathVariable long disease) {
         return riskareaRepository.findByDisease(disease);
     }
 
