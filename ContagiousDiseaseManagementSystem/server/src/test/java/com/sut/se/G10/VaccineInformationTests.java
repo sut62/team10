@@ -40,7 +40,7 @@ public class VaccineInformationTests {
     }
 
     
-// ============================== StorageDate ===========================  
+// ============================StorageDate===========================  
     @Test
     void b5901418_testStoragedateCorrect() {
         VaccineInformation vaccineInformation = new VaccineInformation();
@@ -139,7 +139,7 @@ public class VaccineInformationTests {
             assertEquals("date", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }
-// ============================== ExpireDate ===========================  
+// ==============================ExpireDate===========================  
 @Test
     void b5901418_testExpiredateCorrect() {
         VaccineInformation vaccineInformation = new VaccineInformation();
@@ -262,7 +262,7 @@ public class VaccineInformationTests {
         } catch (ParseException e) {}
     }
 
-    // ---------------- Vacicine Combobox ----------------
+    // ---------------- Vaccine Combobox ----------------
     @Test
     void b5901418_testVaccineComboboxMustNotBeNull() {
         VaccineInformation vaccineInformation = new VaccineInformation();
@@ -283,9 +283,8 @@ public class VaccineInformationTests {
             assertEquals("Vaccine", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }
-
+// ---------------- TypeVaccine Combobox ----------------
     
-    // ---------------- Communicablelevel Combobox ----------------
     @Test
     void b5901418_testTypevaccineComboboxMustNotBeNull() {
         VaccineInformation vaccineInformation = new VaccineInformation();
@@ -307,9 +306,9 @@ public class VaccineInformationTests {
         } catch (ParseException e) {}
     }
 
-     // ---------------- Communicablelevel Combobox ----------------
+
      @Test
-     void b5901418_testVaccineDataboxMustNotBeNull() {
+     void b5901418_testVaccineDataMustNotBeNull() {
          VaccineInformation vaccineInformation = new VaccineInformation();
          SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
          try {
