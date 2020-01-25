@@ -91,6 +91,11 @@
           </v-col>
         </v-row>
 
+        <v-row justify="center">
+          <v-alert style="max-width: 400px;" v-if="saveSuccessful" dense outlined text prominent type="success">บันทึกสำเร็จ</v-alert>
+          <v-alert style="max-width: 400px;" v-if="saveUnsuccessful" outlined dense text type="error" prominent border="left">บันทึกไม่สำเร็จ</v-alert>
+        </v-row>
+        
         <!-- ปุ่มบันทึก -->
         <v-row>
           <v-col>
@@ -124,6 +129,8 @@ import http from "../http-common";
 export default {
   data() {
     return {
+      saveSuccessful: false,
+      saveUnsuccessful: false,
       province: [],
       disease: [],
       communicablelevel: [],
@@ -205,11 +212,19 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกข้อมูลสำเร็จ");
+          if (response.data.length == 0) {
+            this.saveSuccessful = false;
+            this.saveUnsuccessful = true;
+          }
+          else if (response.data) {
+            this.saveSuccessful = true;
+            this.saveUnsuccessful = false;
+          }
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกข้อมูลไม่สำเร็จ");
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
         });
     },
 
