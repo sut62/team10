@@ -1,12 +1,6 @@
 <template>
   <v-container>
-    <v-app-bar style="background: white;" app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span class="font-weight">ContagiousDiseaseManagementSystem</span>
-      </v-toolbar-title>
-    </v-app-bar>
-
-    <v-card style="width:80%; margin:auto; background-color:#FFFFFF" >
+    <v-card style="width:80%; margin:auto; background-color:#FFFFFF">
       <v-container>
         <v-layout text-center wrap>
           <v-flex mb-4>
@@ -15,43 +9,56 @@
             <h1 class="display-1 font-weight-bold mb-3">แบบฟอร์มบันทึกข้อมูลวัคซีนป้องกัน/ยา</h1>
           </v-flex>
         </v-layout>
-
+        <div v-if="saveUnsuccessful">
+          <v-alert outlined dense text type="error" prominent border="left">
+            <strong>บันทึกไม่สำเร็จ</strong>
+            กรุณากรอกข้อมูลให้ครบและถูกต้องก่อนบันทึกข้อมูล
+          </v-alert>
+        </div>
+        <div v-if="saveSuccessful">
+          <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
+        </div>
         <v-row justify="center">
-          <v-col cols="8">
+          <v-col cols="7">
             <v-form v-model="valid" ref="form">
               <v-row justify-center>
                 <v-col cols="25">
                   <v-select
                     v-model="vaccineinformation.fullname"
+                    prepend-icon="mdi-account-circle"
                     :items="medicalStaffs"
                     item-text="fullname"
                     item-value="id"
                     :rules="[v => !!v || 'Item is required']"
-                    label="-- medicalStaffname --"
+                    label="-- MedicalStaffname --"
                     required
                   ></v-select>
                 </v-col>
               </v-row>
 
               <v-row justify-center>
-                <v-col cols="25">
+                <v-col>
                   <v-select
                     v-model="vaccineinformation.vaccineid"
+                    prepend-icon="mdi-pill"
                     :items="vaccines"
                     item-text="vaccinename"
                     item-value="vaccineid"
+                    style="width : 350px"
                     :rules="[v => !!v || 'Item is required']"
-                    label="-- vaccine --"
+                    label="-- Vaccine --"
                     required
                   ></v-select>
                 </v-col>
+                <v-btn color="success" height="40" width="150" to="/viewDatavaccine">ผลของวัคซีน</v-btn>
               </v-row>
 
               <v-row justify-center>
                 <v-col cols="25">
                   <v-select
-                    label="-- typeVaccine --"
+                    label="-- TypeVaccine --"
                     v-model="vaccineinformation.typevaccineid"
+                    prepend-icon="mdi-cursor-default"
                     :items="typevaccines"
                     item-text="typevaccinelist"
                     item-value="typevaccineid"
@@ -73,7 +80,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        style="width:80%"
+                        style="width:100%"
                         prepend-icon="mdi mdi-calendar"
                         v-model="strdate"
                         label="วันที่บันทึกข้อมูลวัคซีนป้องกัน/ยา"
@@ -96,7 +103,7 @@
                   >
                     <template v-slot:activator="{ on }">
                       <v-text-field
-                        style="width:80%"
+                        style="width:100%"
                         prepend-icon="mdi mdi-calendar"
                         v-model="expdate"
                         label="วันที่หมดอายุของวัคซีนป้องกัน/ยา"
@@ -112,7 +119,6 @@
 
               <v-row justify-right>
                 <v-col cols="3">
-                  <!-- <v-btn-toggle group > -->
                   <v-btn
                     @click="saveVaccineinformation"
                     style="color:#FFFFFF"
@@ -130,16 +136,11 @@
                     color="#000000"
                     style="color:#FFFFFF"
                   >ดูบันทึก</v-btn>
-                  <!-- </v-btn-toggle> -->
                 </v-col>
                 <v-spacer></v-spacer>
-                <v-col cols=15>
-                    <v-btn 
-                      color="success" 
-                      height="40" 
-                      width="100"   
-                      to="/">กลับ</v-btn>
-                    </v-col>
+                <v-col cols="15">
+                  <v-btn color="success" height="40" width="100" to="/">กลับ</v-btn>
+                </v-col>
               </v-row>
               <br />
             </v-form>
@@ -153,7 +154,6 @@
 <script>
 import http from "../http-common";
 export default {
-  name: "vaccineinformation",
   data() {
     return {
       vaccineinformation: {
@@ -168,7 +168,9 @@ export default {
       medicalStaffs: [],
       vaccines: null,
       typevaccines: null,
-      valid: false
+      valid: false,
+      saveUnsuccessful: false,
+      saveSuccessful: false
     };
   },
 
@@ -229,12 +231,14 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกสำเร็จ");
+          this.saveSuccessful = true;
+          this.saveUnsuccessful = false;
           this.$router.push("/viewvaccineinformation");
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกไม่สำเร็จ");
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
         });
       this.submitted = true;
     },
@@ -243,12 +247,14 @@ export default {
     },
     clear() {
       this.$refs.form.reset();
-
       this.vaccineCheck = false;
+      this.saveSuccessful = false;
+      this.saveUnsuccessful = false;
     },
 
     pushvaccineinformation() {
       this.$router.push("/vaccineinformation");
+      this.$router.push("/viewDataVaccine");
     },
 
     refreshList() {
