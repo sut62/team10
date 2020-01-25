@@ -1,50 +1,50 @@
 <template>
   <div class ="text-center">
-    <v-card class="mx-auto" tile style="width: 600px">
+    <v-card class="mx-auto" tile style="width: 800px">
 
       <v-layout text-center wrap column>
         <v-toolbar-title class="headline text-uppercase">
           <br />
-          <div class="success pa-8 white--text">ระบบเก็บข้อมูลโรคติดต่อ</div>
+          <div class="success pa-7 white--text"><h1>ระบบเก็บข้อมูลโรคติดต่อ</h1></div>
           <br />
         </v-toolbar-title>
       </v-layout>
 
     <v-card-text>
-      <v-row justify="center">
-        <v-col cols="10"> 
-          <v-select
-            label="ชื่อโรคติดต่อ"
-            outlined
-            :items="disease"
-            item-text="disease"
-            item-value="id"
-            color="teal"
-            v-model="contagion.disease"
-            :rules="[v => !!v || 'Item is required']"
-            clearable
-            required>
-          </v-select>
-        </v-col>
+      <v-row>
+        <v-row justify="center">
+          <v-col cols="5"> 
+            <v-select
+              label="ชื่อโรคติดต่อ"
+              outlined
+              :items="disease"
+              item-text="disease"
+              item-value="id"
+              color="teal"
+              v-model="contagion.disease"
+              :rules="[v => !!v || 'Item is required']"
+              clearable
+              required>
+            </v-select>
+          </v-col>
+      
+          <v-col cols="5">
+            <v-select
+              label="ประเภทของโรคติดต่อ"
+              outlined
+              :items="type"
+              item-text="type"
+              item-value="id"
+              color="teal"
+              v-model="contagion.type"
+              :rules="[v => !!v || 'Item is required']"
+              clearable
+              required>
+            </v-select>
+          </v-col>
+        </v-row>
       </v-row>
-
-      <v-row justify="center">
-        <v-col cols="10">
-          <v-select
-            label="ประเภทของโรคติดต่อ"
-            outlined
-            :items="type"
-            item-text="type"
-            item-value="id"
-            color="teal"
-            v-model="contagion.type"
-            :rules="[v => !!v || 'Item is required']"
-            clearable
-            required>
-          </v-select>
-        </v-col>
-      </v-row>
-
+        
       <v-row justify="center">
         <v-col cols="10">
           <v-text-field
@@ -58,64 +58,63 @@
         </v-col>
       </v-row>
 
-      <v-row justify="center">
-        <v-col cols="10">
-          <v-select
-            label="อาการของโรคติดต่อ"
-            outlined
-            :items="symptom"
-            item-text="symptom"
-            item-value="id"
-            color="teal"
-            v-model="contagion.symptom"
-            :rules="[v => !!v || 'Item is required']"
-            clearable
-            required>
-          </v-select>
-        </v-col>
+      <v-row>
+        <v-row justify="center">
+          <v-col cols="5">
+            <v-select
+              label="อาการของโรคติดต่อ"
+              outlined
+              :items="symptom"
+              item-text="symptom"
+              item-value="id"
+              color="teal"
+              v-model="contagion.symptom"
+              :rules="[v => !!v || 'Item is required']"
+              clearable
+              required>
+            </v-select>
+          </v-col>
+      
+          <v-col cols="5">
+            <v-select
+              label="อัตราการติดต่อของโรคติดต่อ"
+              outlined
+              :items="rate"
+              item-text="rate"
+              item-value="id"
+              color="teal"
+              v-model="contagion.rate"
+              :rules="[v => !!v || 'Item is required']"
+              clearable
+              required>
+            </v-select>
+          </v-col>
+        </v-row>
       </v-row>
 
-      <v-row justify="center">
-        <v-col cols="10">
-          <v-select
-            label="อัตราการติดต่อของโรคติดต่อ"
-            outlined
-            :items="rate"
-            item-text="rate"
-            item-value="id"
-            color="teal"
-            v-model="contagion.rate"
-            :rules="[v => !!v || 'Item is required']"
-            clearable
-            required>
-          </v-select>
-        </v-col>
+      <v-row>
+        <v-row justify="center">
+          <v-col cols="10">
+            <v-select
+              label="การรักษา"
+              outlined
+              :items="heal"
+              item-text="heal"
+              item-value="id"
+              color="teal"
+              v-model="contagion.heal"
+              :rules="[v => !!v || 'Item is required']"
+              clearable
+              required>
+            </v-select>
+          </v-col>
+        </v-row>
       </v-row>
-
-      <v-row justify="center">
-        <v-col cols="10">
-          <v-select
-            label="การรักษา"
-            outlined
-            :items="heal"
-            item-text="heal"
-            item-value="id"
-            color="teal"
-            v-model="contagion.heal"
-            :rules="[v => !!v || 'Item is required']"
-            clearable
-            required>
-          </v-select>
-        </v-col>
-      </v-row>
-
+      
       <v-row justify="center">
         <v-col>
-          <v-btn @click="saveContagion" height="40" width="90" color="success">บันทึก</v-btn>
+          <v-btn @click="saveContagion" height="40" width="100" color="success" >บันทึก</v-btn>         
         </v-col>
-        <!-- <v-col>
-          <v-btn @click="clear" height="40" width="90" color="success">refish</v-btn>
-        </v-col> -->
         <v-spacer></v-spacer>
         <v-col>
           <v-btn color="success" height="40" width="100" to="/home">
@@ -132,11 +131,33 @@
       <div v-if="saveSuccessful">
         <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
       </div>
+      
+      <!-- ตารางเเสดงข้อมูลการบันทึก -->
+      <v-row table>
+        <v-layout text-center column>
+          <v-toolbar-title class="headline text-uppercase">
+            <br />
+            <div class="brown lighten-1 lighten-1 pa-1 white--text">ตารางเเสดงข้อมูลโรคติดต่อ</div>
+          </v-toolbar-title>
+        </v-layout>
+
+        <v-row>
+          <v-col cols="50">
+            <v-data-table 
+                :headers="headers" 
+                :items="items" 
+                :items-per-page="5" 
+                class="elevation-1">
+            </v-data-table>
+          </v-col>
+        </v-row>
+      </v-row>
 
       </v-card-text>
     </v-card>  
   </div>
 </template>
+
 
 <script>
 import http from "../http-common";
@@ -150,7 +171,7 @@ export default {
         symptom: "",
         rate: "",
         heal: "", 
-  
+
       },
       menu1: false,
       disease: [],
@@ -160,13 +181,34 @@ export default {
       rate: [],
       heal:[],
       saveUnsuccessful: false,
-      saveSuccessful: false
+      saveSuccessful: false,
+
+      headers: [
+        { text: "Disease",value: "disease.disease"},
+        { text: "Type",value: "type.type"},
+        { text: "Carrier", value: "carrier" },
+        { text: "Symptom", value: "symptom.symptom" },
+        { text: "Rate", value: "rate.rate" },
+        { text: "Heal", value: "heal.heal" },
+      ],
+      items: []
     };
   },
 
   /* eslint-disable no-console */
    /* eslint-disable */
   methods: {
+    getContagion() {
+      http
+        .get("/contagion")
+        .then(response => {
+          this.items = response.data;
+          console.log(this.items);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     // ดึงข้อมูล combobox
     getDisease() {
       http
@@ -269,11 +311,8 @@ export default {
       this.submitted = true;
     },
 
-    clear() {
-      this.$refs.form.reset();
-      this.contagionCheck = false;
-    },
     refreshList() {
+      this.getContagion();
       this.getDisease();
       this.getType();
       this.getSymptom();
@@ -282,6 +321,7 @@ export default {
     },
   },
   mounted() {
+    this.getContagion();
     this.getDisease();
     this.getType();
     this.getSymptom();

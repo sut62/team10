@@ -193,10 +193,6 @@ export default {
       this.submitted = true;
     },
 
-    clear() {
-      this.$refs.form.reset();
-      this.statisticsCheck = false;
-    },
     refreshList() {
       this.getDisease();
       this.getType();
