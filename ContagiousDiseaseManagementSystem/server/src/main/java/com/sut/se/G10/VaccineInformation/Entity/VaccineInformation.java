@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -44,10 +46,12 @@ public class VaccineInformation {
     private TypeVaccine typevaccineid;
 
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @NotNull
     private @NotNull Date storagedate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @NotNull
     private @NotNull Date expiredate;
    
   
