@@ -36,8 +36,17 @@
         </v-col>
       </v-row>
 
-      <!-- ตาราง -->
+      <!-- Alert if data length is null -->
+      <v-row justify="center">
+        <v-alert style="max-width: 400px;" v-if="saveUnsuccessful" outlined dense text type="error" prominent border="left">ไม่พบข้อมูล</v-alert>
+      </v-row>
+      
+      <!-- Show Data -->
       <div v-if="diseasecheck">
+        <v-row justify="center">
+          <v-alert style="max-width: 400px;" v-if="saveSuccessful" dense outlined text prominent type="success">ค้นหาสำเร็จ</v-alert>
+        </v-row>
+        <!-- ตาราง -->
         <v-data-table
           :headers="headers"
           :items="riskareadata"
@@ -61,7 +70,6 @@
           </v-col>
         </v-row>
       </div>
-
     </v-card>
   </v-container>
 </template>
@@ -73,18 +81,34 @@ export default {
     return {
       disease: [],
       riskarea: [],
+      date: new Date().toISOString().substr(0, 10),
+      dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
       riskareadata: [{
         province: '',
         communicablelevel: '',
         date: ''
       }],
       diseasecheck: false,
+      saveSuccessful: false,
+      saveUnsuccessful: false,
       headers: [
         { text: 'จังหวัด', value: 'province.province'},
         { text: 'ระดับของการระบาด', value: 'communicablelevel.communicablelevel'},
         { text: 'วันที่บันทึก', value: 'date'},
       ],
     };
+  },
+
+  computed: {
+    computedDateFormatted() {
+      return this.formatDate(this.date);
+    }
+  },
+
+  watch: {
+    date() {
+      this.dateFormatted = this.formatDate(this.date);
+    }
   },
 
   /* eslint-disable no-console */
@@ -139,16 +163,37 @@ export default {
         .get("/riskarea/" + this.riskarea.disease)
         .then(response => {
           this.riskareadata = response.data;
+          this.diseasecheck = response.status;
           console.log(response);
-          if (response.data != null) {
-            this.diseasecheck = true;
-          } else {
-            alert("ไม่สามารถค้นหาได้");
+          if (response.data.length == 0) {
+            this.diseasecheck = false;
+            this.saveSuccessful = false;
+            this.saveUnsuccessful = true;
+          }
+          else if (response.data) {
+            this.saveSuccessful = true;
+            this.saveUnsuccessful = false;
           }
         })
+        .catch(e => {
+          console.log(e);
+          this.saveSuccessful = false;
+          this.saveUnsuccessful = true;
+        });
+    },
+    formatDate(date) {
+      if (!date) return null;
+
+      const [year, month, day] = date.split("-");
+      return `${month}/${day}/${year}`;
+    },
+    parseDate(date) {
+      if (!date) return null;
+
+      const [month, day, year] = date.split("/");
+      return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     }
   },
-
   mounted() {
     this.getRiskarea();
     this.getDisease();
