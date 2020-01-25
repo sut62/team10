@@ -133,7 +133,7 @@
       </div>
       
       <!-- ตารางเเสดงข้อมูลการบันทึก -->
-      <v-row table>
+      
         <v-layout text-center column>
           <v-toolbar-title class="headline text-uppercase">
             <br />
@@ -151,7 +151,7 @@
             </v-data-table>
           </v-col>
         </v-row>
-      </v-row>
+
 
       </v-card-text>
     </v-card>  
