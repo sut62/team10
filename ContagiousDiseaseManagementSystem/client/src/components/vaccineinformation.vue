@@ -139,7 +139,7 @@
                 </v-col>
                 <v-spacer></v-spacer>
                 <v-col cols="15">
-                  <v-btn color="success" height="40" width="100" to="/">กลับ</v-btn>
+                  <v-btn color="success" height="40" width="100" to="/home">กลับ</v-btn>
                 </v-col>
               </v-row>
               <br />
