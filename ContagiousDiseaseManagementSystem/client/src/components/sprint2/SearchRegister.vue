@@ -133,28 +133,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    },
-    getGender() {
-      http
-        .get("/gender")
-        .then(response => {
-          this.gender = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
-    },
-    getProvince() {
-      http
-        .get("/province")
-        .then(response => {
-          this.province = response.data;
-          console.log(response.data);
-        })
-        .catch(e => {
-          console.log(e);
-        });
+   
     },
     findbyPosition() {
       http
