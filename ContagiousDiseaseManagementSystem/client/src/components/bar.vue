@@ -6,7 +6,7 @@
           <v-tab @click="pushHome">หน้าแรก</v-tab>
           <v-tab @click="pushRegister">สมัครสมาชิก</v-tab>
           <v-tab @click="pushContagion">จัดเก็บข้อมูลโรคติดต่อ</v-tab>
-          <v-tab @click="pushstatistics">เก็บสถิติการเกิดโรคติดต่อ</v-tab>
+          <v-tab @click="pushStatistics">เก็บสถิติการเกิดโรคติดต่อ</v-tab>
           <v-tab @click="pushDiagnose">จัดเก็บการวินิจฉัยโรคติดต่อ</v-tab>
           <v-tab @click="pushPatient">จัดเก็บข้อมูลผู้ป่วยโรคติดต่อ</v-tab>
           <v-tab @click="pushPatientshow">แสดงข้อมูลผู้ป่วยโรคติดต่อ</v-tab>
