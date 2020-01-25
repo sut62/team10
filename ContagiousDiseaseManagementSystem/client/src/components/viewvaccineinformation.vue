@@ -5,9 +5,7 @@
         <v-layout text-center wrap>
           <v-flex mb-4>
             <br />
-            <h1 class="display-1 font-weight-bold mb-3">
-              ข้อมูลวัคซีนป้องกัน/ยา
-            </h1>
+            <h1 class="display-1 font-weight-bold mb-3">ข้อมูลวัคซีนป้องกัน/ยา</h1>
           </v-flex>
         </v-layout>
         <v-row justify="center">
@@ -27,8 +25,7 @@
               :items-per-page="5"
               class="elevation-1"
               :search="search"
-            >
-            </v-data-table>
+            ></v-data-table>
           </v-col>
 
           <v-col cols="3">
@@ -39,38 +36,35 @@
               v-model="vaccineinformation.vaccineinformationid"
             ></v-text-field>
             <p v-if="vaccineCheck != ''">
-              ID ข้อมูลที่จะทำการลบ : {{ listId }}
+              ID ข้อมูลที่จะทำการลบ : {{ vaccineinformationid }}
               <v-btn
-                class=""
+                class
                 @click="deleteVaccineInformation"
                 color="#D50000"
                 style="color:#FFFFFF"
-                >ลบ</v-btn
-              >
+              >ลบ</v-btn>
             </p>
           </v-col>
 
           <v-col cols="2">
-            <div class="">
+            <div class>
               <v-btn
                 @click="findVaccineInformation"
                 depressed
                 large
                 color="#000000"
                 style="color:#FFFFFF;"
-                >ยืนยัน</v-btn
-              >
+              >ยืนยัน</v-btn>
             </div>
           </v-col>
         </v-row>
 
         <v-row justify="center">
           <v-col cols="2">
-            <v-btn 
-              color="success" 
-              height="40" 
-              width="100"   
-              to="/">กลับ</v-btn>
+            <v-btn color="success" height="40" width="100" to="/">Home</v-btn>
+          </v-col>
+          <v-col cols="2">
+            <v-btn color="success" height="40" width="100" to="/vaccineinformation">กลับ</v-btn>
           </v-col>
         </v-row>
       </v-container>
@@ -94,7 +88,10 @@ export default {
         },
 
         { text: "ขื่อวัคซีนป้องกัน/ยา", value: "vaccineid.vaccinename" },
-        { text: "ประเภทวัคซีนป้องกัน/ยา",value: "typevaccineid.typevaccinelist"        },
+        {
+          text: "ประเภทวัคซีนป้องกัน/ยา",
+          value: "typevaccineid.typevaccinelist"
+        },
         { text: "วันที่จัดเก็บ", value: "storagedate" },
         { text: "วันที่หมดอายุ", value: "expiredate" },
         { text: "ทำรายการโดย", value: "fullname.fullname" }
