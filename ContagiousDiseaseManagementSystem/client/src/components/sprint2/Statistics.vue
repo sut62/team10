@@ -72,6 +72,9 @@
               <v-col cols="5">
                 <v-btn @click="saveStatistics" height="40" width="120" color="success">บันทึก</v-btn>
               </v-col> 
+              <!-- <v-col cols="5">
+                <v-btn @click="clear" height="40" width="120" color="success">refish</v-btn>
+              </v-col>  -->
               <v-row>
               <v-spacer></v-spacer>
                 <v-col cols="7">
