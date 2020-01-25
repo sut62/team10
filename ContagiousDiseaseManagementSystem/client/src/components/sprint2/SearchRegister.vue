@@ -1,11 +1,22 @@
 <template>
   <v-container>
-    <v-card class="mx-auto text-center" style="width: 950px;">
+    <v-card class="mx-auto text-center" style="width: 1500px;">
+
+        <div v-if="saveUnsuccessful">
+        <v-alert outlined dense text type="error" prominsent border="left">
+            <strong>ไม่พบข้อมูล</strong>
+        </v-alert>
+    </div>
+
+      <div v-if="saveSuccessful">
+        <v-alert dense outlined text prominent type="success">ค้นหาสำเร็จ</v-alert>
+      </div>
+
       <!-- หัวเรื่อง -->
       <v-layout text-center wrap>
         <v-flex mb-4>
           <br />
-          <h1 class="display-2 font-weight-bold mb-3">ค้นหาตำแหน่งทางการแพทย์</h1>
+          <h1 class="display-2 font-weight-bold mb-3">ค้นหาข้อมูลของสมาชิก</h1>
         </v-flex>
       </v-layout>
 
@@ -43,7 +54,7 @@
           :items="medicalstaffdata"
           :items-per-page="5"
           class="elevation-1 mx-auto text-center"
-          style="width: 850px;"
+          style="width: 1150px;"
         ></v-data-table>
 
         <!-- ปุ่มกลับ -->
@@ -62,15 +73,7 @@
         </v-row>
       </div>
 
-    <div v-if="saveUnsuccessful">
-        <v-alert outlined dense text type="error" prominent border="left">
-            <strong>ไม่พบข้อมูล</strong>
-        </v-alert>
-    </div>
 
-      <div v-if="saveSuccessful">
-        <v-alert dense outlined text prominent type="success">ค้นหาสำเร็จ</v-alert>
-      </div>
     </v-card>
   </v-container>
 </template>
@@ -98,7 +101,7 @@ export default {
       headers: [
         { text: 'ชื่อสกุล', value: 'fullname'},
         { text: 'เพศ', value: 'gender.gender'},
-        { text: 'วันเดือนปีเกิด', vlue: 'date'},
+        { text: "วันเดือนปีเกิด", value: 'birthdate'},
         { text: 'ตำแหน่งทางการแพทย์', value: 'position.position'},
         { text: 'เบอร์โทรศัพท์', value: 'phone'},
         { text: 'อีเมล์', value: 'email'},
@@ -109,7 +112,6 @@ export default {
   },
   /* eslint-disable no-console */
   methods: {
-
     getMedicalStaff() {
       http
         .get("/medicalStaff")
@@ -121,7 +123,6 @@ export default {
           console.log(e);
         });
     },
-
     getPosition() {
       http
         .get("/position")
@@ -133,7 +134,6 @@ export default {
           console.log(e);
         });
     },
-
     getGender() {
       http
         .get("/gender")
@@ -145,7 +145,6 @@ export default {
           console.log(e);
         });
     },
-
     getProvince() {
       http
         .get("/province")
@@ -157,17 +156,21 @@ export default {
           console.log(e);
         });
     },
-
     findbyPosition() {
       http
         .get("/medicalStaffposition/" + this.medicalStaff.position)
         .then(response => {
           this.medicalstaffdata = response.data;
-          console.log(response);
-          this.saveSuccessful = true;
-          this.saveUnsuccessful = false;
-          if (response.data != null) {
+          console.log(response.data);
+          if (response.data.length == 0) {
+            this.medicalstaffcheck = false;
+            this.saveSuccessful = false;
+            this.saveUnsuccessful = true;
+          }
+          else if (response.data.length != 0) {
             this.medicalstaffcheck = true;
+            this.saveSuccessful = true;
+            this.saveUnsuccessful = false;
           }
         })
         .catch(e => {
