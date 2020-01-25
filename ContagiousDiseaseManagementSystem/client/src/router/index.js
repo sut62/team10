@@ -6,6 +6,7 @@ import Contagion from '../components/Contagion.vue'
 import Diagnose from '../components/Diagnose.vue'
 import Patient from '../components/Patient.vue'
 import Register from '../components/Register.vue'
+import searchregister from '../components/sprint2/SearchRegister.vue'
 import Riskarea from '../components/Riskarea.vue'
 import vaccineinformation from '../components/vaccineinformation.vue'
 import viewvaccineinformation from '../components/viewvaccineinformation.vue'
@@ -45,6 +46,10 @@ const routes = [
   {
     path: '/register',
     component: Register
+  },
+{
+    path: '/searchregister',
+    component: searchregister
   },
   {
     path: '/riskarea',

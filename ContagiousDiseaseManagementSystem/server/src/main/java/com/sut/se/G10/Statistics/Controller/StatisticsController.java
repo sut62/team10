@@ -9,25 +9,14 @@ import com.sut.se.G10.Contagion.Repository.DiseaseRepository;
 import com.sut.se.G10.Contagion.Repository.TypeRepository;
 import com.sut.se.G10.Register.Repository.ProvinceRepository;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.stream.Collectors;
-
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 @CrossOrigin(origins = "http://localhost:8080")
 @RestController

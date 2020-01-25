@@ -8,10 +8,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.persistence.FetchType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+ 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
@@ -32,7 +35,7 @@ import lombok.*;
 public class MedicalStaff {
 
     @Id
-    @SequenceGenerator(name = "medicalstaff_seq", sequenceName = "medicalstaff_seq")
+    @SequenceGenerator(name = "medicalstaff_seq",sequenceName = "medicalstaff_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "medicalstaff_seq")
     @Column(name = "MEDICALSTAFF_ID", unique = true, nullable = true)
     private @NotNull Long id;
@@ -46,7 +49,7 @@ public class MedicalStaff {
     @Pattern(regexp = "\\d{10}")
     private @NotNull String phone;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
     private @NotNull Date birthdate;
     
     @Size(min = 8)
