@@ -63,6 +63,7 @@
                   color="teal"
                   v-model="rates"
                   :rules="[v => !!v || 'Item is required']"
+                  clearable
                   required>
                 </v-text-field>
               </v-col>
@@ -227,7 +228,7 @@ export default {
         )
         .then(response => {
           console.log(response);
-          
+          this.getStatistics();
           this.saveSuccessful = true;
           this.saveUnsuccessful = false;
         
