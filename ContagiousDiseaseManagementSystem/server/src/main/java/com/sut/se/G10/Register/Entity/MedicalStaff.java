@@ -12,6 +12,10 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.FetchType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonFormatTypes;
+
 import javax.validation.constraints.Pattern;
 
 import java.util.Date;
@@ -42,6 +46,7 @@ public class MedicalStaff {
     @Pattern(regexp = "\\d{10}")
     private @NotNull String phone;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private @NotNull Date birthdate;
     
     @Size(min = 8)
