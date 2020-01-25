@@ -9,7 +9,7 @@
             <h1 class="display-1 font-weight-bold mb-3">แบบฟอร์มบันทึกข้อมูลวัคซีนป้องกัน/ยา</h1>
           </v-flex>
         </v-layout>
-        <div v-if="saveUnsuccessful">
+        <!-- <div v-if="saveUnsuccessful">
           <v-alert outlined dense text type="error" prominent border="left">
             <strong>บันทึกไม่สำเร็จ</strong>
             กรุณากรอกข้อมูลให้ครบและถูกต้องก่อนบันทึกข้อมูล
@@ -17,7 +17,7 @@
         </div>
         <div v-if="saveSuccessful">
           <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
-        </div>
+        </div> -->
         <v-row justify="center">
           <v-col cols="7">
             <v-form v-model="valid" ref="form">
@@ -169,8 +169,8 @@ export default {
       vaccines: null,
       typevaccines: null,
       valid: false,
-      saveUnsuccessful: false,
-      saveSuccessful: false
+      // saveUnsuccessful: false,
+      // saveSuccessful: false
     };
   },
 
@@ -231,14 +231,19 @@ export default {
         )
         .then(response => {
           console.log(response);
-          this.saveSuccessful = true;
-          this.saveUnsuccessful = false;
           this.$router.push("/viewvaccineinformation");
+          const option1 = { title: "Alert" ,size:"sm"};
+          this.$dialogs.alert("บันทึกข้อมูลสำเร็จ",option1);
+          this.$refs.form.reset();
+          // this.saveSuccessful = true;
+          // this.saveUnsuccessful = false; 
         })
         .catch(e => {
           console.log(e);
-          this.saveSuccessful = false;
-          this.saveUnsuccessful = true;
+          const option2 = { title: "Alert" , size:"sm"};
+          this.$dialogs.alert("บันทึกข้อมูลไม่สำเร็จ",option2);
+          // this.saveSuccessful = false;
+          // this.saveUnsuccessful = true;
         });
       this.submitted = true;
     },
@@ -248,8 +253,8 @@ export default {
     clear() {
       this.$refs.form.reset();
       this.vaccineCheck = false;
-      this.saveSuccessful = false;
-      this.saveUnsuccessful = false;
+      // this.saveSuccessful = false;
+      // this.saveUnsuccessful = false;
     },
 
     pushvaccineinformation() {
