@@ -73,6 +73,11 @@ public class VaccineInformationController {
         return vaccineRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/vaccine/{vaccineid}")
+    public Optional<Vaccine> vaccines(@PathVariable Long vaccineid) {
+        return vaccineRepository.findById(vaccineid);
+    }
+
     @GetMapping("/typevaccine")
     public Collection<TypeVaccine> typeVaccines() {
         return typevaccineRepository.findAll().stream().collect(Collectors.toList());
@@ -90,7 +95,9 @@ public class VaccineInformationController {
     @PostMapping("/vaccineinformation/{fullname}/{vaccineid}/{typevaccineid}/{strdate}/{expdate}")
     public VaccineInformation newVaccineInformation(VaccineInformation newVaccineInformation,
             @PathVariable Long fullname, // edit
-            @PathVariable Long vaccineid, @PathVariable Long typevaccineid, @PathVariable String strdate,
+            @PathVariable Long vaccineid, 
+            @PathVariable Long typevaccineid, 
+            @PathVariable String strdate,
             @PathVariable String expdate) throws ParseException {
 
         MedicalStaff medicalStaff = medicalStaffRepository.findById(fullname).get();
