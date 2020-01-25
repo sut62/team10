@@ -1,11 +1,11 @@
 <template>
   <div class="text-center">
-      <v-card class="mx-auto" style="max-width: 600px">
+      <v-card class="mx-auto" style="max-width: 800px">
 
         <v-layout text-center wrap column>
           <v-toolbar-title class="headline text-uppercase">
             <br />
-            <div class="success pa-8 white--text">ระบบเก็บสถิติการเกิดโรคติดต่อ</div>
+            <div class="success pa-7 white--text"><h1>ระบบเก็บสถิติการเกิดโรคติดต่อ</h1></div>
             <br />
           </v-toolbar-title>
         </v-layout>
@@ -68,16 +68,15 @@
               </v-col>
             </v-row>
 
-            <v-row>   
-              <v-col cols="5">
-                <v-btn @click="saveStatistics" height="40" width="120" color="success">บันทึก</v-btn>
-              </v-col> 
-              <!-- <v-col cols="5">
-                <v-btn @click="clear" height="40" width="120" color="success">refish</v-btn>
-              </v-col>  -->
+            <v-row> 
+              <v-row>      
+                <v-col cols="8">
+                  <v-btn @click="saveStatistics" height="40" width="100" color="success">บันทึก</v-btn>
+                </v-col>
+              </v-row> 
               <v-row>
               <v-spacer></v-spacer>
-                <v-col cols="7">
+                <v-col cols="8">
                   <v-btn color="success" height="40" width="100" to="/home">
                     <v-icon dark left >mdi-arrow-left</v-icon>กลับ
                   </v-btn>
@@ -91,13 +90,39 @@
               </v-alert>
             </div>
             <div v-if="saveSuccessful">
-              <v-alert dense outlined text prominent type="success">บันทึกข้อมูลสำเร็จ</v-alert>
+              <v-alert dense outlined text prominent type="success">
+                บันทึกข้อมูลสำเร็จ
+              </v-alert>
             </div> 
 
+            <!-- เเสดงข้อมูลการบันทึกเเบบตาราง -->
+            <v-row table>
+              <v-layout text-center column>
+                <v-toolbar-title class="headline text-uppercase">
+                  <br />
+                  <div class="brown lighten-1 lighten-1 pa-1 white--text">
+                    ตารางเเสดงข้อมูลสถิติการเกิดโรคติดต่อ
+                  </div>
+                </v-toolbar-title>
+              </v-layout>
+
+              <v-row>
+                <v-col cols="50">
+                  <v-data-table 
+                      :headers="headers" 
+                      :items="statistics" 
+                      :items-per-page="5" 
+                      class="elevation-1">
+                  </v-data-table>
+                </v-col>
+              </v-row>
+            </v-row>
+            
         </v-card-text>
       </v-card>
   </div>
 </template>
+
 
 <script>
 import http from "../sprint2/http-common";
@@ -105,24 +130,45 @@ export default {
   name: "statistics",
   data() {
     return {
-      statistics: {
+      statistics: [{
         disease: "",
         type: "",
         province: "",
-      },
+      }],
       menu1: false,
       disease: [],
       type: [],
       province: [],
       rates: "",
       saveUnsuccessful: false,
-      saveSuccessful: false
+      saveSuccessful: false,
+
+      headers: [
+        { text: "Disease",value: "disease.disease"},
+        { text: "Type",value: "type.type"},
+        { text: "Province", value: "province.province"},
+        { text: "Rates", value: "rates" },
+      ],
+      items: []
     };
   },
 
   /* eslint-disable no-console */
     /* eslint-disable */
   methods: {
+    getStatistics() {
+      http
+        .get("/statistics")
+        .then(response => {
+          console.log(response.data);
+          this.$forceUpdate();
+          this.statistics = response.data;
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+
     // ดึงข้อมูล disease ใส่ combobox
     getDisease() {
       http
@@ -181,6 +227,7 @@ export default {
         )
         .then(response => {
           console.log(response);
+          this.getStatistics();
           this.saveSuccessful = true;
           this.saveUnsuccessful = false;
         
@@ -194,12 +241,14 @@ export default {
     },
 
     refreshList() {
+      this.getStatistics();
       this.getDisease();
       this.getType();
       this.getProvince();
     }
   },
   mounted() {
+    this.getStatistics();
     this.getDisease();
     this.getType();
     this.getProvince();
