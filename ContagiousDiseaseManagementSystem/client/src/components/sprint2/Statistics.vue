@@ -22,36 +22,39 @@
                   color="teal"
                   v-model="statistics.disease"
                   :rules="[v => !!v || 'Item is required']"
+                  clearable
                   required>
                 </v-select>
               </v-col>
 
               <v-col cols="10">
-              <v-select
-                label="ประเภทของโรคติดต่อ"
-                outlined
-                :items="type"
-                item-text="type"
-                item-value="id"
-                color="teal"
-                v-model="statistics.type"
-                :rules="[v => !!v || 'Item is required']"
-                required>
-              </v-select>
+                <v-select
+                  label="ประเภทของโรคติดต่อ"
+                  outlined
+                  :items="type"
+                  item-text="type"
+                  item-value="id"
+                  color="teal"
+                  v-model="statistics.type"
+                  :rules="[v => !!v || 'Item is required']"
+                  clearable
+                  required>
+                </v-select>
               </v-col>
 
               <v-col cols="10">
-              <v-select
-                label="จังหวัด"
-                outlined
-                :items="province"
-                item-text="province"
-                item-value="id"
-                color="teal"
-                v-model="statistics.province"
-                :rules="[v => !!v || 'Item is required']"
-                required>
-              </v-select>
+                <v-select
+                  label="จังหวัด"
+                  outlined
+                  :items="province"
+                  item-text="province"
+                  item-value="id"
+                  color="teal"
+                  v-model="statistics.province"
+                  :rules="[v => !!v || 'Item is required']"
+                  clearable
+                  required>
+                </v-select>
               </v-col>
 
               <v-col cols="10">
@@ -63,16 +66,22 @@
                   required>
                 </v-text-field>
               </v-col>
-
-              <v-col>
-                <v-btn @click="saveStatistics" height="40" width="100" color="success">บันทึก</v-btn>
-              </v-col>
-              <v-spacer></v-spacer>
-              <v-col >
-                <v-btn color="success" height="40" width="100" to="/home">กลับ</v-btn>
-              </v-col>
             </v-row>
-            
+
+            <v-row>   
+              <v-col cols="5">
+                <v-btn @click="saveStatistics" height="40" width="120" color="success">บันทึก</v-btn>
+              </v-col> 
+              <v-row>
+              <v-spacer></v-spacer>
+                <v-col cols="7">
+                  <v-btn color="success" height="40" width="100" to="/home">
+                    <v-icon dark left >mdi-arrow-left</v-icon>กลับ
+                  </v-btn>
+                </v-col>  
+              </v-row>
+            </v-row>
+                 
             <div v-if="saveUnsuccessful">
               <v-alert outlined dense text type="error" prominent border="left">
                 บันทึกข้อมูลไม่สำเร็จ
@@ -111,7 +120,7 @@ export default {
   /* eslint-disable no-console */
     /* eslint-disable */
   methods: {
-    // ดึงข้อมูล combobox
+    // ดึงข้อมูล disease ใส่ combobox
     getDisease() {
       http
         .get("/disease")
@@ -125,7 +134,7 @@ export default {
         });
     },
 
-    // ดึงข้อมูล combobox
+    // ดึงข้อมูล type ใส่ combobox
     getType() {
       http
         .get("/type")
@@ -139,7 +148,7 @@ export default {
         });
     },
 
-    // ดึงข้อมูล combobox
+    // ดึงข้อมูล province ใส่ combobox
     getProvince() {
       http
         .get("/province")
