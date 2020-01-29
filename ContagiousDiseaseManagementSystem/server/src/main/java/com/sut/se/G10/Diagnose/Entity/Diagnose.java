@@ -1,13 +1,16 @@
 package com.sut.se.G10.Diagnose.Entity;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
@@ -19,6 +22,8 @@ import javax.validation.constraints.Pattern;
 import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Patient.Entity.Patient;
 import com.sut.se.G10.Register.Entity.MedicalStaff;
+
+import com.fasterxml.jackson.annotation.*;
 
 import lombok.*;
 
@@ -64,12 +69,11 @@ public class Diagnose {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "DISEASE_ID", insertable = true)
-    private Disease disease;
-
-    @NotNull
-    @ManyToOne
     @JoinColumn(name = "ADMISSION_ID", insertable = true)
     private Admission admission;
+
+    // @OneToMany(fetch = FetchType.EAGER ,mappedBy="DIAGNOSE")
+    // @JsonManagedReference
+    // private Collection<DiagnoseDisease> diagnoseDisease;
 
 }
