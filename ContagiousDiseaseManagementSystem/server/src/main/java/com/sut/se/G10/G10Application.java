@@ -185,11 +185,8 @@ public class G10Application {
 			MedicalStaff medicalStaff1 = new MedicalStaff();
 			medicalStaff1.setFullname("abced Doctor");
 			medicalStaff1.setAddress("1111111111111111111");
-			try {
-            	Date medicalstaffbirthdate1 = formatter.parse("1998-04-21");
-            	medicalStaff1.setBirthdate(medicalstaffbirthdate1);
-        	} catch (ParseException e) {
-			}
+            Date medicalstaffbirthdate1 = formatter.parse("1998-04-21");
+            medicalStaff1.setBirthdate(medicalstaffbirthdate1);
 			medicalStaff1.setEmail("a@gmail.com");
 			medicalStaff1.setPassword("12345678");
 			medicalStaff1.setPhone("1234567890");
@@ -201,11 +198,8 @@ public class G10Application {
 			MedicalStaff medicalStaff2 = new MedicalStaff();
 			medicalStaff2.setFullname("abced Nurse");
 			medicalStaff2.setAddress("1111111111111111111");
-			try {
-            	Date medicalstaffbirthdate2 = formatter.parse("1998-05-21");
-            	medicalStaff2.setBirthdate(medicalstaffbirthdate2);
-        	} catch (ParseException e) {
-			}
+            Date medicalstaffbirthdate2 = formatter.parse("1998-05-21");
+            medicalStaff2.setBirthdate(medicalstaffbirthdate2);
 			medicalStaff2.setEmail("b@gmail.com");
 			medicalStaff2.setPassword("12345678");
 			medicalStaff2.setPhone("1234567890");
@@ -219,11 +213,8 @@ public class G10Application {
 			patient1.setPatientfullname("Nawapat  Sue");
 			patient1.setPhone("1234567890");
 			patient1.setAddress("1111111111111111111");
-        	try {
-            	Date patientbirthdate1 = formatter.parse("1997-09-21");
-            	patient1.setPatientbirthdate(patientbirthdate1) ;
-        	} catch (ParseException e) {
-			}
+            Date patientbirthdate1 = formatter.parse("1997-09-21");
+            patient1.setPatientbirthdate(patientbirthdate1) ;
 			patient1.setPatientdate(new Date());
 			patient1.setBloodtype(bloodtypeRepository.findById(1));
 			patient1.setGender(genderRepository.findById(1));
