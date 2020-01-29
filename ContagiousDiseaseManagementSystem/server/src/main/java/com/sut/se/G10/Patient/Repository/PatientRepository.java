@@ -10,6 +10,6 @@ public
 interface PatientRepository extends JpaRepository<Patient, Long> {
     Patient findById(long id);
 
-    Patient findByPatientfullname (String patientfullname);
+    Patient findByPhone (String patientPhone);
 
 }
