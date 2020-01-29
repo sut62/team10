@@ -30,11 +30,11 @@
                   min-width="550px"
                   outlined
                   label="Patient Fullname"
-                  v-model="patientFullname"
+                  v-model="patientPhone"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
-                <p v-if="patientCheck != ''">Patient Fullname : {{patientFullname}}</p>
+                <p v-if="patientCheck != ''">Patient Phone : {{patientPhone}}</p>
               </v-col>
               <v-col>
                 <div class="my-2">
@@ -179,7 +179,7 @@ export default {
       },
       valid: false,
       patientCheck: false,
-      patientFullname: "",
+      patientPhone: "",
       saveUnsuccessful: false,
       saveSuccessful: false
     };
@@ -237,12 +237,12 @@ export default {
     
     findPatient() {
       http
-        .get("/patientByPatientfullname/" + this.patientFullname)
+        .get("/patientByPhone/" + this.patientPhone)
         .then(response => {
           console.log(response);
           if (response.data != null) {
             this.diagnose.patientId = response.data.id;
-            if(this.patientFullname == response.data.patientfullname){
+            if(this.patientPhone == response.data.phone){
               this.patientCheck = true;
             }
             

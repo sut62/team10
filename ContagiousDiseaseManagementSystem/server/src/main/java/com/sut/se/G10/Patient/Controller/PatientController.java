@@ -61,9 +61,9 @@ public class PatientController {
         return patientRepository.findById(id);
     }
 
-    @GetMapping("/patientByPatientfullname/{patientfullname}")
-    public Patient getPatientByfullname(@PathVariable String patientfullname) {
-        return patientRepository.findByPatientfullname(patientfullname);
+    @GetMapping("/patientByPhone/{patientPhone}")
+    public Patient getPatientByPhone(@PathVariable String patientPhone) {
+        return patientRepository.findByPhone(patientPhone);
     }
 
     @PostMapping("/patient/{pafullname}/{gender_id}/{pabirthdate}/{bloodtype_id}/{phone}/{address}/{disease_id}")
