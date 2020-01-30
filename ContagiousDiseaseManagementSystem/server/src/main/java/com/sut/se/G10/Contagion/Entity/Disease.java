@@ -1,7 +1,5 @@
 package com.sut.se.G10.Contagion.Entity;
 
-import com.sut.se.G10.Diagnose.Entity.DiagnoseDisease;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,8 +30,5 @@ public class Disease {
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Contagion> contagion;
 
-    // @OneToMany(fetch = FetchType.EAGER ,mappedBy="DISEASE")
-    // // @JsonManagedReference
-    // private Collection<DiagnoseDisease> diagnoseDisease;
 }
 
