@@ -41,7 +41,7 @@ public class StatisticsController {
     }
 
     @PostMapping("/statistics/{disease_id}/{type_id}/{province_id}/{rates}")
-    public Statistics newContagion(Statistics newStatistics,                             
+    public Statistics newStatistics(Statistics newStatistics,                             
                                     @PathVariable long disease_id,
                                     @PathVariable long type_id,
                                     @PathVariable long province_id, 
@@ -55,8 +55,7 @@ public class StatisticsController {
         newStatistics.setType(type);
         newStatistics.setProvince(province);
         newStatistics.setRates(rates);
-
-        
+   
         return statisticsRepository.save(newStatistics);
     }
 }
