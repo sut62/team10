@@ -11,12 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 import javax.validation.constraints.NotNull;
 
 import lombok.*;
 
 @Entity
 @Data
+@Setter
+@Getter
 @NoArgsConstructor
 @Table(name="ADMISSION")
 public class Admission {  
@@ -24,10 +27,11 @@ public class Admission {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ADMISSION_SEQ")
   @SequenceGenerator(name="ADMISSION_SEQ",sequenceName="ADMISSION_SEQ")
-  @Column(name = "ADMISSION_ID", unique = true, nullable = false)  
-  private @NotNull Long id;  
-  private @NotNull String admitted;
+  @Column(name = "ADMISSION_ID", unique = true, nullable = false)
+  private Long id;
+  
+  @NotNull
+  @Column(name = "ADMITTED")
+  private String admitted;
 
-  @OneToMany(fetch = FetchType.EAGER)
-  private Collection<Diagnose> diagnose ;
 }
