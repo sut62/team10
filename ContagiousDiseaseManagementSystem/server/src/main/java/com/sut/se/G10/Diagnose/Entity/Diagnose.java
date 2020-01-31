@@ -69,6 +69,11 @@ public class Diagnose {
 
     @NotNull
     @ManyToOne
+    @JoinColumn(name = "BLOOD_PRESSURE_LEVEL_ID", insertable = true)
+    private BloodPressureLevel bloodPressureLevel;
+
+    @NotNull
+    @ManyToOne
     @JoinColumn(name = "ADMISSION_ID", insertable = true)
     private Admission admission;
 

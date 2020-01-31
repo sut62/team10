@@ -46,6 +46,8 @@ import com.sut.se.G10.Register.Entity.MedicalStaff;
 import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
 import com.sut.se.G10.Patient.Entity.Patient;
 import com.sut.se.G10.Patient.Repository.PatientRepository;
+import com.sut.se.G10.Diagnose.Entity.BloodPressureLevel;
+import com.sut.se.G10.Diagnose.Repository.BloodPressureLevelRepository;
 
 @SpringBootApplication
 public class G10Application {
@@ -69,7 +71,8 @@ public class G10Application {
 							TypeVaccineRepository typeVaccineRepository,
 							VaccineRepository vaccineRepository,
 							PatientRepository patientRepository,
-							MedicalStaffRepository medicalStaffRepository ) {
+							MedicalStaffRepository medicalStaffRepository,
+							BloodPressureLevelRepository bloodPressureLevelRepository ) {
 
 		return args -> {
 			// Contagion Part
@@ -180,6 +183,12 @@ public class G10Application {
 				typeVaccineRepository.save(typevaccine); 
 			});
 
+			Stream.of("Very high", "High", "Normal", "Low", "Very low").forEach(level -> {
+				BloodPressureLevel bloodPressureLevel = new BloodPressureLevel(); 
+				bloodPressureLevel.setLevel(level);
+				bloodPressureLevelRepository.save(bloodPressureLevel); 
+			});
+
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
 
 			MedicalStaff medicalStaff1 = new MedicalStaff();
@@ -211,6 +220,7 @@ public class G10Application {
 
 			Patient patient1 = new Patient();
 			patient1.setPatientfullname("Nawapat  Sue");
+			patient1.setPersonId("1234567890123");
 			patient1.setPhone("1234567890");
 			patient1.setAddress("1111111111111111111");
             Date patientbirthdate1 = formatter.parse("1997-09-21");
