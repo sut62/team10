@@ -37,6 +37,7 @@ public class Patient {
     @Column(name = "PATIENT_ID", unique = true, nullable = true)
     private @NotNull Long id;
 
+    @NotNull
     @Column(name = "PERSON_ID", unique = true)
     @Pattern(regexp = "\\d{13}")
     private @NotNull String personId;
