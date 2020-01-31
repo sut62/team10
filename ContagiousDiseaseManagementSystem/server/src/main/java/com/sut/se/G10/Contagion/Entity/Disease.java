@@ -1,5 +1,7 @@
 package com.sut.se.G10.Contagion.Entity;
 
+import com.sut.se.G10.Diagnose.Entity.DiagnoseDisease;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,11 +26,14 @@ public class Disease {
     @SequenceGenerator(name = "disease_seq", sequenceName = "disease_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "disease_seq")
     @Column(name = "DISEASE_ID", unique = true, nullable = true)
-    private @NotNull Long id;
+    private Long id;
     private @NotNull String disease;
 
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Contagion> contagion;
 
+    // @OneToMany(fetch = FetchType.EAGER ,mappedBy="DISEASE")
+    // // @JsonManagedReference
+    // private Collection<DiagnoseDisease> diagnoseDisease;
 }
 

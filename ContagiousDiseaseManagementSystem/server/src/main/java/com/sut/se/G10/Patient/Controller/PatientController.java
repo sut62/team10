@@ -61,12 +61,12 @@ public class PatientController {
         return patientRepository.findById(id);
     }
 
-    @GetMapping("/patientByPhone/{patientPhone}")
-    public Patient getPatientByPhone(@PathVariable String patientPhone) {
-        return patientRepository.findByPhone(patientPhone);
+    @GetMapping("/patientByPersonId/{personId}")
+    public Patient getPatientByPhone(@PathVariable String personId) {
+        return patientRepository.findByPersonId(personId);
     }
 
-    @PostMapping("/patient/{pafullname}/{gender_id}/{pabirthdate}/{bloodtype_id}/{phone}/{address}/{disease_id}")
+    @PostMapping("/patient/{pafullname}/{gender_id}/{pabirthdate}/{bloodtype_id}/{phone}/{address}/{disease_id}/{person_id}")
     public Patient newPatient( Patient newPatient,
                         @PathVariable String pafullname, 
                         @PathVariable long gender_id, 
@@ -74,7 +74,8 @@ public class PatientController {
                         @PathVariable long bloodtype_id, 
                         @PathVariable String phone,
                         @PathVariable String address,
-                        @PathVariable long disease_id) {
+                        @PathVariable long disease_id,
+                        @PathVariable String person_id) {
                             
         Gender gender = genderRepository.findById(gender_id);
         Bloodtype bloodtype = bloodtypeRepository.findById(bloodtype_id);
@@ -86,6 +87,7 @@ public class PatientController {
         newPatient.setGender(gender);
         newPatient.setBloodtype(bloodtype);
         newPatient.setDisease(disease);
+        newPatient.setPersonId(person_id);
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             Date patientbirthdate = formatter.parse(pabirthdate);

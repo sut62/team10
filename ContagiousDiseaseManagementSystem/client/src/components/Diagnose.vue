@@ -29,12 +29,12 @@
                   max-width="550px"
                   min-width="550px"
                   outlined
-                  label="Patient Fullname"
-                  v-model="patientPhone"
+                  label="Patient "
+                  v-model="personId"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
-                <p v-if="patientCheck != ''">Patient Phone : {{patientPhone}}</p>
+                <p v-if="patientCheck != ''">Person Id : {{personId}}</p>
               </v-col>
               <v-col>
                 <div class="my-2">
@@ -43,14 +43,14 @@
               </v-col>
             </v-row>
 
-            <div v-if="patientCheck">
+            <div v-if = "patientCheck">
               <v-row>
                 <v-col>
                   <v-select
                     full-width
                     max-width="550px"
                     min-width="550px"
-                    label="MedicalStaff"
+                    label="DiagnosisDoctor"
                     outlined
                     v-model="diagnose.medicalStaffId"
                     :items="medicalStaffWherePositionIsDoctors"
@@ -67,11 +67,11 @@
                     full-width
                     max-width="550px"
                     min-width="550px"
-                    label="Disease"
+                    label="Blood Pressure Level"
                     outlined
-                    v-model="diagnose.diseaseId"
-                    :items="diseases"
-                    item-text="disease"
+                    v-model="diagnose.bloodPressureLevelId"
+                    :items="bloodPressureLevels"
+                    item-text="level"
                     item-value="id"
                     :rules="[(v) => !!v || 'Item is required']"
                     required
@@ -95,6 +95,12 @@
                   ></v-select>
                 </v-col>
               </v-row>
+              <v-row>
+                <v-col>
+                  
+                </v-col>
+              </v-row>
+
               <v-row>
                 <v-col>
                   <v-text-field
@@ -154,6 +160,9 @@
               </v-row>
               <br />
             </div>
+
+
+
           </v-form>
         </v-col>
       </v-row>
@@ -170,16 +179,18 @@ export default {
   data() {
     return {
       diagnose: {
-        patientId: "",
-        medicalStaffId: "",
-        diseaseId: "",
-        admissionId: "",
-        diagnosis: "",
-        stayAlertedTime: ""
+        patientId: null,
+        medicalStaffId: null,
+        bloodPressureLevelId: null,
+        admissionId: null,
+        diagnosis: null,
+        stayAlertedTime: null,
+        diseaseIds: []
       },
+      diseaseItems: [],
       valid: false,
       patientCheck: false,
-      patientPhone: "",
+      personId: null,
       saveUnsuccessful: false,
       saveSuccessful: false
     };
@@ -234,15 +245,27 @@ export default {
           console.log(e);
         });
     },
+
+    getBloodPressureLevels() {
+      http
+        .get("/bloodPressureLevel")
+        .then(response => {
+          this.bloodPressureLevels = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
     
     findPatient() {
       http
-        .get("/patientByPhone/" + this.patientPhone)
+        .get("/patientByPersonId/" + this.personId)
         .then(response => {
           console.log(response);
           if (response.data != null) {
             this.diagnose.patientId = response.data.id;
-            if(this.patientPhone == response.data.phone){
+            if(this.personId == response.data.personId){
               this.patientCheck = true;
             }
             
@@ -264,7 +287,7 @@ export default {
             "/" +
             this.diagnose.medicalStaffId +
             "/" +
-            this.diagnose.diseaseId +
+            this.diagnose.bloodPressureLevelId +
             "/" +
             this.diagnose.admissionId +
             "/" +
@@ -293,8 +316,9 @@ export default {
     },
     refreshList() {
       this.getMedicalStaffs();
-      this.getDiseases();
+      this.getBloodPressureLevels();
       this.getAdmissions();
+      this.getDiseases();
       this.getMedicalStaffWherePositionIsDoctors();
     }
   },
@@ -302,8 +326,9 @@ export default {
   mounted() {
     /* eslint-enable no-console */
     this.getMedicalStaffs();
-    this.getDiseases();
+    this.getBloodPressureLevels();
     this.getAdmissions();
+    this.getDiseases();
     this.getMedicalStaffWherePositionIsDoctors();
   }
 };

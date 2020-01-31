@@ -10,6 +10,8 @@ import com.sut.se.G10.Patient.Entity.Patient;
 import com.sut.se.G10.Patient.Repository.PatientRepository;
 import com.sut.se.G10.Register.Entity.MedicalStaff;
 import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
+import com.sut.se.G10.Diagnose.Entity.BloodPressureLevel;
+import com.sut.se.G10.Diagnose.Repository.BloodPressureLevelRepository;
 
 import java.util.Collection;
 import java.util.Date;
@@ -40,6 +42,8 @@ public class DiagnoseController {
     private MedicalStaffRepository medicalStaffRepository;
     @Autowired
     private PatientRepository patientRepository;
+    @Autowired
+    private BloodPressureLevelRepository bloodPressureLevelRepository;
 
     DiagnoseController(DiagnoseRepository diagnoseRepository) {
         this.diagnoseRepository = diagnoseRepository;
@@ -55,20 +59,23 @@ public class DiagnoseController {
         return diagnoseRepository.findById(id);
     }
 
-    @PostMapping("/diagnose/{patient_id}/{medicalStaff_id}/{admission_id}/{diagnosis}/{stayAlertedTime}")
+    @PostMapping("/diagnose/{patient_id}/{medicalStaff_id}/{bloodPressureLevel_id}/{admission_id}/{diagnosis}/{stayAlertedTime}")
     public Diagnose newDiagnose( Diagnose newDiagnose,
             @PathVariable long patient_id, 
             @PathVariable long medicalStaff_id,
+            @PathVariable long bloodPressureLevel_id,
             @PathVariable long admission_id, 
             @PathVariable String diagnosis,
             @PathVariable String stayAlertedTime) {
 
         Patient patientfullname = patientRepository.findById(patient_id);
         MedicalStaff fullname = medicalStaffRepository.findById(medicalStaff_id);
+        BloodPressureLevel bloodPressureLevel = bloodPressureLevelRepository.findById(bloodPressureLevel_id);
         Admission admission = admissionRepository.findById(admission_id);
 
         newDiagnose.setPatientfullname(patientfullname);
         newDiagnose.setFullname(fullname);
+        newDiagnose.setBloodPressureLevel(bloodPressureLevel);
         newDiagnose.setAdmission(admission);
         newDiagnose.setDiagnosisDate(new Date());
         newDiagnose.setDiagnosis(diagnosis);
