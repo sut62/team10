@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class BloodPressureLevelController {
 
     @Autowired 
-    private BloodPressureLevelRepository bloodPressureLevelRepository;
+    private final BloodPressureLevelRepository bloodPressureLevelRepository;
+
+    public BloodPressureLevelController(BloodPressureLevelRepository bloodPressureLevelRepository) {
+        this.bloodPressureLevelRepository = bloodPressureLevelRepository ;
+    }
 
     @GetMapping("/bloodPressureLevel")
     public Collection<BloodPressureLevel> getBloodPressureLevels() {

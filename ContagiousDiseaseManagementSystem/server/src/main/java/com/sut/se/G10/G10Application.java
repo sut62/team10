@@ -244,6 +244,7 @@ public class G10Application {
 			communicablelevelRepository.findAll().forEach(System.out::println);
 			vaccineRepository.findAll().forEach(System.out::println); 
 			typeVaccineRepository.findAll().forEach(System.out::println);
+			bloodPressureLevelRepository.findAll().forEach(System.out::println);
 			patientRepository.findAll().forEach(System.out::println); 
 			medicalStaffRepository.findAll().forEach(System.out::println);
 		};
