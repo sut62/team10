@@ -18,7 +18,6 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import com.fasterxml.jackson.annotation.*;
 
 @Data
 @Entity
@@ -34,12 +33,10 @@ public class DiagnoseDisease {
     @NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="DISEASE_ID")
-    @JsonIgnore
     private Disease disease;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="DIAGNOSE_ID")
-    @JsonIgnore
     private Diagnose diagnose;
 }
