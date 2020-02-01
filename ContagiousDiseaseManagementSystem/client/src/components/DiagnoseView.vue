@@ -10,10 +10,19 @@
 
         <v-row justify="center">
         <v-col cols="12">
-            <v-data-table :headers="headers" :items="items" :items-per-page="10" class="elevation-1">
+            <v-data-table :headers="diagnoseHeaders" :items="diagnoseItems" :items-per-page="10" class="elevation-1">
             </v-data-table>
         </v-col>
         </v-row>
+
+        <v-row justify="center">
+        <v-col cols="12">
+            <v-data-table :headers="diagnoseDiseaseHeaders" :items="diagnoseDiseaseItems" :items-per-page="10" class="elevation-1">
+            </v-data-table>
+        </v-col>
+        </v-row>
+
+
         <v-row justify="left">
           <v-col cols="4">
             <v-btn 
@@ -43,21 +52,32 @@ export default {
   name: "DiagnoseView",
   data() {
     return {
-      headers: [
+      diagnoseItems: [],
+      diagnoseDiseaseItems: [],
+      diagnoseHeaders: [
         {
           text: "Patient",
           align: "left",
           sortable: false,
-          value: "patientfullname.patientfullname"
+          value: "patient.personId"
         },
-        { text: "DiagnosisDoctor", value: "fullname.fullname" },
-        { text: "Disease", value: "disease.disease" },
+        { text: "Diagnose Code", value: "diagnoseCode" },
+        { text: "DiagnosisDoctor", value: "diagnosisDoctor.fullname" },
+        { text: "Blood Pressure Level", value: "bloodPressureLevel.level" },
         { text: "Admission", value: "admission.admitted" },
         { text: "Diagnosis Date", value: "diagnosisDate" },
         { text: "Stay Alerted Time", value: "stayAlertedTime" },
         { text: "Diagnosis", value: "diagnosis" }
       ],
-      items: []
+      diagnoseDiseaseHeaders: [
+        {
+          text: "Diagnose Code",
+          align: "left",
+          sortable: false,
+          value: "diagnose.diagnoseCode"
+        },
+        { text: "Disease Per Diagnose", value: "disease.disease" }
+      ]
     };
   },
   methods: {
@@ -66,20 +86,33 @@ export default {
       http
         .get("/diagnose")
         .then(response => {
-          this.items = response.data;
-          console.log(this.items);
+          this.diagnoseItems = response.data;
+          console.log(this.diagnoseItems);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+    getDiagnoseDiseases() {
+      http
+        .get("/diagnoseDisease")
+        .then(response => {
+          this.diagnoseDiseaseItems = response.data;
+          console.log(this.diagnoseDiseaseItems);
         })
         .catch(e => {
           console.log(e);
         });
     },
     refreshList() {
-      this.getVideoRentals();
+      this.getDiagnoses();
+      this.getDiagnoseDiseases();
     }
     /* eslint-disable no-console */
   },
   mounted() {
     this.getDiagnoses();
+    this.getDiagnoseDiseases();
   }
 };
 </script>

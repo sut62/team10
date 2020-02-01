@@ -29,7 +29,7 @@
                   max-width="550px"
                   min-width="550px"
                   outlined
-                  label="Patient "
+                  label="Patient Find By Person ID"
                   v-model="personId"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
@@ -353,7 +353,9 @@ export default {
             "/" +
             this.diagnose.diagnosis +
             "/" +
-            this.diagnose.stayAlertedTime,
+            this.diagnose.stayAlertedTime +
+            "/" +
+            this.diagnose.diseaseIds,
           this.diagnose
         )
         .then(response => {

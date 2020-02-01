@@ -42,6 +42,10 @@ public class Diagnose {
     private Long id;
 
     @NotNull
+    @Column(name = "DIAGNOSE_CODE", unique = true)
+    private String diagnoseCode;
+
+    @NotNull
     @Column(name ="DIAGNOSIS_DATE")
     private Date diagnosisDate;
 
@@ -60,12 +64,12 @@ public class Diagnose {
     @NotNull
     @ManyToOne
     @JoinColumn(name = "PATIENT_ID", insertable = true)
-    private Patient patientfullname;
+    private Patient patient;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name = "MEDICAL_STAFF_ID", insertable = true)
-    private MedicalStaff fullname;
+    private MedicalStaff diagnosisDoctor;
 
     @NotNull
     @ManyToOne
@@ -76,9 +80,4 @@ public class Diagnose {
     @ManyToOne
     @JoinColumn(name = "ADMISSION_ID", insertable = true)
     private Admission admission;
-
-    // @OneToMany(fetch = FetchType.EAGER ,mappedBy="DIAGNOSE")
-    // @JsonManagedReference
-    // private Collection<DiagnoseDisease> diagnoseDisease;
-
 }

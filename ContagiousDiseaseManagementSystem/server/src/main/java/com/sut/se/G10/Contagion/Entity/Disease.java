@@ -31,9 +31,4 @@ public class Disease {
 
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Contagion> contagion;
-
-    // @OneToMany(fetch = FetchType.EAGER ,mappedBy="DISEASE")
-    // // @JsonManagedReference
-    // private Collection<DiagnoseDisease> diagnoseDisease;
 }
-
