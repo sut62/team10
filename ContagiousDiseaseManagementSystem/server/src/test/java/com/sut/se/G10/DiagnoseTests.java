@@ -63,10 +63,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("ABab12 _.,");
         diagnose.setDiagnosisDate(new Date(2020, 12, 25));
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         diagnose =  diagnoseRepository.saveAndFlush(diagnose);
 
@@ -76,8 +77,8 @@ public class DiagnoseTests {
         assertEquals("3 months", found.get().getStayAlertedTime());
         assertEquals(bloodPressureLevelRepository.findById(1), found.get().getBloodPressureLevel());
         assertEquals(admissionRepository.findById(1), found.get().getAdmission());
-        assertEquals(patientRepository.findById(1), found.get().getPatientfullname());
-        assertEquals(medicalStaffRepository.findById(1), found.get().getFullname());
+        assertEquals(patientRepository.findById(1), found.get().getPatient());
+        assertEquals(medicalStaffRepository.findById(1), found.get().getDiagnosisDoctor());
     }
 
     @Test
@@ -86,10 +87,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(null);
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(null);
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -99,7 +101,7 @@ public class DiagnoseTests {
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Diagnose> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("patientfullname", v.getPropertyPath().toString());
+        assertEquals("patient", v.getPropertyPath().toString());
     }
 
     @Test
@@ -108,10 +110,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(null);
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(null);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -121,7 +124,7 @@ public class DiagnoseTests {
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Diagnose> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-        assertEquals("fullname", v.getPropertyPath().toString());
+        assertEquals("diagnosisDoctor", v.getPropertyPath().toString());
     }
 
     @Test
@@ -130,10 +133,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(null);
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -152,10 +156,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(null);
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -174,10 +179,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(null);
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -196,10 +202,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("123456789$");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -218,10 +225,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis(null);
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -240,10 +248,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("123456789");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -263,10 +272,11 @@ public class DiagnoseTests {
         "123456789012345678901234567890123456789012345678901");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("3 months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -285,10 +295,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("1_months");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -307,10 +318,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime(null);
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -329,10 +341,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("1234");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -351,10 +364,11 @@ public class DiagnoseTests {
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime("123456789012345678901");
+        diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatientfullname(patientRepository.findById(1));
-        diagnose.setFullname(medicalStaffRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -365,6 +379,57 @@ public class DiagnoseTests {
         ConstraintViolation<Diagnose> v = result.iterator().next();
         assertEquals("size must be between 5 and 20", v.getMessage());
         assertEquals("stayAlertedTime", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void b5911837_testDiagnoseCodeNotNull() {
+        Diagnose diagnose = new  Diagnose();
+        diagnose.setDiagnosis("1234567890");
+        diagnose.setDiagnosisDate(new Date());
+        diagnose.setStayAlertedTime("12345678901234567890");
+        diagnose.setDiagnoseCode(null);
+        diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
+        diagnose.setAdmission(admissionRepository.findById(1));
+        diagnose.setPatient(patientRepository.findById(1));
+        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+
+        Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Diagnose> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("diagnoseCode", v.getPropertyPath().toString());
+    }
+
+    @Test
+    void b5911837_testDiagnoseCodeMustBeUnique() {
+        Diagnose diagnose1 = new  Diagnose();
+        diagnose1.setDiagnosis("1234567890");
+        diagnose1.setDiagnosisDate(new Date());
+        diagnose1.setStayAlertedTime("12345678901234567890");
+        diagnose1.setDiagnoseCode("XXXXX-XXXXX");
+        diagnose1.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
+        diagnose1.setAdmission(admissionRepository.findById(1));
+        diagnose1.setPatient(patientRepository.findById(1));
+        diagnose1.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        diagnoseRepository.saveAndFlush(diagnose1);
+
+        // คาดหวังว่า DataIntegrityViolationException จะถูก throw
+        assertThrows(DataIntegrityViolationException.class, () -> {
+            Diagnose diagnose2 = new  Diagnose();
+            diagnose2.setDiagnosis("1234567890");
+            diagnose2.setDiagnosisDate(new Date());
+            diagnose2.setStayAlertedTime("12345678901234567890");
+            diagnose2.setDiagnoseCode("XXXXX-XXXXX");
+            diagnose2.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
+            diagnose2.setAdmission(admissionRepository.findById(1));
+            diagnose2.setPatient(patientRepository.findById(1));
+            diagnose2.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+            diagnoseRepository.saveAndFlush(diagnose2);
+        });
     }
 
 }

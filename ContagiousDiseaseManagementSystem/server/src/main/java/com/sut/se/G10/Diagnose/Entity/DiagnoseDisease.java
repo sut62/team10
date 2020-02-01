@@ -29,16 +29,17 @@ public class DiagnoseDisease {
 	@SequenceGenerator(name="DIAGNOSE_DISEASE_SEQ",sequenceName="DIAGNOSE_DISEASE_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="DIAGNOSE_DISEASE_SEQ")
 	@Column(name="DIAGNOSE_DISEASE_ID",unique = true, nullable = false)
-	private @NotNull Long id;
+	private Long id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="DIAGNOSE_ID")
-    @JsonIgnore
-    private Diagnose diagnose;
-
-
+    @NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="DISEASE_ID")
     @JsonIgnore
     private Disease disease;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="DIAGNOSE_ID")
+    @JsonIgnore
+    private Diagnose diagnose;
 }

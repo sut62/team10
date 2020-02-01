@@ -12,6 +12,8 @@ import com.sut.se.G10.Register.Entity.MedicalStaff;
 import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
 import com.sut.se.G10.Diagnose.Entity.BloodPressureLevel;
 import com.sut.se.G10.Diagnose.Repository.BloodPressureLevelRepository;
+import com.sut.se.G10.Diagnose.Entity.DiagnoseDisease;
+import com.sut.se.G10.Diagnose.Repository.DiagnoseDiseaseRepository;
 
 import java.util.Collection;
 import java.util.Date;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -44,6 +47,8 @@ public class DiagnoseController {
     private PatientRepository patientRepository;
     @Autowired
     private BloodPressureLevelRepository bloodPressureLevelRepository;
+    @Autowired
+    private DiagnoseDiseaseRepository diagnoseDiseaseRepository;
 
     DiagnoseController(DiagnoseRepository diagnoseRepository) {
         this.diagnoseRepository = diagnoseRepository;
@@ -59,29 +64,43 @@ public class DiagnoseController {
         return diagnoseRepository.findById(id);
     }
 
-    @PostMapping("/diagnose/{patient_id}/{medicalStaff_id}/{bloodPressureLevel_id}/{admission_id}/{diagnosis}/{stayAlertedTime}")
-    public Diagnose newDiagnose( Diagnose newDiagnose,
+    @PostMapping("/diagnose/{patient_id}/{medicalStaff_id}/{bloodPressureLevel_id}/{admission_id}/{diagnosis}/{stayAlertedTime}/{disease_Ids}")
+    public void addDiagnoseAndAddDiagnoseDisease( Diagnose newDiagnose,
             @PathVariable long patient_id, 
             @PathVariable long medicalStaff_id,
             @PathVariable long bloodPressureLevel_id,
             @PathVariable long admission_id, 
             @PathVariable String diagnosis,
-            @PathVariable String stayAlertedTime) {
+            @PathVariable String stayAlertedTime,
+            @PathVariable long[] disease_Ids) {
 
-        Patient patientfullname = patientRepository.findById(patient_id);
-        MedicalStaff fullname = medicalStaffRepository.findById(medicalStaff_id);
+        Patient patient = patientRepository.findById(patient_id);
+        MedicalStaff diagnosisDoctor = medicalStaffRepository.findById(medicalStaff_id);
         BloodPressureLevel bloodPressureLevel = bloodPressureLevelRepository.findById(bloodPressureLevel_id);
         Admission admission = admissionRepository.findById(admission_id);
 
-        newDiagnose.setPatientfullname(patientfullname);
-        newDiagnose.setFullname(fullname);
+        newDiagnose.setPatient(patient);
+        newDiagnose.setDiagnosisDoctor(diagnosisDoctor);
         newDiagnose.setBloodPressureLevel(bloodPressureLevel);
         newDiagnose.setAdmission(admission);
         newDiagnose.setDiagnosisDate(new Date());
+        newDiagnose.setDiagnoseCode(generateCode());
         newDiagnose.setDiagnosis(diagnosis);
         newDiagnose.setStayAlertedTime(stayAlertedTime);
+                
+        Diagnose diagnoseForDiagnoseDisease = diagnoseRepository.save(newDiagnose);
 
-        return diagnoseRepository.save(newDiagnose);
+        for(int i=0; i<disease_Ids.length; i++){
+            DiagnoseDisease diagnoseDisease = new DiagnoseDisease();
+            diagnoseDisease.setDiagnose(diagnoseForDiagnoseDisease);
+            diagnoseDisease.setDisease(diseaseRepository.findById(disease_Ids[i]));
+            diagnoseDiseaseRepository.save(diagnoseDisease);
+        }
+    }
+    
+    public String generateCode() {
+        String code = UUID.randomUUID().toString();
+        return code;
     }
 
 }
