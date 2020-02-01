@@ -27,23 +27,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class DiagnoseDiseaseController {
 
     @Autowired
-    private final DiagnoseDiseaseRepository diagnoseDiseaseRepository;
+    private DiagnoseDiseaseRepository diagnoseDiseaseRepository;
     @Autowired
     private DiagnoseRepository diagnoseRepository;
     @Autowired
     private DiseaseRepository diseaseRepository;
 
-    DiagnoseDiseaseController(DiagnoseDiseaseRepository diagnoseDiseaseRepository) {
-        this.diagnoseDiseaseRepository = diagnoseDiseaseRepository;
-    }
-
     @GetMapping("/diagnoseDisease")
-    public Collection<DiagnoseDisease> getDiagnoseDiseases() {
-        return diagnoseDiseaseRepository.findAll().stream().collect(Collectors.toList());
+    public List<DiagnoseDisease> getDiagnoseDiseases() {
+        return diagnoseDiseaseRepository.findAll();
     }
 
     @GetMapping("/diagnoseDisease/{id}")
-    public Optional<DiagnoseDisease> getDiagnose(@PathVariable Long id) {
+    public Optional<DiagnoseDisease> getDiagnoseDisease(@PathVariable Long id) {
         return diagnoseDiseaseRepository.findById(id);
     }
 
