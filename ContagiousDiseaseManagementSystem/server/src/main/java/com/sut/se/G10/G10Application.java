@@ -76,11 +76,11 @@ public class G10Application {
 
 		return args -> {
 			// Contagion Part
-			Stream.of("ไม่มีโรค", "ตาแดง","ไข้ฉี่หนู","โรคอุจจาระร่วงเฉียบพลัน",
+			Stream.of("ตาแดง","ไข้ฉี่หนู","โรคอุจจาระร่วงเฉียบพลัน",
 					"บิด","ไทฟอยด์","อาหารเป็นพิษ",
 					"หวัด","ไข้หวัดใหญ่","ปอดบวม",
 					"ไข้หวัดนก","ไข้เลือดออกไข้สมองอักเสบเจอี","ไข้มาลาเลีย",
-					"เยื่อบุตาอักเสบ","โรคธาลัสซีเมีย","โรคเอดส์").forEach(newdisease -> {
+					"เยื่อบุตาอักเสบ","โรคธาลัสซีเมีย","โรคเอดส์","ไม่มีโรค").forEach(newdisease -> {
 				Disease disease = new Disease();
 				disease.setDisease(newdisease);
 				diseaseRepository.save(disease);
@@ -105,7 +105,7 @@ public class G10Application {
 				rate.setRate(newrate);
 				rateRepository.save(rate);
 			});
-			Stream.of("ให้ยา","ให้วัคซีน","ไม่มี").forEach(newrate -> {
+			Stream.of("ให้ยา","ให้วัคซีนป้องกัน","ไม่มีการรักษา").forEach(newrate -> {
 				Heal heal = new Heal();
 				heal.setHeal(newrate);
 				healRepository.save(heal);
