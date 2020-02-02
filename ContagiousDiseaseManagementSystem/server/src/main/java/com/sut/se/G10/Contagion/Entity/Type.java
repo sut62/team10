@@ -24,7 +24,7 @@ public class Type {
     @SequenceGenerator(name = "type_seq", sequenceName = "type_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "type_seq")
     @Column(name = "TYPE_ID", unique = true, nullable = true)
-    private @NotNull Long id;
+    private Long id;
     private @NotNull String type;
 
     @OneToMany(fetch = FetchType.EAGER)
