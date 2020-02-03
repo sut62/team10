@@ -2,6 +2,7 @@
   <v-app>
     <div class="text-center">
       <v-layout justify-center>
+        <!-- Before Login -->
         <div v-if="whilelogin">
           <v-card class="mx-auto my-12" style="width: 500px;">
             <v-card-title>Login</v-card-title>
@@ -14,6 +15,7 @@
                     label="อีเมล์"
                     name="login"
                     type="text"
+                    prepend-icon="mdi-account-circle"
                     v-model="email"
                   ></v-text-field>
                 </v-col>
@@ -24,6 +26,7 @@
                     label="รหัสผ่าน"
                     name="password"
                     type="password"
+                    prepend-icon="mdi-lock"
                     v-model="password"
                   ></v-text-field>
                 </v-col>
@@ -31,9 +34,7 @@
             </v-row>
             <v-row>
               <v-col>
-                <v-btn type="submit" tile color="primary" to="/register"
-                  >สมัครสมาชิก</v-btn
-                >
+                <v-btn type="submit" tile color="primary" to="/register">สมัครสมาชิก</v-btn>
               </v-col>
               <v-spacer></v-spacer>
               <v-col>
@@ -42,8 +43,7 @@
                   @click.prevent="findMedicallStaffss"
                   tile
                   type="submit"
-                  >เข้าสู่ระบบ
-                </v-btn>
+                >เข้าสู่ระบบ</v-btn>
               </v-col>
             </v-row>
           </v-card>
@@ -66,11 +66,16 @@ export default {
       whilelogin: true,
       authenticated: false,
       emailCheck: "",
-      passwordCheck: ""
+      passwordCheck: "",
+      staffFullname: ""
     };
   },
   /* eslint-disable no-console */
   methods: {
+    Logout() {
+      alert("Logout !!!");
+      this.$router.push("/");
+    },
     findMedicallStaffss() {
       http
         .get("/medicalstaff/" + this.email)
@@ -85,6 +90,7 @@ export default {
           if (this.password == this.passwordCheck) {
             this.authenticated = true;
             this.email = response.data.email;
+            this.staffFullname = response.data.fullname;
             this.whilelogin = false;
             alert("เข้าสู่ระบบเสร็จสิ้น");
             this.$router.push("/home");
@@ -97,7 +103,7 @@ export default {
     },
     getMedicalStaffss() {
       http
-        .get("/medicalstaff")
+        .get("/medicalStaff")
         .then(response => {
           this.medicalstaff = response.data;
           console.log(response.data);
@@ -105,7 +111,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    },
+    }
   },
 
   mounted() {
