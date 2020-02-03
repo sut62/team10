@@ -1,23 +1,33 @@
 <template>
   <v-app>
-    <v-card class="mx-auto" tile max-width="2000">
+    <div class="mx-auto text-center" style="width: 100%;">
+      <v-toolbar>
+        <v-toolbar-title>
+          <h1>ระบบจัดการโรคติดต่อ</h1>
+        </v-toolbar-title>
+        <v-spacer />
+        <v-tab @click="Logout">Logout</v-tab>
+      </v-toolbar>
+      <br />
       <v-layout text-center wrap>
-        <v-flex mb-4>
-          <br />
-          <bar />
-          <br />
-          <h1 class="display-2 font-weight-bold mb-3">ระบบจัดการโรคติดต่อ</h1>
-        </v-flex>
+        <bar />
       </v-layout>
-    </v-card>
+    </div>
   </v-app>
 </template>
 
 <script>
-import bar from '../components/bar' ;
+import bar from "../components/bar";
 export default {
   components: {
     bar
+  },
+
+  methods: {
+    Logout() {
+      alert("Logout !!!");
+      this.$router.push("/");
+    }
   }
-}
+};
 </script>
