@@ -31,7 +31,7 @@
                   outlined
                   label="Patient Find By Person ID"
                   v-model="personId"
-                  :rules="[(v) => !!v || 'Item is required']"
+                  :rules="[(v) => !!v || 'Item is required and Input Only Number of PersonId']"
                   required
                 ></v-text-field>
                 <p v-if="patientCheck != ''">Person Id : {{personId}}</p>
@@ -106,40 +106,7 @@
                   item-value="id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required multiple>
-                    <template v-slot:prepend-item>
-                      <v-list-item ripple @click="toggle">
-                        <v-list-item-action>
-                          <v-icon :color="diagnose.diseaseIds.length > 0 ? 'indigo darken-4' : ''">{{icon}}</v-icon>
-                        </v-list-item-action>
-                        <v-list-item-content>
-                          <v-list-item-title>Select All Diseases</v-list-item-title>
-                       </v-list-item-content>
-                      </v-list-item>
-                      <v-divider class="mt-2"></v-divider>
-                    </template>
-                        
-                    <template v-slot:append-item>
-                      <v-divider class="mb-2"></v-divider>
-                        <v-list-item disabled>
-                          <v-list-item-avatar color="grey lighten-3">
-                            <v-icon>mdi-food-apple</v-icon>
-                          </v-list-item-avatar>
-
-                          <v-list-item-content v-if="selectAllDiseases">
-                            <v-list-item-title>You select all diseases!</v-list-item-title>
-                          </v-list-item-content>
-
-                          <v-list-item-content v-else-if="selectSomeDiseases">
-                            <v-list-item-title>Disease Count</v-list-item-title>
-                            <v-list-item-subtitle>{{diagnose.diseaseIds.length}}</v-list-item-subtitle>
-                          </v-list-item-content>
-
-                          <v-list-item-content v-else>
-                            <v-list-item-title>You are not yet select disease?</v-list-item-title>
-                            <v-list-item-subtitle>Please select at least one disease!</v-list-item-subtitle>
-                        </v-list-item-content>
-                      </v-list-item>
-                    </template>
+                    
                   </v-select>
                 </v-col>
               </v-row>
@@ -154,7 +121,7 @@
                     min-width="550px"
                     label="Diagnosis"
                     v-model="diagnose.diagnosis"
-                    :rules="[(v) => !!v || 'Item is required']"
+                    :rules="[(v) => !!v || 'Item is required and Input can be 0-9,A-Z,a-z, . , _ ,  ,  , SPACE and Tab Character']"
                     required
                   ></v-text-field>
                 </v-col>
@@ -167,7 +134,7 @@
                     min-width="550px"
                     label="stayAlertedTime"
                     v-model="diagnose.stayAlertedTime"
-                    :rules="[(v) => !!v || 'Item is required']"
+                    :rules="[(v) => !!v || 'Item is required and Enter Only Number 0-99999']"
                     required
                   ></v-text-field>
                 </v-col>
@@ -241,17 +208,7 @@ export default {
   },
 
   computed: {
-    selectAllDiseases () {
-      return this.diagnose.diseaseIds.length === this.diseases.length
-    },
-    selectSomeDiseases () {
-      return this.diagnose.diseaseIds.length > 0 && !this.selectAllDiseases
-    },
-    icon () {
-      if (this.selectAllDiseases) return 'mdi-close-box'
-      if (this.selectSomeDiseases) return 'mdi-minus-box'
-      return 'mdi-checkbox-blank-outline'
-    },
+    
   },
 
   methods: {
@@ -383,15 +340,6 @@ export default {
       this.getDiseases();
       this.getMedicalStaffWherePositionIsDoctors();
     },
-    toggle () {
-      this.$nextTick(() => {
-        if (this.selectAllDiseases) {
-          this.diagnose.diseaseIds = []
-        } else {
-          this.diagnose.diseaseIds = this.diseases.slice()
-        }
-      })
-    }
   },
 
   mounted() {

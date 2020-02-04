@@ -17,7 +17,9 @@ import javax.persistence.JoinColumn;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.validation.constraints.Pattern;     
+import javax.validation.constraints.Pattern;   
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Max;
 
 import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Patient.Entity.Patient;
@@ -57,9 +59,9 @@ public class Diagnose {
 
     @NotNull
     @Column(name ="STAY_ALERTED_TIME")
-    @Size(min=5, max=20)
-    @Pattern(regexp = "[a-zA-Z0-9 \t]*")
-    private String stayAlertedTime;
+    @Min(value = 0)
+    @Max(value = 99999)
+    private Long stayAlertedTime;
 
     @NotNull
     @ManyToOne
