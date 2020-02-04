@@ -1,4 +1,4 @@
-﻿package com.sut.se.G10;
+package com.sut.se.G10;
 
 import com.sut.se.G10.Patient.Entity.Patient;
 import com.sut.se.G10.Register.Entity.Gender;
