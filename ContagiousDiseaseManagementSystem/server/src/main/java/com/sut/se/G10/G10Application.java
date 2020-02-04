@@ -1,4 +1,4 @@
-package com.sut.se.G10;
+﻿package com.sut.se.G10;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -224,11 +224,10 @@ public class G10Application {
 			patient1.setPhone("1234567890");
 			patient1.setAddress("1111111111111111111");
             Date patientbirthdate1 = formatter.parse("1997-09-21");
-            patient1.setPatientbirthdate(patientbirthdate1) ;
+            patient1.setPatientbirthdate(patientbirthdate1);
 			patient1.setPatientdate(new Date());
 			patient1.setBloodtype(bloodtypeRepository.findById(1));
 			patient1.setGender(genderRepository.findById(1));
-			patient1.setDisease(diseaseRepository.findById(1));
 			patientRepository.save(patient1);
 
 

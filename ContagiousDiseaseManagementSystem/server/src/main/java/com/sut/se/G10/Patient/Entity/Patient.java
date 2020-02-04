@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +19,6 @@ import javax.validation.constraints.Size;
 import javax.persistence.FetchType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Register.Entity.Gender;
 
 import javax.persistence.Column;
@@ -35,7 +35,7 @@ public class Patient {
     @SequenceGenerator(name = "Patient_seq", sequenceName = "Patient_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Patient_seq")
     @Column(name = "PATIENT_ID", unique = true, nullable = true)
-    private @NotNull Long id;
+    private Long id;
 
     @Column(name = "PERSON_ID", unique = true)
     @Pattern(regexp = "\\d{13}")
@@ -62,10 +62,5 @@ public class Patient {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     @JoinColumn(name = "GENDER_ID", insertable = true)
     private @NotNull Gender gender;
-    
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
-    @JoinColumn(name = "CONTAGION_NAME_ID", insertable = true)
-    private @NotNull Disease disease;
-
 
 }
