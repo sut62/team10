@@ -1,4 +1,4 @@
-﻿package com.sut.se.G10;
+package com.sut.se.G10;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
