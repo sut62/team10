@@ -7,9 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.persistence.OneToMany;
-import javax.persistence.FetchType;
-import java.util.Collection;
 import javax.persistence.Column;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +24,4 @@ public class Bloodtype {
     private Long id;
     
     private @NotNull String bloodtype;
-
-    @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Patient> patient;
 }
