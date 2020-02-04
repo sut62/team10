@@ -61,13 +61,14 @@ public class DiagnoseDiseaseTests {
         validator = factory.getValidator();
     }
 
+    // ---------------------------------- Test All Field ---------------------------------------------
     @Test
     void b5911837_testDiagnoseDiseaseAllCorrect() {
         DiagnoseDisease diagnoseDisease = new DiagnoseDisease();
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("ABab12 _.,");
         diagnose.setDiagnosisDate(new Date(2020, 12, 25));
-        diagnose.setStayAlertedTime("3 months");
+        diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
@@ -95,7 +96,7 @@ public class DiagnoseDiseaseTests {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("ABab12 _.,");
         diagnose.setDiagnosisDate(new Date(2020, 12, 25));
-        diagnose.setStayAlertedTime("3 months");
+        diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));

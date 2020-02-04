@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
@@ -71,7 +72,7 @@ public class DiagnoseController {
             @PathVariable long bloodPressureLevel_id,
             @PathVariable long admission_id, 
             @PathVariable String diagnosis,
-            @PathVariable String stayAlertedTime,
+            @PathVariable Long stayAlertedTime,
             @PathVariable long[] disease_Ids) {
 
         Patient patient = patientRepository.findById(patient_id);

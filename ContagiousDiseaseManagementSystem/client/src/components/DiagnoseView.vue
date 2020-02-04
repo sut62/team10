@@ -64,7 +64,7 @@ export default {
       { text: "Blood Pressure Level", value: "bloodPressureLevel.level" },
       { text: "Admission", value: "admission.admitted" },
       { text: "Diagnosis Date", value: "diagnosisDate" },
-      { text: "Stay Alerted Time", value: "stayAlertedTime" },
+      { text: "Stay Alerted Time(Day(s))", value: "stayAlertedTime" },
       { text: "Diagnosis", value: "diagnosis" }
     ],
     diagnoseDiseaseHeaders: [
