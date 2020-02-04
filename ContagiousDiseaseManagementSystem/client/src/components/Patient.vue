@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <v-container>
         <v-card class="mx-auto" style="max-width: 600px">
           <div v-if="saveUnsuccessful">
@@ -24,6 +24,13 @@
                     <v-col cols="15">
                         <label class="headline">ชื่อ-สกุล</label>
                         <v-text-field label="กรุณากรอกชื่อ-สกุล" v-model="patientfullname" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-text-field>
+                    </v-col>
+                </v-row>
+
+                <v-row>
+                    <v-col cols="15">
+                        <label class="headline">เลขประจำตัวประชานชน</label>
+                        <v-text-field label="กรุณากรอกเลขประจำตัวประชานชน" v-model="personId" :rules="[(v) => !!v || 'ยังไม่ได้กรอกข้อมูล']"></v-text-field>
                     </v-col>
                 </v-row>
 
@@ -93,7 +100,7 @@
                 <v-row>
                     <v-col cols="15">
                       <label class="headline">โรคติดต่อที่พบ</label>
-                      <v-select label="กรุณาเลือกโรคติดต่อ" :items="disease" v-model="patient.disease"
+                      <v-select multiple label="กรุณาเลือกโรคติดต่อ" :items="disease" v-model="patient.diseaseId"
                           class="mx-auto"
                           style="width: 700px"
                           outlined
@@ -115,8 +122,15 @@
                     </v-col>
 
                     <v-spacer></v-spacer>
-                    <v-spacer></v-spacer>
-                    <v-spacer></v-spacer>
+                    <v-col cols="15">
+                      <v-btn 
+                        color="success" 
+                        height="40" 
+                        width="200"   
+                        to="/patientshow">แสดงข้อมูลผู้ป่วยโรคติดต่อ
+                      </v-btn>
+                    </v-col>
+                    
                     <v-spacer></v-spacer>
 
                     <v-col cols="15">
@@ -149,10 +163,11 @@ export default {
         {
           gender: "",
           bloodtype: "",
-          disease: ""
+          diseaseId: []
         }
       ],
       patientfullname: "",
+      personId:"",
       phone: "",
       address: "",
       saveUnsuccessful: false,
@@ -226,6 +241,8 @@ export default {
           "/patient/" +
             this.patientfullname +
             "/" +
+            this.personId +
+            "/" +
             this.patient.gender +
             "/" +
             this.birthdate +
@@ -236,7 +253,7 @@ export default {
             "/" +
             this.address +
             "/" +
-            this.patient.disease,
+            this.patient.diseaseId,
           this.patient
         )
         .then(response => {
