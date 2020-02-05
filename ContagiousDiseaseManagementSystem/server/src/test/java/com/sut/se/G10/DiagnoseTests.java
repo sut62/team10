@@ -1,5 +1,8 @@
 package com.sut.se.G10;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import com.sut.se.G10.Diagnose.Entity.Diagnose;
 import com.sut.se.G10.Diagnose.Repository.DiagnoseRepository;
 import com.sut.se.G10.Contagion.Entity.Disease;
@@ -8,8 +11,16 @@ import com.sut.se.G10.Diagnose.Entity.Admission;
 import com.sut.se.G10.Diagnose.Repository.AdmissionRepository;
 import com.sut.se.G10.Register.Entity.MedicalStaff;
 import com.sut.se.G10.Register.Repository.MedicalStaffRepository;
+import com.sut.se.G10.Register.Entity.Province;
+import com.sut.se.G10.Register.Repository.ProvinceRepository;
+import com.sut.se.G10.Register.Entity.Gender;
+import com.sut.se.G10.Register.Repository.GenderRepository;
+import com.sut.se.G10.Register.Entity.Position;
+import com.sut.se.G10.Register.Repository.PositionRepository;
 import com.sut.se.G10.Patient.Entity.Patient;
 import com.sut.se.G10.Patient.Repository.PatientRepository;
+import com.sut.se.G10.Patient.Entity.Bloodtype;
+import com.sut.se.G10.Patient.Repository.BloodtypeRepository;
 import com.sut.se.G10.Diagnose.Entity.BloodPressureLevel;
 import com.sut.se.G10.Diagnose.Repository.BloodPressureLevelRepository;
 
@@ -50,6 +61,14 @@ public class DiagnoseTests {
     private PatientRepository patientRepository;
     @Autowired
     private BloodPressureLevelRepository bloodPressureLevelRepository;
+    @Autowired
+    private ProvinceRepository provinceRepository;
+    @Autowired
+    private GenderRepository genderRepository;
+    @Autowired
+    private PositionRepository positionRepository;
+    @Autowired
+    private BloodtypeRepository bloodtypeRepository;
 
     @BeforeEach
     public void setup() {
@@ -67,8 +86,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         diagnose =  diagnoseRepository.saveAndFlush(diagnose);
 
@@ -78,8 +127,8 @@ public class DiagnoseTests {
         assertEquals(333L, found.get().getStayAlertedTime());
         assertEquals(bloodPressureLevelRepository.findById(1), found.get().getBloodPressureLevel());
         assertEquals(admissionRepository.findById(1), found.get().getAdmission());
-        assertEquals(patientRepository.findById(1), found.get().getPatient());
-        assertEquals(medicalStaffRepository.findById(1), found.get().getDiagnosisDoctor());
+        assertEquals(patient, found.get().getPatient());
+        assertEquals(medicalStaff, found.get().getDiagnosisDoctor());
     }
 
     // ---------------------------------- Test String diagnoseCode Field ---------------------------------------------
@@ -92,8 +141,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode(null);
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -115,8 +194,39 @@ public class DiagnoseTests {
         diagnose1.setDiagnoseCode("XXXXX-XXXXX");
         diagnose1.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose1.setAdmission(admissionRepository.findById(1));
-        diagnose1.setPatient(patientRepository.findById(1));
-        diagnose1.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose1.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose1.setPatient(patient);
+
         diagnoseRepository.saveAndFlush(diagnose1);
 
         // คาดหวังว่า DataIntegrityViolationException จะถูก throw
@@ -128,8 +238,10 @@ public class DiagnoseTests {
             diagnose2.setDiagnoseCode("XXXXX-XXXXX");
             diagnose2.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
             diagnose2.setAdmission(admissionRepository.findById(1));
-            diagnose2.setPatient(patientRepository.findById(1));
-            diagnose2.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+            diagnose2.setDiagnosisDoctor(medicalStaff);
+
+            diagnose2.setPatient(patient);
+
             diagnoseRepository.saveAndFlush(diagnose2);
         });
     }
@@ -144,8 +256,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -168,8 +310,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -191,8 +363,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -214,8 +416,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -231,15 +463,45 @@ public class DiagnoseTests {
     @Test
     void b5911837_testDiagnosisMax100() {
         Diagnose diagnose = new  Diagnose();
-        diagnose.setDiagnosis("12345678901234567890123456789012345678901234567890"+
-        "123456789012345678901234567890123456789012345678901");
+        diagnose.setDiagnosis("12345678901234567890123456789012345678901234567890" 
+        + "123456789012345678901234567890123456789012345678901");
         diagnose.setDiagnosisDate(new Date());
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -262,8 +524,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -277,7 +569,7 @@ public class DiagnoseTests {
     }
 
     @Test
-    void b5911837_testStayAlertedTimeIntMin0() {
+    void b5911837_testStayAlertedTimeNumMin0() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
@@ -285,8 +577,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -300,7 +622,7 @@ public class DiagnoseTests {
     }
 
     @Test
-    void b5911837_testStayAlertedTimeIntMax99999() {
+    void b5911837_testStayAlertedTimeNumMax99999() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
         diagnose.setDiagnosisDate(new Date());
@@ -308,8 +630,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -332,8 +684,26 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
         diagnose.setPatient(null);
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -356,8 +726,24 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
+
         diagnose.setDiagnosisDoctor(null);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -380,8 +766,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
         diagnose.setAdmission(null);
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+        
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
@@ -404,8 +820,38 @@ public class DiagnoseTests {
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(null);
         diagnose.setAdmission(admissionRepository.findById(1));
-        diagnose.setPatient(patientRepository.findById(1));
-        diagnose.setDiagnosisDoctor(medicalStaffRepository.findById(1));
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		MedicalStaff medicalStaff = new MedicalStaff();
+		medicalStaff.setFullname("abced Doctor");
+        medicalStaff.setAddress("1111111111111111111");
+        try{
+            Date medicalstaffbirthdate = formatter.parse("1998-04-21");
+            medicalStaff.setBirthdate(medicalstaffbirthdate);
+        } catch(ParseException e){}
+		medicalStaff.setEmail("a@gmail.com");
+		medicalStaff.setPassword("12345678");
+		medicalStaff.setPhone("1234567890");
+		medicalStaff.setPosition(positionRepository.findByPosition("Doctor"));
+		medicalStaff.setGender(genderRepository.findById(1));
+		medicalStaff.setProvince(provinceRepository.findById(1));
+        medicalStaffRepository.save(medicalStaff);
+        diagnose.setDiagnosisDoctor(medicalStaff);
+
+        Patient patient = new Patient();
+		patient.setPatientfullname("Nawapat  Sue");
+		patient.setPersonId("1234567890123");
+		patient.setPhone("1234567890");
+        patient.setAddress("1111111111111111111");
+        try{
+            Date patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(patientbirthdate);
+        } catch(ParseException e){}
+		patient.setPatientdate(new Date());
+		patient.setBloodtype(bloodtypeRepository.findById(1));
+		patient.setGender(genderRepository.findById(1));
+		patientRepository.save(patient);
+        diagnose.setPatient(patient);
 
         Set<ConstraintViolation<Diagnose>> result = validator.validate(diagnose);
 
