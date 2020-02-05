@@ -121,7 +121,7 @@
                     min-width="550px"
                     label="Diagnosis"
                     v-model="diagnose.diagnosis"
-                    :rules="[(v) => !!v || 'Item is required and Input can be 0-9,A-Z,a-z, . , _ ,  ,  , SPACE and Tab Character']"
+                    :rules="[(v) => !!v || 'Item is required and Input must be 0-9,A-Z,a-z, . , _ ,  ,  , SPACE and Tab Character']"
                     required
                   ></v-text-field>
                 </v-col>
@@ -134,7 +134,7 @@
                     min-width="550px"
                     label="stayAlertedTime"
                     v-model="diagnose.stayAlertedTime"
-                    :rules="[(v) => !!v || 'Item is required and Enter Only Number 0-99999']"
+                    :rules="[(v) => !!v || 'Item is required and Input must be Number 0-99999']"
                     required
                   ></v-text-field>
                 </v-col>
