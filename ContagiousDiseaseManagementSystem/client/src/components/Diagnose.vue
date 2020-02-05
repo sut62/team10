@@ -151,7 +151,8 @@
                   </v-btn>
                 </v-col>
               </v-row>
-              <v-row>
+            </div>
+            <v-row>
                 <v-col cols="10">
                   <v-btn
                       style="margin-right : 100px"
@@ -171,9 +172,6 @@
                 </v-col>
               </v-row>
               <br />
-            </div>
-
-
 
           </v-form>
         </v-col>
