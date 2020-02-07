@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+	<title>PatientTests</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">save correct</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/patient<datalist><option>http://localhost:8080/patient</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-9<datalist><option>id=input-9</option><option>//input[@id='input-9']</option><option>//div[@id='app']/div/div/div[2]/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#input-9</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-9<datalist><option>id=input-9</option><option>//input[@id='input-9']</option><option>//div[@id='app']/div/div/div[2]/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#input-9</option></datalist></td><td>yaya mamama</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-9<datalist><option>id=input-9</option><option>//input[@id='input-9']</option><option>//div[@id='app']/div/div/div[2]/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#input-9</option></datalist></td><td>yaya mamama</td>
+</tr>
+<tr><td>click</td><td>id=input-12<datalist><option>id=input-12</option><option>//input[@id='input-12']</option><option>//div[@id='app']/div/div/div[2]/form/div[2]/div/div/div/div/div/input</option><option>//div[2]/div/div/div/div/div/input</option><option>css=#input-12</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-12<datalist><option>id=input-12</option><option>//input[@id='input-12']</option><option>//div[@id='app']/div/div/div[2]/form/div[2]/div/div/div/div/div/input</option><option>//div[2]/div/div/div/div/div/input</option><option>css=#input-12</option></datalist></td><td>1234567893698</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-12<datalist><option>id=input-12</option><option>//input[@id='input-12']</option><option>//div[@id='app']/div/div/div[2]/form/div[2]/div/div/div/div/div/input</option><option>//div[2]/div/div/div/div/div/input</option><option>css=#input-12</option></datalist></td><td>1234567893698</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[3]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[3]/div/div/div/div/div/div</option><option>//div[3]/div/div/div/div/div/div</option><option>css=div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='list-15']/div[2]/div<datalist><option>//div[@id='list-15']/div[2]/div</option><option>//div/div/div[2]/div</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//div[@id='app']/div)[3]<datalist><option>xpath=(//div[@id='app']/div)[3]</option><option>//div[2]/div/div/div</option><option>css=div.container</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-23<datalist><option>id=input-23</option><option>//input[@id='input-23']</option><option>//div[@id='app']/div/div/div[2]/form/div[4]/div/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#input-23</option></datalist></td><td>03/02/1987</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-23<datalist><option>id=input-23</option><option>//input[@id='input-23']</option><option>//div[@id='app']/div/div/div[2]/form/div[4]/div/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#input-23</option></datalist></td><td>03/02/1987</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div</option><option>//div[5]/div/div/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-menu-active.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='list-28']/div[6]/div<datalist><option>//div[@id='list-28']/div[6]/div</option><option>//div[6]/div</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div</option><option>//div[5]/div/div/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-label-active.v-input--is-dirty.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td>O-</td>
+</tr>
+<tr><td>click</td><td>id=input-35<datalist><option>id=input-35</option><option>//input[@id='input-35']</option><option>//div[@id='app']/div/div/div[2]/form/div[6]/div/div/div/div/div/input</option><option>//div[6]/div/div/div/div/div/input</option><option>css=#input-35</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-35<datalist><option>id=input-35</option><option>//input[@id='input-35']</option><option>//div[@id='app']/div/div/div[2]/form/div[6]/div/div/div/div/div/input</option><option>//div[6]/div/div/div/div/div/input</option><option>css=#input-35</option></datalist></td><td>0236598745</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-35<datalist><option>id=input-35</option><option>//input[@id='input-35']</option><option>//div[@id='app']/div/div/div[2]/form/div[6]/div/div/div/div/div/input</option><option>//div[6]/div/div/div/div/div/input</option><option>css=#input-35</option></datalist></td><td>0236598745</td>
+</tr>
+<tr><td>click</td><td>id=input-38<datalist><option>id=input-38</option><option>//textarea[@id='input-38']</option><option>//div[@id='app']/div/div/div[2]/form/div[7]/div/div/div/div/div/textarea</option><option>//textarea</option><option>css=#input-38</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-38<datalist><option>id=input-38</option><option>//textarea[@id='input-38']</option><option>//div[@id='app']/div/div/div[2]/form/div[7]/div/div/div/div/div/textarea</option><option>//textarea</option><option>css=#input-38</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-38<datalist><option>id=input-38</option><option>//textarea[@id='input-38']</option><option>//div[@id='app']/div/div/div[2]/form/div[7]/div/div/div/div/div/textarea</option><option>//textarea</option><option>css=#input-38</option></datalist></td><td>14 ม.5 ต.พพพพ อ.นนน จ.ยยยย 25555</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-38<datalist><option>id=input-38</option><option>//textarea[@id='input-38']</option><option>//div[@id='app']/div/div/div[2]/form/div[7]/div/div/div/div/div/textarea</option><option>//textarea</option><option>css=#input-38</option></datalist></td><td>14 ม.5 ต.พพพพ อ.นนน จ.ยยยย 25555</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div/div/div</option><option>//div[8]/div/div/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-menu-active.v-select--is-multi.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='list-41']/div[2]/div/div/div<datalist><option>//div[@id='list-41']/div[2]/div/div/div</option><option>//div/div/div[2]/div/div/div</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[8]/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[8]/div</option><option>//form/div[8]/div</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div/div/div</option><option>//div[8]/div/div/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-label-active.v-input--is-dirty.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-multi.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td>ไข้ฉี่หนู</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[9]/div/button/span<datalist><option>//div[@id='app']/div/div/div[2]/form/div[9]/div/button/span</option><option>//button/span</option><option>css=span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//div[@id='app']/div/div/div/div/div)[44]<datalist><option>xpath=(//div[@id='app']/div/div/div/div/div)[44]</option><option>//div[4]/div/div/div/div/div/div/div</option><option>css=div.v-alert__wrapper</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>xpath=(//div[@id='app']/div/div/div/div/div/div)[44]<datalist><option>xpath=(//div[@id='app']/div/div/div/div/div/div)[44]</option><option>//div[4]/div/div/div/div/div/div/div/div</option><option>css=div.v-alert__content</option></datalist></td><td>บันทึกข้อมูลสำเร็จ</td>
+</tr>
+<tr><td>click</td><td>xpath=(//div[@id='app']/div)[5]<datalist><option>xpath=(//div[@id='app']/div)[5]</option><option>//div[4]/div/div/div</option><option>css=div.container</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">can't save </td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/patient<datalist><option>http://localhost:8080/patient</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-9<datalist><option>id=input-9</option><option>//input[@id='input-9']</option><option>//div[@id='app']/div/div/div[2]/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#input-9</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-9<datalist><option>id=input-9</option><option>//input[@id='input-9']</option><option>//div[@id='app']/div/div/div[2]/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#input-9</option></datalist></td><td>yaya mamama</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-9<datalist><option>id=input-9</option><option>//input[@id='input-9']</option><option>//div[@id='app']/div/div/div[2]/form/div/div/div/div/div/div/input</option><option>//input</option><option>css=#input-9</option></datalist></td><td>yaya mamama</td>
+</tr>
+<tr><td>click</td><td>id=input-12<datalist><option>id=input-12</option><option>//input[@id='input-12']</option><option>//div[@id='app']/div/div/div[2]/form/div[2]/div/div/div/div/div/input</option><option>//div[2]/div/div/div/div/div/input</option><option>css=#input-12</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-12<datalist><option>id=input-12</option><option>//input[@id='input-12']</option><option>//div[@id='app']/div/div/div[2]/form/div[2]/div/div/div/div/div/input</option><option>//div[2]/div/div/div/div/div/input</option><option>css=#input-12</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-12<datalist><option>id=input-12</option><option>//input[@id='input-12']</option><option>//div[@id='app']/div/div/div[2]/form/div[2]/div/div/div/div/div/input</option><option>//div[2]/div/div/div/div/div/input</option><option>css=#input-12</option></datalist></td><td>12345678</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-12<datalist><option>id=input-12</option><option>//input[@id='input-12']</option><option>//div[@id='app']/div/div/div[2]/form/div[2]/div/div/div/div/div/input</option><option>//div[2]/div/div/div/div/div/input</option><option>css=#input-12</option></datalist></td><td>12345678</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[3]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[3]/div/div/div/div/div/div</option><option>//div[3]/div/div/div/div/div/div</option><option>css=div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=หญิง-list-item-53<datalist><option>id=หญิง-list-item-53</option><option>//div[@id='หญิง-list-item-53']</option><option>//div[@id='list-15']/div[2]/div/div</option><option>//div/div/div[2]/div/div</option><option>css=#หญิง-list-item-53</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div[2]/form/div[3]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[3]/div/div/div/div/div/div</option><option>//div[3]/div/div/div/div/div/div</option><option>css=div.v-select__selections</option></datalist></td><td>หญิง</td>
+</tr>
+<tr><td>click</td><td>xpath=(//div[@id='app']/div)[3]<datalist><option>xpath=(//div[@id='app']/div)[3]</option><option>//div[2]/div/div/div</option><option>css=div.container</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-23<datalist><option>id=input-23</option><option>//input[@id='input-23']</option><option>//div[@id='app']/div/div/div[2]/form/div[4]/div/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#input-23</option></datalist></td><td>23/05/1987</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-23<datalist><option>id=input-23</option><option>//input[@id='input-23']</option><option>//div[@id='app']/div/div/div[2]/form/div[4]/div/div[2]/div/div/div/input</option><option>//div[2]/div/div/div/input</option><option>css=#input-23</option></datalist></td><td>23/05/1987</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div</option><option>//div[5]/div/div/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-menu-active.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='list-28']/div[6]/div<datalist><option>//div[@id='list-28']/div[6]/div</option><option>//div[6]/div</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[5]/div/div/div/div/div/div</option><option>//div[5]/div/div/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-label-active.v-input--is-dirty.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td>O-</td>
+</tr>
+<tr><td>click</td><td>id=input-35<datalist><option>id=input-35</option><option>//input[@id='input-35']</option><option>//div[@id='app']/div/div/div[2]/form/div[6]/div/div/div/div/div/input</option><option>//div[6]/div/div/div/div/div/input</option><option>css=#input-35</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-35<datalist><option>id=input-35</option><option>//input[@id='input-35']</option><option>//div[@id='app']/div/div/div[2]/form/div[6]/div/div/div/div/div/input</option><option>//div[6]/div/div/div/div/div/input</option><option>css=#input-35</option></datalist></td><td>0236598745</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-35<datalist><option>id=input-35</option><option>//input[@id='input-35']</option><option>//div[@id='app']/div/div/div[2]/form/div[6]/div/div/div/div/div/input</option><option>//div[6]/div/div/div/div/div/input</option><option>css=#input-35</option></datalist></td><td>0236598745</td>
+</tr>
+<tr><td>click</td><td>id=input-38<datalist><option>id=input-38</option><option>//textarea[@id='input-38']</option><option>//div[@id='app']/div/div/div[2]/form/div[7]/div/div/div/div/div/textarea</option><option>//textarea</option><option>css=#input-38</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-38<datalist><option>id=input-38</option><option>//textarea[@id='input-38']</option><option>//div[@id='app']/div/div/div[2]/form/div[7]/div/div/div/div/div/textarea</option><option>//textarea</option><option>css=#input-38</option></datalist></td><td>14 ม.5 ต.พพพพ อ.นนน จ.ยยยย 25555</td>
+</tr>
+<tr><td>assertValue</td><td>id=input-38<datalist><option>id=input-38</option><option>//textarea[@id='input-38']</option><option>//div[@id='app']/div/div/div[2]/form/div[7]/div/div/div/div/div/textarea</option><option>//textarea</option><option>css=#input-38</option></datalist></td><td>14 ม.5 ต.พพพพ อ.นนน จ.ยยยย 25555</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div</option><option>//div[8]/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-menu-active.v-select--is-multi.primary--text &gt; div.v-input__control &gt; div.v-input__slot</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='list-41']/div[2]/div/div/div<datalist><option>//div[@id='list-41']/div[2]/div/div/div</option><option>//div/div/div[2]/div/div/div</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]<datalist><option>//div[@id='app']/div/div/div[2]</option><option>//div[4]/div/div/div/div/div[2]</option><option>css=div.v-card__text</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div/div/div<datalist><option>//div[@id='app']/div/div/div[2]/form/div[8]/div/div/div/div/div/div</option><option>//div[8]/div/div/div/div/div/div</option><option>css=div.v-input.mx-auto.v-input--is-label-active.v-input--is-dirty.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-text-field--enclosed.v-text-field--outlined.v-select.v-select--is-multi.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td>ไข้ฉี่หนู</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div[2]/form/div[9]/div/button/span<datalist><option>//div[@id='app']/div/div/div[2]/form/div[9]/div/button/span</option><option>//button/span</option><option>css=span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>xpath=(//div[@id='app']/div/div/div/div/div/div)[44]<datalist><option>xpath=(//div[@id='app']/div/div/div/div/div/div)[44]</option><option>//div[4]/div/div/div/div/div/div/div/div</option><option>css=div.v-alert__content</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>xpath=(//div[@id='app']/div/div/div/div/div/div)[44]<datalist><option>xpath=(//div[@id='app']/div/div/div/div/div/div)[44]</option><option>//div[4]/div/div/div/div/div/div/div/div</option><option>css=div.v-alert__content</option></datalist></td><td>ข้อมูลไม่ครบถ้วน</td>
+</tr>
+<tr><td>click</td><td>xpath=(//div[@id='app']/div)[5]<datalist><option>xpath=(//div[@id='app']/div)[5]</option><option>//div[4]/div/div/div</option><option>css=div.container</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+</body>
+</html>
