@@ -51,7 +51,7 @@ public class RegisterTests {
 
      
     @Test
-    void b5905492_testDateCorrect() {
+    void B5905492_testDateCorrect() {
         MedicalStaff medicalStaff = new MedicalStaff();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
         try {
@@ -69,7 +69,7 @@ public class RegisterTests {
     }
 
     @Test
-    void b5905492_testDateMustNotBeNull() {
+    void B5905492_testDateMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
         medicalStaff.setBirthdate(null);
         try {
@@ -85,7 +85,7 @@ public class RegisterTests {
     }
 
     @Test
-    void b5905492_testDatePatternFail() {
+    void B5905492_testDatePatternFail() {
         MedicalStaff medicalStaff = new MedicalStaff();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -103,7 +103,7 @@ public class RegisterTests {
     }
 
     @Test
-    void b5905492_testDateMustBeUnique() {
+    void B5905492_testDateMustBeUnique() {
         MedicalStaff medicalStaff1 = new MedicalStaff();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -123,7 +123,7 @@ public class RegisterTests {
     }
 
     @Test
-    void b5905492_testDateMustNotBe11Digits() {
+    void B5905492_testDateMustNotBe11Digits() {
         MedicalStaff medicalStaff = new MedicalStaff();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -141,7 +141,7 @@ public class RegisterTests {
     }
 //-------------------------------------------birthdate--------------------------------------------//
 @Test
-    void b5905492_testFullnameMustNotBeNull() {
+    void B5905492_testFullnameMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
         medicalStaff.setFullname(null);
         try {
@@ -157,7 +157,7 @@ public class RegisterTests {
         }
         //-------------------------------------------fullname notnull--------------------------------------------// 
         @Test
-    void b5905492_testAddressMustNotBeNull() {
+    void B5905492_testAddressMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
         medicalStaff.setAddress(null);
         try {
@@ -173,7 +173,7 @@ public class RegisterTests {
 }
 //-------------------------------------------address notnull--------------------------------------------//
 @Test
-void b5905492_testEmailMustNotBeNull() {
+void B5905492_testEmailMustNotBeNull() {
     MedicalStaff medicalStaff1 = new MedicalStaff();
 
     try {
@@ -192,7 +192,7 @@ void b5905492_testEmailMustNotBeNull() {
 //-------------------------------------------email notnull--------------------------------------------//
 
     @Test
-    void b5905492_testEmailMustBeUnique() {
+    void B5905492_testEmailMustBeUnique() {
         MedicalStaff medicalStaff1 = new MedicalStaff();
 
         try {
@@ -202,7 +202,7 @@ void b5905492_testEmailMustNotBeNull() {
             assertThrows(DataIntegrityViolationException.class, () -> {
                 MedicalStaff medicalStaff2 = new MedicalStaff();
                 try {
-                    medicalStaff2.setEmail("sasithongmail.com");
+                    medicalStaff2.setEmail("sasithon@gmail.com");
                     medicalStaff2 = medicalStaffRepository.saveAndFlush(medicalStaff2);
                 } catch (DataIntegrityViolationException ex) {}
             });
@@ -210,7 +210,25 @@ void b5905492_testEmailMustNotBeNull() {
     }
     //-------------------------------------------email unique--------------------------------------------//
     @Test
-void b5905492_testPasswordMustNotBeNull() {
+    void B5905492_testEmailPattern() {
+        MedicalStaff medicalStaff1 = new MedicalStaff();
+    
+        try {
+            medicalStaff1.setEmail("@gmail.com");
+            medicalStaff1 = medicalStaffRepository.save(medicalStaff1);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff1);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must be a well-formed email address", v.getMessage());
+            assertEquals("email", v.getPropertyPath().toString());
+            
+        }
+    }
+    //-------------------------------------------email pattern--------------------------------------------//
+    @Test
+void B5905492_testPasswordMustNotBeNull() {
     MedicalStaff medicalStaff1 = new MedicalStaff();
 
     try {
@@ -228,7 +246,7 @@ void b5905492_testPasswordMustNotBeNull() {
 }
 //-------------------------------------------password notnull--------------------------------------------//
 @Test
-    void b5905492_testPasswordMustNotBe7Digits() {
+    void B5905492_testPasswordMustNotBe7Digits() {
         MedicalStaff medicalStaff = new MedicalStaff();
         try {
             
@@ -245,7 +263,7 @@ void b5905492_testPasswordMustNotBeNull() {
     }
     //-------------------------------------------password size--------------------------------------------//
 @Test
-    void b5905492_testGenderMustNotBeNull() {
+    void B5905492_testGenderMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
         medicalStaff.setGender(null);
         try {
@@ -261,7 +279,7 @@ void b5905492_testPasswordMustNotBeNull() {
 }
 //-------------------------------------------gender notnull--------------------------------------------//
 @Test
-    void b5905492_testPositionMustNotBeNull() {
+    void B5905492_testPositionMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
         medicalStaff.setPosition(null);
         try {
@@ -277,7 +295,7 @@ void b5905492_testPasswordMustNotBeNull() {
 }
 //-------------------------------------------position notnull--------------------------------------------//
 @Test
-    void b5905492_testProvinceMustNotBeNull() {
+    void B5905492_testProvinceMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
         medicalStaff.setProvince(null);
         try {
