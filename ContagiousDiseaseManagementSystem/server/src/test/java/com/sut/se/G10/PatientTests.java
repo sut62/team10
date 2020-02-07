@@ -6,7 +6,6 @@ import com.sut.se.G10.Patient.Entity.Bloodtype;
 import com.sut.se.G10.Patient.Repository.PatientRepository;
 import com.sut.se.G10.Register.Repository.GenderRepository;
 import com.sut.se.G10.Patient.Repository.BloodtypeRepository;
-import com.sut.se.G10.Contagion.Repository.DiseaseRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -77,7 +76,7 @@ public class PatientTests {
     
             ConstraintViolation<Patient> v = result.iterator().next();
             assertEquals("must not be null", v.getMessage());
-            assertEquals("birth date", v.getPropertyPath().toString());
+            assertEquals("birthdate", v.getPropertyPath().toString());
         }
     }
 
@@ -95,7 +94,7 @@ public class PatientTests {
 
             ConstraintViolation<Patient> v = result.iterator().next();
             assertEquals("must match \"yyy-MM-dd\"", v.getMessage());
-            assertEquals("birth date", v.getPropertyPath().toString());
+            assertEquals("birthdate", v.getPropertyPath().toString());
         } catch (ParseException e) {} 
     }
 
@@ -133,7 +132,7 @@ public class PatientTests {
 
             ConstraintViolation<Patient> v = result.iterator().next();
             assertEquals("must match \"\\d{10}\"", v.getMessage());
-            assertEquals("birth date", v.getPropertyPath().toString());
+            assertEquals("birthdate", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }
 
@@ -356,4 +355,47 @@ public class PatientTests {
         }
     }
 
+    //----------------------------Person ID Be Unique-------------------------------
+    @Test
+    void B5910557_testPersonIdMustBeUnique() {
+        Patient patient1 = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            patient1.setPatientfullname("Wachiraya Chaiyasaj");
+            patient1.setPersonId("1234567890159");
+            patient1.setGender(gender);
+            Date date = formatter.parse("1997/01/11");
+            patient1.setPatientbirthdate(date);
+            patient1.setBloodtype(bloodtype);
+            patient1.setPhone("0982208997");
+            patient1.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+            patient1.setPatientdate(new Date());
+            patient1 = patientRepository.save(patient1);
+            
+        } catch (DataIntegrityViolationException e) {
+        assertThrows(DataIntegrityViolationException.class, () ->{
+            Patient patient2 = new Patient();
+
+            
+                patient2.setPatientfullname("Wachiraya Chaiyasaj");
+                patient2.setPersonId("1234567890159");
+                patient2.setGender(gender);
+
+            try{
+                Date date2 = formatter.parse("1997/01/11");
+                patient2.setPatientbirthdate(date2);
+            } catch (ParseException ex) {}    
+
+                patient2.setBloodtype(bloodtype);
+                patient2.setPhone("0982208997");
+                patient2.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+                patient2.setPatientdate(new Date());
+                patient2 = patientRepository.save(patient2);
+            
+        });
+        } catch (ParseException e) {} 
+    }
 }

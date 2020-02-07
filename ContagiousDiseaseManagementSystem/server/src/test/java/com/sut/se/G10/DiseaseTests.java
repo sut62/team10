@@ -87,4 +87,31 @@ public class DiseaseTests {
         assertEquals("disease", v.getPropertyPath().toString());
     }
 
+    //--------------------B5910557------------------
+    @Test
+    void B5910557_testDiseaseAllCorrect() {
+        Disease disease = new  Disease();
+        disease.setDisease("ไข้หวัดนก");
+
+        disease =  diseaseRepository.saveAndFlush(disease);
+
+        Optional<Disease> found = diseaseRepository.findById(disease.getId());
+        assertEquals("ไข้หวัดนก", found.get().getDisease());
+    }
+
+    @Test
+    void B5910557_testDiseaseNotNull() {
+        Disease disease = new  Disease();
+        disease.setDisease(null);
+
+        Set<ConstraintViolation<Disease>> result = validator.validate(disease);
+
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Disease> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("disease", v.getPropertyPath().toString());
+    }
 }
