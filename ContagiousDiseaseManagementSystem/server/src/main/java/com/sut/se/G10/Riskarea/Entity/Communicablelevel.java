@@ -26,9 +26,9 @@ public class Communicablelevel {
     @SequenceGenerator(name = "communicablelevel_seq", sequenceName = "communicablelevel_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "communicablelevel_seq")
     @Column(name = "COMMUNICABLELEVEL_ID", unique = true, nullable = true)
-    private @NotNull Long id ;
-    private @NotNull String communicablelevel ;
+    private Long id;
+    private @NotNull String communicablelevel;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private Collection<Riskarea> riskarea ;
-} 
+    private Collection<Riskarea> riskarea;
+}

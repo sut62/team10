@@ -19,27 +19,30 @@ import javax.validation.constraints.NotNull;
 import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Register.Entity.Province;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="RISKAREA")
+@Table(name = "RISKAREA")
 public class Riskarea {
 
     @Id
-    @SequenceGenerator(name="riskarea_seq",sequenceName="riskarea_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="riskarea_seq")
+    @SequenceGenerator(name = "riskarea_seq", sequenceName = "riskarea_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "riskarea_seq")
     @Column(name = "RISKAREA_ID", unique = true, nullable = true)
-    private @NotNull Long id ;
-    
+    private Long id;
+
     @Temporal(TemporalType.DATE)
-    private @NotNull Date date ;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private @NotNull Date date;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "PROVINCE_ID", insertable = true)
-    private Province province ;
+    private Province province;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
     @JoinColumn(name = "DISEASE_ID", insertable = true)
