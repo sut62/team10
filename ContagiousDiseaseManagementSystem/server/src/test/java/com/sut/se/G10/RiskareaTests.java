@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.DataIntegrityViolationException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
@@ -22,7 +21,6 @@ import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 public class RiskareaTests {
@@ -38,76 +36,54 @@ public class RiskareaTests {
         validator = factory.getValidator();
     }
 
-    // ===================================== Start Test Date =====================================
     @Test
     void b6020712_testDateCorrect() {
         Riskarea riskarea = new Riskarea();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date date = formatter.parse("1999-05-13");
-            riskarea.setDate(date) ;
-        } catch (ParseException e) {}
-        
+            riskarea.setDate(date);
+        } catch (ParseException e) {
+        }
+
         riskarea = riskareaRepository.saveAndFlush(riskarea);
 
         Optional<Riskarea> found = riskareaRepository.findById(riskarea.getId());
         try {
             assertEquals(formatter.parse("1999-05-13"), found.get().getDate());
-        } catch (ParseException e) {}
+        } catch (ParseException e) {
+        }
     }
 
     @Test
     void b6020712_testDateMustNotBeNull() {
         Riskarea riskarea = new Riskarea();
-        try {
-            riskarea.setDate(null);
-            riskarea = riskareaRepository.saveAndFlush(riskarea);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
-            assertEquals(1, result.size());
-    
-            ConstraintViolation<Riskarea> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("date", v.getPropertyPath().toString());
-        }
+        riskarea.setDate(null);
+
+        Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
+        assertEquals(1, result.size());
+
+        ConstraintViolation<Riskarea> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("date", v.getPropertyPath().toString());
     }
 
     @Test
     void b6020712_testDatePatternFail() {
         Riskarea riskarea = new Riskarea();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         try {
-            Date date = formatter.parse("2563/01/21");
+            Date date = formatter.parse("2563-01-21");
             riskarea.setDate(date);
-            riskarea = riskareaRepository.saveAndFlush(riskarea);
-        } catch (ConstraintViolationException e) {
+
             Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
             assertEquals(1, result.size());
 
             ConstraintViolation<Riskarea> v = result.iterator().next();
-            assertEquals("must match \"yyy-MM-dd\"", v.getMessage());
+            assertEquals("must match \"yyyy-MM-dd\"", v.getMessage());
             assertEquals("date", v.getPropertyPath().toString());
-        } catch (ParseException e) {} 
-    }
-
-    @Test
-    void b6020712_testDateMustBeUnique() {
-        Riskarea riskarea1 = new Riskarea();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563/01/21");
-            riskarea1.setDate(date);
-            riskarea1 = riskareaRepository.saveAndFlush(riskarea1);
-        } catch (DataIntegrityViolationException e) {
-            assertThrows(DataIntegrityViolationException.class, () -> {
-                Riskarea riskarea2 = new Riskarea();
-                try {
-                    Date date = formatter.parse("2563/01/21");
-                    riskarea2.setDate(date);
-                    riskarea2 = riskareaRepository.saveAndFlush(riskarea2);
-                } catch (ParseException ex) {}
-            });
-        } catch (ParseException e) {} 
+        } catch (ParseException e) {
+        }
     }
 
     @Test
@@ -117,80 +93,14 @@ public class RiskareaTests {
         try {
             Date date = formatter.parse("2563/01/211");
             riskarea.setDate(date);
-            riskarea = riskareaRepository.saveAndFlush(riskarea);
-        } catch (ConstraintViolationException e) {
+
             Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
             assertEquals(1, result.size());
-    
+
             ConstraintViolation<Riskarea> v = result.iterator().next();
             assertEquals("must match be 10 characters", v.getMessage());
             assertEquals("date", v.getPropertyPath().toString());
-        } catch (ParseException e) {}
+        } catch (ParseException e) {
+        }
     }
-
-    // ===================================== End Test Date =====================================
-
-    // ================================== Start Test Combobox ==================================
-
-    // ---------------- Province Combobox ----------------
-    @Test
-    void b6020712_testProvinceComboboxMustNotBeNull() {
-        Riskarea riskarea = new Riskarea();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563-01-21");
-            riskarea.setDate(date);
-            riskarea.setProvince(null);
-            riskarea = riskareaRepository.saveAndFlush(riskarea);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
-            assertEquals(1, result.size());
-    
-            ConstraintViolation<Riskarea> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("province", v.getPropertyPath().toString());
-        } catch (ParseException e) {}
-    }
-
-    // ---------------- Disease Combobox ----------------
-    @Test
-    void b6020712_testDiseaseComboboxMustNotBeNull() {
-        Riskarea riskarea = new Riskarea();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563-01-21");
-            riskarea.setDate(date);
-            riskarea.setDisease(null);
-            riskarea = riskareaRepository.saveAndFlush(riskarea);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
-            assertEquals(1, result.size());
-    
-            ConstraintViolation<Riskarea> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("disease", v.getPropertyPath().toString());
-        } catch (ParseException e) {}
-    }
-
-    
-    // ---------------- Communicablelevel Combobox ----------------
-    @Test
-    void b6020712_testCommunicablelevelComboboxMustNotBeNull() {
-        Riskarea riskarea = new Riskarea();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563-01-21");
-            riskarea.setDate(date);
-            riskarea.setCommunicablelevel(null);
-            riskarea = riskareaRepository.saveAndFlush(riskarea);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<Riskarea>> result = validator.validate(riskarea);
-            assertEquals(1, result.size());
-    
-            ConstraintViolation<Riskarea> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("communicablelevel", v.getPropertyPath().toString());
-        } catch (ParseException e) {}
-    }
-    // ================================== End Test Combobox ==================================
 }
