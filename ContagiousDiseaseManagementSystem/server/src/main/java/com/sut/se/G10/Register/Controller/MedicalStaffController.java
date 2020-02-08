@@ -60,12 +60,6 @@ public class MedicalStaffController {
         return medicalstaffss ;
     }
 
-    @GetMapping("/medicallstaff/{fullname}")
-    public Optional<MedicalStaff> MedicalStaffs(@PathVariable String fullname) {
-        Optional<MedicalStaff> medicalstaff = medicalStaffRepository.findByFullname(fullname);
-        return medicalstaff ;
-    }
-
     @GetMapping("/medicalStaff/{id}")
     public Optional<MedicalStaff> getMedicalStaff(@PathVariable Long id) {
         return medicalStaffRepository.findById(id);
