@@ -46,31 +46,49 @@ public class PatientTests {
         validator = factory.getValidator();
     }
 
-    //---------------------------------TEST BIRTHDATE--------------------------------
+    
     @Test
-    void B5910557_testDateCorrect() {
+    void B5910557_testSavePatientCorrect() {
         Patient patient = new Patient();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
         try {
             Date Patientbirthdate = formatter.parse("1997-09-21");
             patient.setPatientbirthdate(Patientbirthdate) ;
         } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
-        Patient patientFound = new Patient();
-        patientFound = patientRepository.save(patient);
-        Optional<Patient> found = patientRepository.findById(patientFound.getId());
+        patient = patientRepository.saveAndFlush(patient);
+        Optional<Patient> found = patientRepository.findById(patient.getId());
+        assertEquals("Wachiraya Chaiyasaj", found.get().getPatientfullname());
+        assertEquals("1234567890159", found.get().getPersonId());
+        assertEquals(gender, found.get().getGender());
+        assertEquals(bloodtype, found.get().getBloodtype());
+        assertEquals("0982208997", found.get().getPhone());
+        assertEquals("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190", found.get().getAddress());
+        assertEquals(new Date(1987, 6, 5), found.get().getPatientdate());
         try {
             assertEquals(formatter.parse("1997-09-21"), found.get().getPatientbirthdate());
         } catch (ParseException e) {}
     }
-
+    
+    //---------------------------------TEST BIRTHDATE--------------------------------
     @Test
-    void B5910557_testDateMustNotBeNull() {
+    void B5910557_testPatientBirthdateMustNotBeNull() {
         Patient patient = new Patient();
         patient.setPatientbirthdate(null);
         try {
             patient = patientRepository.save(patient);
         } catch (ConstraintViolationException e) {
+
             Set<ConstraintViolation<Patient>> result = validator.validate(patient);
             assertEquals(1, result.size());
     
@@ -81,87 +99,20 @@ public class PatientTests {
     }
 
     @Test
-    void B5910557_testDatePatternFail() {
+    void B5910557_testPatientBirthdatePatternFail() {
         Patient patient = new Patient();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         try {
-            Date date = formatter.parse("2563/01/21");
+            Date date = formatter.parse("1987-01-21");
             patient.setPatientbirthdate(date);
-            patient = patientRepository.saveAndFlush(patient);
-        } catch (ConstraintViolationException e) {
+            
             Set<ConstraintViolation<Patient>> result = validator.validate(patient);
             assertEquals(1, result.size());
 
             ConstraintViolation<Patient> v = result.iterator().next();
-            assertEquals("must match \"yyy-MM-dd\"", v.getMessage());
+            assertEquals("must match \"yyyy-MM-dd\"", v.getMessage());
             assertEquals("birthdate", v.getPropertyPath().toString());
         } catch (ParseException e) {} 
-    }
-
-    @Test
-    void B5910557_testDateMustBeUnique() {
-        Patient patient1 = new Patient();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563/01/21");
-            patient1.setPatientbirthdate(date);
-            patient1 = patientRepository.saveAndFlush(patient1);
-        } catch (DataIntegrityViolationException e) {
-            assertThrows(DataIntegrityViolationException.class, () -> {
-                Patient patient2 = new Patient();
-                try {
-                    Date date = formatter.parse("2563/01/21");
-                    patient2.setPatientbirthdate(date);
-                    patient2 = patientRepository.saveAndFlush(patient2);
-                } catch (ParseException ex) {}
-            });
-        } catch (ParseException e) {} 
-    }
-
-    @Test
-    void B5910557_testDateMustNotBe10Digits() {
-        Patient patient = new Patient();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563/01/211");
-            patient.setPatientbirthdate(date);
-            patient = patientRepository.saveAndFlush(patient);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
-            assertEquals(1, result.size());
-
-            ConstraintViolation<Patient> v = result.iterator().next();
-            assertEquals("must match \"\\d{10}\"", v.getMessage());
-            assertEquals("birthdate", v.getPropertyPath().toString());
-        } catch (ParseException e) {}
-    }
-
-    //---------------------------------TEST SAVE CORRECT--------------------------------
-    //ใส่ข้อมูลถูกต้องปกติ
-    @Test
-	void B5910557_testPatientDataCorrect() {
-        Patient patient = new Patient();
-        Gender gender = genderRepository.findById(1);
-        Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        
-        patient.setPatientfullname("Wachiraya Chaiyasaj");
-        patient.setPersonId("1234567890159");
-        patient.setGender(gender);
-        patient.setBloodtype(bloodtype);
-		patient.setPhone("0982208997");
-        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
-        
-        Patient patientFound = new Patient();
-        patientFound = patientRepository.save(patient);
-        Optional<Patient> found = patientRepository.findById(patientFound.getId());
-
-        assertEquals("Wachiraya Chaiyasaj", found.get().getPatientfullname());
-        assertEquals("1234567890159", found.get().getPersonId());
-        assertEquals(gender, found.get().getGender());
-        assertEquals(bloodtype, found.get().getBloodtype());
-        assertEquals("0982208997", found.get().getPhone());
-        assertEquals("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190", found.get().getAddress());
-        
     }
 
     //---------------------------------TEST NOT NULL--------------------------------
@@ -249,10 +200,48 @@ public class PatientTests {
     
             ConstraintViolation<Patient> v = result.iterator().next();
             assertEquals("must not be null", v.getMessage());
-            assertEquals("patientfullname", v.getPropertyPath().toString());
+            assertEquals("address", v.getPropertyPath().toString());
         }
     }
+    //PatientDate ต้องnot null
+    @Test
+    void B5910557_testPatientdateMustNotBeNull() {
+        Patient patient = new Patient();
+        patient.setPatientdate(null);
+        try {
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("patientdate", v.getPropertyPath().toString());
+        }
+    }
+    //----------------------------------END MUST NOT BE NULL---------------------------------
 
+    //-------------------------------PATIENT DATE PATTERN--------------------------------
+    @Test
+    void b6020712_testPatientDatePatternFail() {
+        Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Date date = formatter.parse("1987-06-21");
+            patient.setPatientdate(date);
+
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must match \"yyyy-MM-dd\"", v.getMessage());
+            assertEquals("patientdate", v.getPropertyPath().toString());
+        } catch (ParseException e) {
+        }
+    }
+    //-------------------------------END PATIENT DATE PATTERN----------------------------
+
+    //-------------------------------------PHONE---------------------------------------------
     //---------------------------------TEST PATTERN--------------------------------
     //ใส่ข้อมูลไม่ถูกต้องไม่ถูกpattern
     @Test
@@ -260,7 +249,7 @@ public class PatientTests {
         Patient patient = new Patient();
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
-		patient.setPhone("098220899777");
+		patient.setPhone("123456789A");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
 
         try {
@@ -274,10 +263,56 @@ public class PatientTests {
             assertEquals("phone", v.getPropertyPath().toString());
         }
     }
+
+    //---------------------------PHONE LESS/MORE 10---------------------------
+    @Test
+	void B5910557_testPhoneMustNotLessThan10() {
+        Patient patient = new Patient();
+        
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890159");
+		patient.setPhone("0123445");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+
+        try {
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size()); // result ต้องมี error 1 ค่าเท่านั้น
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must match \"\\d{10}\"", v.getMessage());
+            assertEquals("phone", v.getPropertyPath().toString());
+        }
+    }
+    @Test
+	void B5910557_testPhoneMustNotMoreThan10() {
+        Patient patient = new Patient();
+        
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890159");
+		patient.setPhone("01234567890123");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+
+        try {
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size()); // result ต้องมี error 1 ค่าเท่านั้น
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must match \"\\d{10}\"", v.getMessage());
+            assertEquals("phone", v.getPropertyPath().toString());
+        }
+    }
+    //-------------------------END PHONE LESS/MORE 10---------------------------
+    //---------------------------------END PHONE-------------------------------------
+
+    //------------------------------PATIENTFULLNAME----------------------------------
     //---------------------------------TEST SIZE--------------------------------
     //ใส่ข้อมูลไม่ถูกต้องไม่ถูกตามsizeที่กำหนด
     @Test
-    void  B5910557_testPatientFullnameSizelessthan10() {
+    void  B5910557_testPatientFullnameSizeLessThan10() {
         Patient patient = new Patient();
         patient.setPatientfullname("Wachira");
         patient.setPersonId("1234567890159");
@@ -296,64 +331,72 @@ public class PatientTests {
         }
     }
 
-    //---------------------------------TEST COMBOBOX--------------------------------
-    // ---------------- Gender Combobox ----------------
     @Test
-    void B5910557_testGenserComboboxMustNotBeNull() {
+    void  B5910557_testPatientFullnameSizeMoreThan50() {
         Patient patient = new Patient();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563-01-21");
-            patient.setPatientbirthdate(date);
-            patient.setGender(null);
-            patient = patientRepository.save(patient);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
-            assertEquals(1, result.size());
-    
-            ConstraintViolation<Patient> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("gender", v.getPropertyPath().toString());
-        } catch (ParseException e) {}
-    }
-    
-    // ---------------- Bloodtype Combobox ----------------
-    @Test
-    void B5910557_testBloodtypeComboboxMustNotBeNull() {
-        Patient patient = new Patient();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = formatter.parse("2563-01-21");
-            patient.setPatientbirthdate(date);
-            patient.setBloodtype(null);
-            patient = patientRepository.save(patient);
-        } catch (ConstraintViolationException e) {
-            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
-            assertEquals(1, result.size());
-    
-            ConstraintViolation<Patient> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("bloodtype", v.getPropertyPath().toString());
-        } catch (ParseException e) {}
-    }
-    //---------------------------------END COMBOBOX--------------------------------
+        patient.setPatientfullname("Wachiraya Chaiyasajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
+        patient.setPersonId("1234567890159");
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
 
-    //PatientDate ต้องnot null
-    @Test
-    void B5910557_testPatientdateMustNotBeNull() {
-        Patient patient = new Patient();
-        patient.setPatientdate(null);
         try {
             patient = patientRepository.save(patient);
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<Patient>> result = validator.validate(patient);
-            assertEquals(1, result.size());
+            assertEquals(1, result.size());// result ต้องมี error 1 ค่าเท่านั้น
     
             ConstraintViolation<Patient> v = result.iterator().next();
-            assertEquals("must not be null", v.getMessage());
-            assertEquals("patient date", v.getPropertyPath().toString());
+            assertEquals("must be betweet 10 to 50", v.getMessage());
+            assertEquals("patientfullname", v.getPropertyPath().toString());
         }
     }
+    //-----------------------------END TEST SIZE----------------------------------
+    //----------------------------PATIENTFULLNAME---------------------------------
+
+    //--------------------------------PERSON ID-----------------------------------
+    //---------------------------PERSON ID LESS/MORE 13---------------------------
+    @Test
+	void B5910557_testPersonIDMustNotLessThen13() {
+        Patient patient = new Patient();
+        
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890");
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+
+        try {
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size()); // result ต้องมี error 1 ค่าเท่านั้น
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must match \"\\d{13}\"", v.getMessage());
+            assertEquals("personId", v.getPropertyPath().toString());
+        }
+    }
+
+    @Test
+	void B5910557_testPersonIDMustNotMoreThen13() {
+        Patient patient = new Patient();
+        
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("12345678901234");
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+
+        try {
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size()); // result ต้องมี error 1 ค่าเท่านั้น
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must match \"\\d{13}\"", v.getMessage());
+            assertEquals("personId", v.getPropertyPath().toString());
+        }
+    }
+    //-------------------------END PERSON ID LESS/MORE 13---------------------------
 
     //----------------------------Person ID Be Unique-------------------------------
     @Test
@@ -398,4 +441,49 @@ public class PatientTests {
         });
         } catch (ParseException e) {} 
     }
+    //---------------------------------END PERSON ID------------------------------------
+
+
+    //---------------------------------TEST COMBOBOX--------------------------------
+    // ---------------- Gender Combobox ----------------
+    @Test
+    void B5910557_testGenserComboboxMustNotBeNull() {
+        Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            patient.setPatientbirthdate(date);
+            patient.setGender(null);
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("gender", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+    
+    // ---------------- Bloodtype Combobox ----------------
+    @Test
+    void B5910557_testBloodtypeComboboxMustNotBeNull() {
+        Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = formatter.parse("2563-01-21");
+            patient.setPatientbirthdate(date);
+            patient.setBloodtype(null);
+            patient = patientRepository.save(patient);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<Patient>> result = validator.validate(patient);
+            assertEquals(1, result.size());
+    
+            ConstraintViolation<Patient> v = result.iterator().next();
+            assertEquals("must not be null", v.getMessage());
+            assertEquals("bloodtype", v.getPropertyPath().toString());
+        } catch (ParseException e) {}
+    }
+    //---------------------------------END COMBOBOX--------------------------------
+
 }
