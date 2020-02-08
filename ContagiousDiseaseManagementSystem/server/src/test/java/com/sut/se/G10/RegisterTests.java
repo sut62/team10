@@ -262,6 +262,58 @@ void B5905492_testPasswordMustNotBeNull() {
         }
     }
     //-------------------------------------------password size--------------------------------------------//
+    @Test
+void B5905492_testPhoneMustNotBeNull() {
+    MedicalStaff medicalStaff1 = new MedicalStaff();
+
+    try {
+        medicalStaff1.setPhone(null);
+        medicalStaff1 = medicalStaffRepository.save(medicalStaff1);
+    } catch (ConstraintViolationException e) {
+        Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff1);
+        assertEquals(1, result.size());
+
+        ConstraintViolation<MedicalStaff> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("phone", v.getPropertyPath().toString());
+        
+    }
+}
+//-------------------------------------------phone notnull--------------------------------------------//
+@Test
+    void B5905492_testPhoneMustNotBe9Digits() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        try {
+            
+            medicalStaff.setPhone("098745874");
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must match \"\\d{10}\"", v.getMessage());
+            assertEquals("phone", v.getPropertyPath().toString());
+        }
+    }
+    //-------------------------------------------phone size9--------------------------------------------//
+@Test
+    void B5905492_testPhoneMustNotBe11Digits() {
+        MedicalStaff medicalStaff = new MedicalStaff();
+        try {
+            
+            medicalStaff.setPhone("08596587458");
+            medicalStaff = medicalStaffRepository.save(medicalStaff);
+        } catch (ConstraintViolationException e) {
+            Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
+            assertEquals(1, result.size());
+
+            ConstraintViolation<MedicalStaff> v = result.iterator().next();
+            assertEquals("must match \"\\d{10}\"", v.getMessage());
+            assertEquals("phone", v.getPropertyPath().toString());
+        }
+    }
+    //-------------------------------------------phone size11--------------------------------------------//
 @Test
     void B5905492_testGenderMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
