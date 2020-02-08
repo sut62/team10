@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta content="text/html; charset=UTF-8" http-equiv="content-type" />
-	<title>VaccineInformation</title>
+	<title>VaccineInformationtests</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
@@ -52,6 +52,80 @@
 <tr><td>click</td><td>//div[2]/div/div[2]/div[2]/div/div<datalist><option>//div[2]/div/div[2]/div[2]/div/div</option><option>css=div.content &gt; div</option></datalist></td><td></td>
 </tr>
 <tr><td>assertText</td><td>//div[2]/div/div[2]/div[2]/div/div<datalist><option>//div[2]/div/div[2]/div[2]/div/div</option><option>css=div.content &gt; div</option></datalist></td><td>บันทึกข้อมูลสำเร็จ</td>
+</tr>
+<tr><td>click</td><td>link=OK<datalist><option>link=OK</option><option>//a[contains(text(),'OK')]</option><option>//div[3]/a</option><option>css=a.v-dialog-btn.success</option></datalist></td><td></td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">viewDataVAccine_failed</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/vaccineinformation<datalist><option>http://localhost:8080/vaccineinformation</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div[2]/a/span<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div[2]/a/span</option><option>//a/span</option><option>css=span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-58<datalist><option>id=input-58</option><option>//input[@id='input-58']</option><option>//div[@id='app']/div/div/div/div[2]/div/div/div[2]/div/div/input</option><option>//input</option><option>css=#input-58</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-58<datalist><option>id=input-58</option><option>//input[@id='input-58']</option><option>//div[@id='app']/div/div/div/div[2]/div/div/div[2]/div/div/input</option><option>//input</option><option>css=#input-58</option></datalist></td><td>HIV</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td<datalist><option>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td</option><option>//td</option><option>css=td</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td<datalist><option>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td</option><option>//td</option><option>css=td</option></datalist></td><td>No matching records found</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">viewDataVaccine_pass</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/vaccineinformation<datalist><option>http://localhost:8080/vaccineinformation</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>link=ผลของวัคซีน<datalist><option>link=ผลของวัคซีน</option><option>//div[@id='app']/div/div/div/div[2]/div/form/div[2]/a</option><option>//a[contains(@href, '/viewDatavaccine')]</option><option>//a</option><option>css=a.v-btn.v-btn--contained.v-btn--router.theme--light.v-size--default.success</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=input-58<datalist><option>id=input-58</option><option>//input[@id='input-58']</option><option>//div[@id='app']/div/div/div/div[2]/div/div/div[2]/div/div/input</option><option>//input</option><option>css=#input-58</option></datalist></td><td></td>
+</tr>
+<tr><td>type</td><td>id=input-58<datalist><option>id=input-58</option><option>//input[@id='input-58']</option><option>//div[@id='app']/div/div/div/div[2]/div/div/div[2]/div/div/input</option><option>//input</option><option>css=#input-58</option></datalist></td><td>สุกใส</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td<datalist><option>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td</option><option>//td</option><option>css=td.text-start</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td<datalist><option>//div[@id='app']/div/div/div/div[3]/div/div/div/table/tbody/tr/td</option><option>//td</option><option>css=td.text-start</option></datalist></td><td>วัคซีนป้องกันไข้สุกใสไข้สุกใส</td>
+</tr>
+</tbody></table>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">VaccineInformation_failed</td></tr>
+</thead>
+<tbody>
+<tr><td>open</td><td>http://localhost:8080/vaccineinformation<datalist><option>http://localhost:8080/vaccineinformation</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div/div/div/div[2]/div/div/div<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div/div/div/div[2]/div/div/div</option><option>//div/div[2]/div/div/div</option><option>css=div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=kanoon-list-item-56<datalist><option>id=kanoon-list-item-56</option><option>//div[@id='kanoon-list-item-56']</option><option>xpath=(//div[@id='list-9']/div/div/div)[2]</option><option>//div/div/div/div/div/div/div</option><option>css=#kanoon-list-item-56</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div/div/div/div[2]/div/div/div<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div/div/div/div[2]/div/div/div</option><option>//div/div/div[2]/div/div/div</option><option>css=div.v-select__selections</option></datalist></td><td>kanoon</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div[2]/div/div/div[2]/div/div/div<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div[2]/div/div/div[2]/div/div/div</option><option>//div[2]/div/div/div[2]/div/div/div</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=วัคซีนป้องกันพิษสุนัขบ้า-list-item-60<datalist><option>id=วัคซีนป้องกันพิษสุนัขบ้า-list-item-60</option><option>//div[@id='วัคซีนป้องกันพิษสุนัขบ้า-list-item-60']</option><option>//div[@id='list-17']/div[3]/div/div</option><option>//div/div/div[3]/div/div</option><option>css=#วัคซีนป้องกันพิษสุนัขบ้า-list-item-60</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div[2]/div/div/div[2]/div/div/div/div<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div[2]/div/div/div[2]/div/div/div/div</option><option>//div[2]/div/div/div[2]/div/div/div/div</option><option>css=div.v-input.v-input--is-label-active.v-input--is-dirty.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-select.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections &gt; div.v-select__selection.v-select__selection--comma</option></datalist></td><td>วัคซีนป้องกันพิษสุนัขบ้า</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div[3]/div/div/div[2]/div/div/div<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div[3]/div/div/div[2]/div/div/div</option><option>//div[3]/div/div/div[2]/div/div/div</option><option>css=div.col.col-25 &gt; div.v-input.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-select.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>id=ยาใช้ภายใน-list-item-65<datalist><option>id=ยาใช้ภายใน-list-item-65</option><option>//div[@id='ยาใช้ภายใน-list-item-65']</option><option>//div[@id='list-27']/div[2]/div/div</option><option>//div/div/div[2]/div/div</option><option>css=#ยาใช้ภายใน-list-item-65</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div[3]/div/div/div[2]/div/div/div<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div[3]/div/div/div[2]/div/div/div</option><option>//div[3]/div/div/div[2]/div/div/div</option><option>css=div.v-input.v-input--is-label-active.v-input--is-dirty.v-input--is-focused.theme--light.v-text-field.v-text-field--is-booted.v-select.primary--text &gt; div.v-input__control &gt; div.v-input__slot &gt; div.v-select__slot &gt; div.v-select__selections</option></datalist></td><td>ยาใช้ภายใน</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div[4]/div[2]/div/div[2]/div/div[2]/div/i<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div[4]/div[2]/div/div[2]/div/div[2]/div/i</option><option>//div[2]/div/div[2]/div/div[2]/div/i</option></datalist></td><td></td>
+</tr>
+<tr><td>assertValue</td><td>id=input-36<datalist><option>id=input-36</option><option>//input[@id='input-36']</option><option>//div[@id='app']/div/div/div/div[2]/div/form/div[4]/div/div/div[2]/div/div/input</option><option>//div[4]/div/div/div[2]/div/div/input</option><option>css=#input-36</option></datalist></td><td>2020-02-08</td>
+</tr>
+<tr><td>click</td><td>//div[@id='app']/div/div/div/div[2]/div/form/div[5]/div/button/span<datalist><option>//div[@id='app']/div/div/div/div[2]/div/form/div[5]/div/button/span</option><option>//button/span</option><option>css=button.v-btn.v-btn--contained.theme--light.v-size--default.green &gt; span.v-btn__content</option></datalist></td><td></td>
+</tr>
+<tr><td>click</td><td>//div[2]/div/div[2]/div[2]<datalist><option>//div[2]/div/div[2]/div[2]</option><option>css=div.v-dialog-body</option></datalist></td><td></td>
+</tr>
+<tr><td>assertText</td><td>//div[2]/div/div[2]/div[2]/div/div<datalist><option>//div[2]/div/div[2]/div[2]/div/div</option><option>css=div.content &gt; div</option></datalist></td><td>บันทึกข้อมูลไม่สำเร็จ</td>
 </tr>
 <tr><td>click</td><td>link=OK<datalist><option>link=OK</option><option>//a[contains(text(),'OK')]</option><option>//div[3]/a</option><option>css=a.v-dialog-btn.success</option></datalist></td><td></td>
 </tr>
