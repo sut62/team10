@@ -12,15 +12,16 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sut.se.G10.Register.Entity.MedicalStaff;
+
+
 
 @Data
 @Entity
@@ -47,11 +48,11 @@ public class VaccineInformation {
 
 
     @Temporal(TemporalType.DATE)
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private @NotNull Date storagedate;
 
     @Temporal(TemporalType.DATE)
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private @NotNull Date expiredate;
    
   
