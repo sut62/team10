@@ -38,7 +38,7 @@ public class Statistics {
     @Column(name = "STATISTICS_ID", unique = true, nullable = true)
     private @NotNull Long id;
 
-    @Pattern(regexp = "[0-9]*")
+    @Pattern(regexp = "[a-z0-9]*")
     @Size(min = 2, max =10)
     private @NotNull String rates;
 
