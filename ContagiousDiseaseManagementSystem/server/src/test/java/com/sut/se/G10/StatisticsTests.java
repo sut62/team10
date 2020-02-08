@@ -199,7 +199,7 @@ public class StatisticsTests {
     void b5913480_testRatesWrongPattern() {
         Statistics statistics = new Statistics();
         try {
-            statistics.setRates("aA%&");
+            statistics.setRates("DA%&");
         } catch (ConstraintViolationException e){
             Set<ConstraintViolation<Statistics>> result = validator.validate(statistics);
             
@@ -208,7 +208,7 @@ public class StatisticsTests {
     
             // error message ตรงชนิด และถูก field
             ConstraintViolation<Statistics> message = result.iterator().next();
-            assertEquals("must match \"[0-9]*\"", message.getMessage());
+            assertEquals("must match \"[a-z0-9]*\"", message.getMessage());
             assertEquals("rates", message.getPropertyPath().toString());
         }
     }
