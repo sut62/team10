@@ -53,9 +53,6 @@ public class VaccineInformationTests {
         } catch (ParseException e) {}
 
         vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
-        // VaccineInformation vaccineInformation2 = new VaccineInformation();
-        // vaccineInformation2 = vaccineinformationRepository.save(vaccineInformation);
-
         Optional<VaccineInformation> found = vaccineinformationRepository.findById(vaccineInformation.getVaccineinformationid());
         try {
             assertEquals(formatter.parse("1998-05-11"), found.get().getStoragedate());
@@ -72,9 +69,7 @@ public class VaccineInformationTests {
             Date date = formatter.parse("1999-05-13");
             vaccineInformation.setExpiredate(date);
             vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
-            // VaccineInformation vaccineInformation2 = new VaccineInformation();
-            // vaccineInformation2 = vaccineinformationRepository.save(vaccineInformation);
-        } catch (ConstraintViolationException e) {
+            } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<VaccineInformation>> result = validator.validate(vaccineInformation);
             assertEquals(1, result.size());
     
@@ -103,27 +98,7 @@ public class VaccineInformationTests {
     }
 
     @Test
-    void b5901418_testStoragedateMustBeUnique() {
-        VaccineInformation vaccineInformation1 = new VaccineInformation();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date storagedate = formatter.parse("2541/08/23");
-            vaccineInformation1.setStoragedate(storagedate);
-            vaccineInformation1 = vaccineinformationRepository.saveAndFlush(vaccineInformation1);
-        } catch (DataIntegrityViolationException e) {
-            assertThrows(DataIntegrityViolationException.class, () -> {
-                VaccineInformation vaccineInformation2 = new VaccineInformation();
-                try {
-                    Date storagedate = formatter.parse("2541/08/23");
-                    vaccineInformation2.setStoragedate(storagedate);
-                    vaccineInformation2 = vaccineinformationRepository.saveAndFlush(vaccineInformation2);
-                } catch (ParseException ex) {}
-            });
-        } catch (ParseException e) {} 
-    }
-
-    @Test
-    void b5901418_testStoragedateMustNotBe10Digits() {
+    void b5901418_testStoragedateMustNotBe11Digits() {
         VaccineInformation vaccineInformation = new VaccineInformation();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -135,7 +110,7 @@ public class VaccineInformationTests {
             assertEquals(1, result.size());
 
             ConstraintViolation<VaccineInformation> v = result.iterator().next();
-            assertEquals("must match \"\\d{10}\"", v.getMessage());
+            assertEquals("must match be 10 characters", v.getMessage());
             assertEquals("date", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }
@@ -152,9 +127,6 @@ public class VaccineInformationTests {
         } catch (ParseException e) {}
 
         vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
-        // VaccineInformation vaccineInformation2 = new VaccineInformation();
-        // vaccineInformation2 = vaccineinformationRepository.save(vaccineInformation);
-
         Optional<VaccineInformation> found = vaccineinformationRepository.findById(vaccineInformation.getVaccineinformationid());
         try {
             assertEquals(formatter.parse("1998-05-11"), found.get().getExpiredate());
@@ -170,8 +142,6 @@ public class VaccineInformationTests {
             Date date = formatter.parse("1999-05-13");
             vaccineInformation.setStoragedate(date);
             vaccineInformation = vaccineinformationRepository.saveAndFlush(vaccineInformation);
-            // VaccineInformation vaccineInformation2 = new VaccineInformation();
-            // vaccineInformation2 = vaccineinformationRepository.save(vaccineInformation);
         } catch (ConstraintViolationException e) {
             Set<ConstraintViolation<VaccineInformation>> result = validator.validate(vaccineInformation);
             assertEquals(1, result.size());
@@ -202,26 +172,6 @@ public class VaccineInformationTests {
     }
 
     @Test
-    void b5901418_testExpiredateMustBeUnique() {
-        VaccineInformation vaccineInformation1 = new VaccineInformation();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date expiredate = formatter.parse("2541/08/23");
-            vaccineInformation1.setExpiredate(expiredate);
-            vaccineInformation1 = vaccineinformationRepository.saveAndFlush(vaccineInformation1);
-        } catch (DataIntegrityViolationException e) {
-            assertThrows(DataIntegrityViolationException.class, () -> {
-                VaccineInformation vaccineInformation2 = new VaccineInformation();
-                try {
-                    Date expiredate = formatter.parse("2541/08/23");
-                    vaccineInformation2.setExpiredate(expiredate);
-                    vaccineInformation2 = vaccineinformationRepository.saveAndFlush(vaccineInformation2);
-                } catch (ParseException ex) {}
-            });
-        } catch (ParseException e) {} 
-    }
-
-    @Test
     void b5901418_testExpiredateMustNotBe11Digits() {
         VaccineInformation vaccineInformation = new VaccineInformation();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -234,7 +184,7 @@ public class VaccineInformationTests {
             assertEquals(1, result.size());
 
             ConstraintViolation<VaccineInformation> v = result.iterator().next();
-            assertEquals("must match \"\\d{10}\"", v.getMessage());
+            assertEquals("must match be 10 characters", v.getMessage());
             assertEquals("date", v.getPropertyPath().toString());
         } catch (ParseException e) {}
     }  
