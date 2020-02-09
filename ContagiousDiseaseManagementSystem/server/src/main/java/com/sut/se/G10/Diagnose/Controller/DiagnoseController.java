@@ -15,6 +15,7 @@ import com.sut.se.G10.Diagnose.Repository.BloodPressureLevelRepository;
 import com.sut.se.G10.Diagnose.Entity.DiagnoseDisease;
 import com.sut.se.G10.Diagnose.Repository.DiagnoseDiseaseRepository;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -84,7 +85,7 @@ public class DiagnoseController {
         newDiagnose.setDiagnosisDoctor(diagnosisDoctor);
         newDiagnose.setBloodPressureLevel(bloodPressureLevel);
         newDiagnose.setAdmission(admission);
-        newDiagnose.setDiagnosisDate(new Date());
+        newDiagnose.setDiagnosisDate(LocalDateTime.now());
         newDiagnose.setDiagnoseCode(generateCode());
         newDiagnose.setDiagnosis(diagnosis);
         newDiagnose.setStayAlertedTime(stayAlertedTime);

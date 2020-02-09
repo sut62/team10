@@ -38,6 +38,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.Date;
@@ -86,7 +87,8 @@ public class DiagnoseDiseaseTests {
         DiagnoseDisease diagnoseDisease = new DiagnoseDisease();
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("ABab12 _.,");
-        diagnose.setDiagnosisDate(new Date(2020, 12, 25));
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -144,7 +146,8 @@ public class DiagnoseDiseaseTests {
         DiagnoseDisease diagnoseDisease = new DiagnoseDisease();
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("ABab12 _.,");
-        diagnose.setDiagnosisDate(new Date(2020, 12, 25));
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
