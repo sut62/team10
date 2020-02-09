@@ -1,5 +1,6 @@
 package com.sut.se.G10.Diagnose.Entity;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
 
@@ -49,7 +50,7 @@ public class Diagnose {
 
     @NotNull
     @Column(name ="DIAGNOSIS_DATE")
-    private Date diagnosisDate;
+    private LocalDateTime diagnosisDate;
 
     @NotNull
     @Column(name ="DIAGNOSIS")

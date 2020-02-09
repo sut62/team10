@@ -36,6 +36,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.Date;
@@ -81,7 +82,8 @@ public class DiagnoseTests {
     void b5911837_testDiagnoseAllCorrect() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("ABab12 _.,");
-        diagnose.setDiagnosisDate(new Date(2020, 12, 25));
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -123,7 +125,7 @@ public class DiagnoseTests {
 
         Optional<Diagnose> found = diagnoseRepository.findById(diagnose.getId());
         assertEquals("ABab12 _.,", found.get().getDiagnosis());
-        assertEquals(new Date(2020, 12, 25), found.get().getDiagnosisDate());
+        assertEquals(dateTimeNow, found.get().getDiagnosisDate());
         assertEquals(333L, found.get().getStayAlertedTime());
         assertEquals(bloodPressureLevelRepository.findById(1), found.get().getBloodPressureLevel());
         assertEquals(admissionRepository.findById(1), found.get().getAdmission());
@@ -136,7 +138,8 @@ public class DiagnoseTests {
     void b5911837_testDiagnoseCodeNotNull() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode(null);
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -189,7 +192,8 @@ public class DiagnoseTests {
     void b5911837_testDiagnoseCodeMustBeUnique() {
         Diagnose diagnose1 = new  Diagnose();
         diagnose1.setDiagnosis("1234567890");
-        diagnose1.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose1.setDiagnosisDate(dateTimeNow);
         diagnose1.setStayAlertedTime(333L);
         diagnose1.setDiagnoseCode("XXXXX-XXXXX");
         diagnose1.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -233,7 +237,7 @@ public class DiagnoseTests {
         assertThrows(DataIntegrityViolationException.class, () -> {
             Diagnose diagnose2 = new  Diagnose();
             diagnose2.setDiagnosis("1234567890");
-            diagnose2.setDiagnosisDate(new Date());
+            diagnose2.setDiagnosisDate(dateTimeNow);
             diagnose2.setStayAlertedTime(333L);
             diagnose2.setDiagnoseCode("XXXXX-XXXXX");
             diagnose2.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -246,7 +250,7 @@ public class DiagnoseTests {
         });
     }
 
-    // ---------------------------------- Test Date diagnosisDate Field ---------------------------------------------
+    // ---------------------------------- Test LocalDateTime diagnosisDate Field ---------------------------------------------
     @Test
     void b5911837_testDiagnosisDateNotNull() {
         Diagnose diagnose = new  Diagnose();
@@ -305,7 +309,8 @@ public class DiagnoseTests {
     void b5911837_testDiagnosisNotNull() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis(null);
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -358,7 +363,8 @@ public class DiagnoseTests {
     void b5911837_testDiagnosisNotAgianstPattern() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("123456789$");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -411,7 +417,8 @@ public class DiagnoseTests {
     void b5911837_testDiagnosisMin10() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("123456789");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -465,7 +472,8 @@ public class DiagnoseTests {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("12345678901234567890123456789012345678901234567890" 
         + "123456789012345678901234567890123456789012345678901");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -519,7 +527,8 @@ public class DiagnoseTests {
     void b5911837_testStayAlertedTimeMustNotBeNull() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(null);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -572,7 +581,8 @@ public class DiagnoseTests {
     void b5911837_testStayAlertedTimeNumMin0() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(-1L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -625,7 +635,8 @@ public class DiagnoseTests {
     void b5911837_testStayAlertedTimeNumMax99999() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(100000L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -679,7 +690,8 @@ public class DiagnoseTests {
     void b5911837_testPatientNotNull() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -721,7 +733,8 @@ public class DiagnoseTests {
     void b5911837_testMedicalStaffNotNull() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -761,7 +774,8 @@ public class DiagnoseTests {
     void b5911837_testAdmissionNotNull() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(bloodPressureLevelRepository.findById(1));
@@ -815,7 +829,8 @@ public class DiagnoseTests {
     void b5911837_testBloodPressureLevelNotNull() {
         Diagnose diagnose = new  Diagnose();
         diagnose.setDiagnosis("1234567890");
-        diagnose.setDiagnosisDate(new Date());
+        LocalDateTime dateTimeNow = LocalDateTime.now();
+        diagnose.setDiagnosisDate(dateTimeNow);
         diagnose.setStayAlertedTime(333L);
         diagnose.setDiagnoseCode("XXXXX-XXXXX");
         diagnose.setBloodPressureLevel(null);
