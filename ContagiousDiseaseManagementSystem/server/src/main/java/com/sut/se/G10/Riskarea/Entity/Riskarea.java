@@ -1,6 +1,6 @@
 package com.sut.se.G10.Riskarea.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sut.se.G10.Contagion.Entity.Disease;
 import com.sut.se.G10.Register.Entity.Province;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,19 +35,20 @@ public class Riskarea {
     @Column(name = "RISKAREA_ID", unique = true, nullable = true)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private @NotNull Date date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "GMT+7")
+    @FutureOrPresent
+    @PastOrPresent
+    private @NotNull LocalDate date;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "PROVINCE_ID", insertable = true)
-    private Province province;
+    private @NotNull Province province;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Disease.class)
     @JoinColumn(name = "DISEASE_ID", insertable = true)
-    private Disease disease;
+    private @NotNull Disease disease;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Communicablelevel.class)
     @JoinColumn(name = "COMMUNICABLE_ID", insertable = true)
-    private Communicablelevel communicablelevel;
+    private @NotNull Communicablelevel communicablelevel;
 }
