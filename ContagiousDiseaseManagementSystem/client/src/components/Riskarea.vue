@@ -2,7 +2,6 @@
   <div class="text-center">
     <v-container>
       <v-card class="mx-auto" style="max-width: 950px;">
-        
         <!-- หัวเรื่อง -->
         <v-layout text-center wrap>
           <v-flex mb-4>
@@ -78,47 +77,53 @@
               max-width="290px"
               min-width="290px"
             >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="dateFormatted"
-                label="กรุณากรอกวันที่"
-                @blur="date = parseDate(dateFormatted)"
-                v-on="on"
-              ></v-text-field>
-            </template>
-              <v-date-picker v-model="date" no-title @input="menu1 = false"></v-date-picker>
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="dateFormatted"
+                  label="กรุณากรอกวันที่"
+                  @blur="date = parseDate(dateFormatted)"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" no-title @input="menu1 = false" readonly></v-date-picker>
             </v-menu>
           </v-col>
         </v-row>
 
         <v-row justify="center">
-          <v-alert style="max-width: 400px;" v-if="saveSuccessful" dense outlined text prominent type="success">บันทึกสำเร็จ</v-alert>
-          <v-alert style="max-width: 400px;" v-if="saveUnsuccessful" outlined dense text type="error" prominent border="left">บันทึกไม่สำเร็จ</v-alert>
+          <v-alert
+            style="max-width: 400px;"
+            v-if="saveSuccessful"
+            dense
+            outlined
+            text
+            prominent
+            type="success"
+          >บันทึกสำเร็จ</v-alert>
+          <v-alert
+            style="max-width: 400px;"
+            v-if="saveUnsuccessful"
+            outlined
+            dense
+            text
+            type="error"
+            prominent
+            border="left"
+          >บันทึกไม่สำเร็จ</v-alert>
         </v-row>
-        
+
         <!-- ปุ่มบันทึก -->
         <v-row>
           <v-col>
-            <v-btn 
-              class="ma-5"
-              color="success" 
-              height="50"
-              width="100" 
-              @click="saveRiskarea" dark>บันทึก
+            <v-btn class="ma-5" color="success" height="50" width="100" @click="saveRiskarea" dark>
+              บันทึก
               <v-icon dark right>mdi-checkbox-marked-circle</v-icon>
             </v-btn>
-            <v-btn 
-              class="ma-5"
-              color="grey lighten-2" 
-              height="50" 
-              width="80"   
-              to="/home">
-              <v-icon dark left>mdi-arrow-left</v-icon>
-              กลับ
+            <v-btn class="ma-5" color="grey lighten-2" height="50" width="80" to="/home">
+              <v-icon dark left>mdi-arrow-left</v-icon>กลับ
             </v-btn>
           </v-col>
         </v-row>
-
       </v-card>
     </v-container>
   </div>
@@ -215,8 +220,7 @@ export default {
           if (response.data.length == 0) {
             this.saveSuccessful = false;
             this.saveUnsuccessful = true;
-          }
-          else if (response.data) {
+          } else if (response.data) {
             this.saveSuccessful = true;
             this.saveUnsuccessful = false;
           }
