@@ -84,7 +84,17 @@ public class PatientTests {
     @Test
     void B5910557_testPatientBirthdateMustNotBeNull() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
         patient.setPatientbirthdate(null);
+        patient.setPatientdate(new Date(1987, 6, 5));
         try {
             patient = patientRepository.save(patient);
         } catch (ConstraintViolationException e) {
@@ -94,14 +104,24 @@ public class PatientTests {
     
             ConstraintViolation<Patient> v = result.iterator().next();
             assertEquals("must not be null", v.getMessage());
-            assertEquals("birthdate", v.getPropertyPath().toString());
+            assertEquals("patientbirthdate", v.getPropertyPath().toString());
         }
     }
 
     @Test
     void B5910557_testPatientBirthdatePatternFail() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        patient.setPatientdate(new Date(1987, 6, 5));
         try {
             Date date = formatter.parse("1987-01-21");
             patient.setPatientbirthdate(date);
@@ -111,7 +131,7 @@ public class PatientTests {
 
             ConstraintViolation<Patient> v = result.iterator().next();
             assertEquals("must match \"yyyy-MM-dd\"", v.getMessage());
-            assertEquals("birthdate", v.getPropertyPath().toString());
+            assertEquals("patientbirthdate", v.getPropertyPath().toString());
         } catch (ParseException e) {} 
     }
 
@@ -120,11 +140,21 @@ public class PatientTests {
     @Test
 	void B5910557_testNameMustNotBeNull() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
         patient.setPatientfullname(null);
         patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -142,11 +172,21 @@ public class PatientTests {
     @Test
 	void B5910557_testPersonIDMustNotBeNull() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
-        patient.setPatientfullname("Wachiraya Chaiyasaj");
+		patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId(null);
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -164,11 +204,21 @@ public class PatientTests {
     @Test
 	void B5910557_testPhoneMustNotBeNull() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone(null);
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -178,7 +228,7 @@ public class PatientTests {
     
             ConstraintViolation<Patient> v = result.iterator().next();
             assertEquals("must not be null", v.getMessage());
-            assertEquals("patientfullname", v.getPropertyPath().toString());
+            assertEquals("phone", v.getPropertyPath().toString());
         }
     }
 
@@ -186,11 +236,21 @@ public class PatientTests {
     @Test
 	void B5910557_testAddressMustNotBeNull() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress(null);
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -207,7 +267,22 @@ public class PatientTests {
     @Test
     void B5910557_testPatientdateMustNotBeNull() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
         patient.setPatientdate(null);
+
         try {
             patient = patientRepository.save(patient);
         } catch (ConstraintViolationException e) {
@@ -225,7 +300,17 @@ public class PatientTests {
     @Test
     void b6020712_testPatientDatePatternFail() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+
+        patient.setPatientfullname("Wachiraya Chaiyasaj");
+        patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
+		patient.setPhone("0982208997");
+        patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        patient.setPatientdate(new Date(1987, 6, 5));
         try {
             Date date = formatter.parse("1987-06-21");
             patient.setPatientdate(date);
@@ -247,10 +332,21 @@ public class PatientTests {
     @Test
     void  B5910557_testPhonePatternfial() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("123456789A");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -268,11 +364,21 @@ public class PatientTests {
     @Test
 	void B5910557_testPhoneMustNotLessThan10() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
-		patient.setPhone("0123445");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
+		patient.setPhone("0123456");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -288,11 +394,21 @@ public class PatientTests {
     @Test
 	void B5910557_testPhoneMustNotMoreThan10() {
         Patient patient = new Patient();
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
-		patient.setPhone("01234567890123");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
+		patient.setPhone("01234567891");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -314,10 +430,21 @@ public class PatientTests {
     @Test
     void  B5910557_testPatientFullnameSizeLessThan10() {
         Patient patient = new Patient();
-        patient.setPatientfullname("Wachira");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        
+        patient.setPatientfullname("Wachiraya");
         patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -334,10 +461,21 @@ public class PatientTests {
     @Test
     void  B5910557_testPatientFullnameSizeMoreThan50() {
         Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
+        
         patient.setPatientfullname("Wachiraya Chaiyasajjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj");
         patient.setPersonId("1234567890159");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -358,11 +496,21 @@ public class PatientTests {
     @Test
 	void B5910557_testPersonIDMustNotLessThen13() {
         Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
-        patient.setPersonId("1234567890");
+        patient.setPersonId("123456789012");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
@@ -379,11 +527,21 @@ public class PatientTests {
     @Test
 	void B5910557_testPersonIDMustNotMoreThen13() {
         Patient patient = new Patient();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd") ;
+        Gender gender = genderRepository.findById(1);
+        Bloodtype bloodtype = bloodtypeRepository.findById(1);
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("12345678901234");
+        patient.setGender(gender);
+        patient.setBloodtype(bloodtype);
 		patient.setPhone("0982208997");
         patient.setAddress("14/2 ม.4 ต.กระโทก อ.โชคชัย จ.นครรราชสีมา 30190");
+        try {
+            Date Patientbirthdate = formatter.parse("1997-09-21");
+            patient.setPatientbirthdate(Patientbirthdate) ;
+        } catch (ParseException e) {}
+        patient.setPatientdate(new Date(1987, 6, 5));
 
         try {
             patient = patientRepository.save(patient);
