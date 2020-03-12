@@ -160,15 +160,15 @@ void B5905492_testMedicalStaffDataCorrect() {
     void B5905492_testAddressMustNotBeNull() {
        MedicalStaff medicalStaff = new MedicalStaff();
          Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
  	
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress(null);
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -194,15 +194,15 @@ void B5905492_testMedicalStaffDataCorrect() {
 void B5905492_testEmailMustNotBeNull() {
     MedicalStaff medicalStaff = new MedicalStaff();
          Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail(null);
@@ -228,15 +228,15 @@ void B5905492_testEmailMustNotBeNull() {
 	void B5905492_testPasswordMustNotBeNull() {
      	MedicalStaff medicalStaff = new MedicalStaff();
          Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword(null);
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -263,15 +263,15 @@ void B5905492_testEmailMustNotBeNull() {
     void B5905492_testPasswordMustNotBe7Digits() {
         MedicalStaff medicalStaff = new MedicalStaff();
         Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MMdd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MMdd");
 
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword("1234567");
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -294,18 +294,18 @@ void B5905492_testEmailMustNotBeNull() {
     }
     //-------------------------------------------phone notnull--------------------------------------------//
     @Test
-void B5905492_testPhoneMustNotBeNull() {
-  MedicalStaff medicalStaff = new MedicalStaff();
+    void B5905492_testPhoneMustNotBeNull() {
+    MedicalStaff medicalStaff = new MedicalStaff();
          Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    impleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone(null);
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -332,15 +332,15 @@ void B5905492_testPhoneMustNotBeNull() {
     void B5905492_testPhoneMustNotLessThan10() {
         MedicalStaff medicalStaff = new MedicalStaff();
         Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0123456");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -366,16 +366,16 @@ void B5905492_testPhoneMustNotBeNull() {
     void B5905492_testPhoneMustNotMoreThan10() {
         MedicalStaff medicalStaff = new MedicalStaff();
         Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
 
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("01234567891");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -401,15 +401,15 @@ void B5905492_testPhoneMustNotBeNull() {
     void  B5905492_testPhonePatternfail() {
        MedicalStaff medicalStaff = new MedicalStaff();
          Position position = positionRepository.findById(1);
-   	 Gender gender = genderRepository.findById(1);
-   	 Province province = provinceRepository.findById(1);
-	 SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+   	    Gender gender = genderRepository.findById(1);
+   	    Province province = provinceRepository.findById(1);
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
-	medicalStaff.setFullname("Sasithon Chairat");
+	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("123456789A");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -443,7 +443,7 @@ void B5905492_testPhoneMustNotBeNull() {
         medicalStaff.setPhone("0987458748");
         medicalStaff.setGender(gender);
         medicalStaff.setPosition(position);
-	medicalStaff.setProvince(province);
+	    medicalStaff.setProvince(province);
         medicalStaff.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
@@ -473,21 +473,21 @@ void B5905492_testPhoneMustNotBeNull() {
         medicalStaff1.setFullname("Sasithon Chairat");
         medicalStaff1.setPhone("0987458748");
         medicalStaff1.setGender(gender);
-	Date date = formatter.parse("1997-01-11");
-	medicalStaff1.setBirthdate(date);
+	    Date date = formatter.parse("1997-01-11");
+	    medicalStaff1.setBirthdate(date);
         medicalStaff1.setPosition(position);
-	medicalStaff1.setProvince(province);
+	    medicalStaff1.setProvince(province);
         medicalStaff1.setAddress("97/3 หนองหาน อุดรธานี 41130");
         medicalStaff1.setPassword("12345678");
-	medicalStaff1.setEmail("sasithon@gmail.com");
+	    medicalStaff1.setEmail("sasithon@gmail.com");
         medicalStaff1 =  medicalStaffRepository.save( medicalStaff1);
             
         } catch (DataIntegrityViolationException e) {
         assertThrows(DataIntegrityViolationException.class, () ->{
            	 MedicalStaff medicalStaff2 = new MedicalStaff();
 		
-		medicalStaff2.setFullname("Sasithon Chairat");
-		medicalStaff2.setEmail("sasithon@gmail.com");
+		    medicalStaff2.setFullname("Sasithon Chairat");
+		    medicalStaff2.setEmail("sasithon@gmail.com");
                 medicalStaff2.setGender(gender);
 
             try{
@@ -495,8 +495,8 @@ void B5905492_testPhoneMustNotBeNull() {
                 medicalStaff2.setBirthdate(date2);
             } catch (ParseException ex) {}    
 		
-		medicalStaff2.setProvince(province);
-		medicalStaff2.setPassword("12345678");
+		    medicalStaff2.setProvince(province);
+		    medicalStaff2.setPassword("12345678");
                 medicalStaff2.setPosition(position);
                 medicalStaff2.setPhone("0987458748");
                 medicalStaff2.setAddress("97/3 หนองหาน อุดรธานี 41130");
