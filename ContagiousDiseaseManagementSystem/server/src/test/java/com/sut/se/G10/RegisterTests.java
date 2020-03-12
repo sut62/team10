@@ -299,7 +299,7 @@ void B5905492_testEmailMustNotBeNull() {
          Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    impleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MMdd");
 
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone(null);
