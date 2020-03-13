@@ -144,7 +144,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
         patient.setPatientfullname(null);
         patient.setPersonId("1234567890159");
@@ -176,7 +176,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
 		patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId(null);
@@ -208,7 +208,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
@@ -240,7 +240,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
@@ -271,7 +271,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
@@ -336,7 +336,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
@@ -368,7 +368,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
@@ -398,7 +398,7 @@ public class PatientTests {
         Patient patient = new Patient();
         Gender gender = genderRepository.findById(1);
         Bloodtype bloodtype = bloodtypeRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
         patient.setPatientfullname("Wachiraya Chaiyasaj");
         patient.setPersonId("1234567890159");
