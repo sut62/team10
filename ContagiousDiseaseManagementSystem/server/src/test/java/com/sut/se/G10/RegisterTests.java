@@ -57,7 +57,7 @@ void B5905492_testMedicalStaffDataCorrect() {
     Position position = positionRepository.findById(1);
     Gender gender = genderRepository.findById(1);
     Province province = provinceRepository.findById(1);
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     
     medicalStaff.setFullname("Sasithon Chairat");
     medicalStaff.setGender(gender);
@@ -68,7 +68,7 @@ void B5905492_testMedicalStaffDataCorrect() {
     medicalStaff.setEmail("sasithon@gmail.com");
     medicalStaff.setPassword("12345678");
  	try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date);
         } catch (ParseException e) {}
 
@@ -86,7 +86,7 @@ void B5905492_testMedicalStaffDataCorrect() {
     assertEquals("sasithon@gmail.com", found.get().getEmail());
     assertEquals("12345678", found.get().getPassword());
 	try {
-            assertEquals(formatter.parse("1997/05/04"), found.get().getBirthdate());
+            assertEquals(formatter.parse("1997-05-04"), found.get().getBirthdate());
         } catch (ParseException e) {}
 
 }
@@ -128,7 +128,7 @@ void B5905492_testMedicalStaffDataCorrect() {
          Position position = positionRepository.findById(1);
    	 Gender gender = genderRepository.findById(1);
    	 Province province = provinceRepository.findById(1);
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         medicalStaff.setFullname(null);
         medicalStaff.setPhone("0987458748");
@@ -139,7 +139,7 @@ void B5905492_testMedicalStaffDataCorrect() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
 
@@ -162,7 +162,7 @@ void B5905492_testMedicalStaffDataCorrect() {
          Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
  	
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
@@ -173,7 +173,7 @@ void B5905492_testMedicalStaffDataCorrect() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
 
@@ -196,7 +196,7 @@ void B5905492_testEmailMustNotBeNull() {
          Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
@@ -207,7 +207,7 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail(null);
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
 
@@ -230,7 +230,7 @@ void B5905492_testEmailMustNotBeNull() {
          Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
@@ -241,7 +241,7 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword(null);
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
 
@@ -265,7 +265,7 @@ void B5905492_testEmailMustNotBeNull() {
         Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MMdd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
@@ -276,7 +276,7 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword("1234567");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
         
@@ -299,7 +299,7 @@ void B5905492_testEmailMustNotBeNull() {
          Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MMdd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone(null);
@@ -310,7 +310,7 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
 
@@ -334,7 +334,7 @@ void B5905492_testEmailMustNotBeNull() {
         Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0123456");
@@ -345,7 +345,7 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
         
@@ -368,7 +368,7 @@ void B5905492_testEmailMustNotBeNull() {
         Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 
 	    medicalStaff.setFullname("Sasithon Chairat");
@@ -380,7 +380,7 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
         
@@ -403,7 +403,7 @@ void B5905492_testEmailMustNotBeNull() {
          Position position = positionRepository.findById(1);
    	    Gender gender = genderRepository.findById(1);
    	    Province province = provinceRepository.findById(1);
-	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
 	    medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("123456789A");
@@ -414,7 +414,7 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("1997/05/04");
+            Date date = formatter.parse("1997-05-04");
             medicalStaff.setBirthdate(date) ;
         } catch (ParseException e) {}
 
@@ -437,7 +437,7 @@ void B5905492_testEmailMustNotBeNull() {
          Position position = positionRepository.findById(1);
    	 Gender gender = genderRepository.findById(1);
    	 Province province = provinceRepository.findById(1);
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         medicalStaff.setFullname("Sasithon Chairat");
         medicalStaff.setPhone("0987458748");
@@ -448,14 +448,14 @@ void B5905492_testEmailMustNotBeNull() {
         medicalStaff.setPassword("12345678");
         medicalStaff.setEmail("sasithon@gmail.com");
         try {
-            Date date = formatter.parse("2563-01-21");
+            Date date = formatter.parse("2563/01/21");
             medicalStaff.setBirthdate(date);
             
             Set<ConstraintViolation<MedicalStaff>> result = validator.validate(medicalStaff);
             assertEquals(1, result.size());
 
             ConstraintViolation<MedicalStaff> v = result.iterator().next();
-            assertEquals("must match \"yyyy/MM/dd\"", v.getMessage());
+            assertEquals("must match \"yyyy-MM-dd\"", v.getMessage());
             assertEquals("date", v.getPropertyPath().toString());
         } catch (ParseException e) {} 
     }
@@ -467,7 +467,7 @@ void B5905492_testEmailMustNotBeNull() {
          Position position = positionRepository.findById(1);
    	 Gender gender = genderRepository.findById(1);
    	 Province province = provinceRepository.findById(1);
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
         try {
         medicalStaff1.setFullname("Sasithon Chairat");
@@ -491,7 +491,7 @@ void B5905492_testEmailMustNotBeNull() {
                 medicalStaff2.setGender(gender);
 
             try{
-		Date date2 = formatter.parse("1997/01/11");
+		Date date2 = formatter.parse("1997-01-11");
                 medicalStaff2.setBirthdate(date2);
             } catch (ParseException ex) {}    
 		
@@ -510,9 +510,9 @@ void B5905492_testEmailMustNotBeNull() {
 @Test
     void B5905492_testGenderComboboxMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date date = formatter.parse("2563/01/21");
+            Date date = formatter.parse("2563-01-21");
             medicalStaff.setBirthdate(date);
             medicalStaff.setGender(null);
             medicalStaff = medicalStaffRepository.save(medicalStaff);
@@ -529,9 +529,9 @@ void B5905492_testEmailMustNotBeNull() {
 @Test
     void B5905492_testPositionComboboxMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date date = formatter.parse("2563/01/21");
+            Date date = formatter.parse("2563-01-21");
             medicalStaff.setBirthdate(date);
             medicalStaff.setPosition(null);
             medicalStaff = medicalStaffRepository.save(medicalStaff);
@@ -548,9 +548,9 @@ void B5905492_testEmailMustNotBeNull() {
 @Test
     void B5905492_testProvinceComboboxMustNotBeNull() {
         MedicalStaff medicalStaff = new MedicalStaff();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date date = formatter.parse("2563/01/21");
+            Date date = formatter.parse("2563-01-21");
             medicalStaff.setBirthdate(date);
             medicalStaff.setProvince(null);
             medicalStaff = medicalStaffRepository.save(medicalStaff);
